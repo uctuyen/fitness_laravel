@@ -14,10 +14,16 @@ class AppServiceProvider extends ServiceProvider
     public $bindings = [
         'App\Services\Interfaces\EmployeeServiceInterface' => 'App\Services\EmployeeService',
         'App\Repositories\Interfaces\EmployeeRepositoriesInterface' => 'App\Repositories\EmployeeRepositories',
+
         'App\Services\Interfaces\MemberServiceInterface' => 'App\Services\MemberService',
         'App\Repositories\Interfaces\MemberRepositoriesInterface' => 'App\Repositories\MemberRepositories',
+
         'App\Services\Interfaces\TrainerServiceInterface' => 'App\Services\TrainerService',
         'App\Repositories\Interfaces\TrainerRepositoriesInterface' => 'App\Repositories\TrainerRepositories',
+        
+        'App\Services\Interfaces\MajorServiceInterface' => 'App\Services\MajorService',
+        'App\Repositories\Interfaces\MajorRepositoriesInterface' => 'App\Repositories\MajorRepositories',
+
         'App\Repositories\Interfaces\ProvinceRepositoriesInterface' => 'App\Repositories\ProvinceRepositories',
         'App\Repositories\Interfaces\DistrictRepositoriesInterface' => 'App\Repositories\DistrictRepositories',
         'App\Repositories\Interfaces\BaseRepositoriesInterface' => 'App\Repositories\BaseRepositories',

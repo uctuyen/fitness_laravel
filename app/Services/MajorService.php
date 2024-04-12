@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Services\Interfaces\EmployeeServiceInterface;
-use App\Repositories\Interfaces\EmployeeRepositoriesInterface as EmployeeRepositories;
+use App\Services\Interfaces\MajorServiceInterface;
+use App\Repositories\Interfaces\MajorRepositoriesInterface as MajorRepositories;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -11,16 +11,16 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 /**
- * Class EmployeeService
+ * Class MajorService
  * @package App\Services
  */
-class EmployeeService implements EmployeeServiceInterface
+class MajorService implements MajorServiceInterface
 {
-    protected $employeeRepositories;
+    protected $majorRepositories;
     public function __construct(
-        EmployeeRepositories $employeeRepositories
+        MajorRepositories $majorRepositories
     ){
-        $this->employeeRepositories = $employeeRepositories;
+        $this->majorRepositories = $majorRepositories;
     }
     public function getAllPaginate($request){
         $condition['keyword'] = addslashes($request->input('keyword'));
@@ -28,12 +28,12 @@ class EmployeeService implements EmployeeServiceInterface
 
 
         $perPage = (int)$request->input('perpage');
-        $employees = $this->employeeRepositories->paginate
+        $majors = $this->majorRepositories->paginate
             ($this->paginateSelect(),
             $condition,
             [],
             ['path'=>'employee/index'],$perPage);
-        return $employees;
+        return $majors;
     }
     public function create($request)
     {
@@ -42,10 +42,10 @@ class EmployeeService implements EmployeeServiceInterface
             $payload = $request->except('_token','send','re_password');
             $payload['day_of_birth']  = $this->convertDate($payload['day_of_birth']);
             $payload['password'] = Hash::make($payload['password']);
-            $employee = $this->employeeRepositories->create($payload);
+            $major = $this->majorRepositories->create($payload);
             DB::commit();
             return [
-                'employee' => $employee,
+                'employee' => $major,
             ];
         } catch (\Exception $e) {
             DB::rollBack();
@@ -60,10 +60,10 @@ class EmployeeService implements EmployeeServiceInterface
             $payload = $request->except('_token','send');
             $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
-            $employee = $this->employeeRepositories->update($id, $payload);
+            $major = $this->majorRepositories->update($id, $payload);
             DB::commit();
             // return [
-            //     'employee' => $employee,
+            //     'employee' => $major,
             // ];
             return true;
         } catch (\Exception $e) {
@@ -75,7 +75,7 @@ class EmployeeService implements EmployeeServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $employee = $this->employeeRepositories->delete($id);
+            $major = $this->majorRepositories->delete($id);
             DB::commit();
             return true;
         } catch (\Exception $e) {

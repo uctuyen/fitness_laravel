@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\EmployeeController;
-use App\Http\Controllers\Backend\TrainerController;
 use App\Http\Controllers\Backend\MemberController;
+use App\Http\Controllers\Backend\TrainerController;
+use App\Http\Controllers\Backend\MajorController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Models\Employee;
@@ -26,7 +27,8 @@ Route::get('/', function () {
 Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')
 ->middleware('admin');
 
-                /** employee */
+                /** actorrrrrrrrrrrrrrrrr */
+                        /** employee */
 Route::group(['prefix' => 'employee'],function(){
     Route::get('index', [EmployeeController::class, 'index'])->name('employee.index')
     ->middleware('admin');
@@ -60,7 +62,7 @@ Route::group(['prefix' => 'member'],function(){
     Route::delete('{id}/destroy', [memberController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('member.destroy')
     ->middleware('admin');
 });
-                /** trainer */
+                        /** trainer */
 Route::group(['prefix' => 'trainer'],function(){
     Route::get('index', [trainerController::class, 'index'])->name('trainer.index')
     ->middleware('admin');
@@ -77,7 +79,24 @@ Route::group(['prefix' => 'trainer'],function(){
     Route::delete('{id}/destroy', [trainerController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('trainer.destroy')
     ->middleware('admin');
 });   
-
+                        /** item */
+                        /** major */
+Route::group(['prefix' => 'major'],function(){
+    Route::get('index', [MajorController::class, 'index'])->name('major.index')
+    ->middleware('admin');
+    Route::get('create', [MajorController::class, 'create'])->name('major.create')
+    ->middleware('admin');
+    Route::post('save', [MajorController::class, 'save'])->name('major.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [MajorController::class, 'edit'])->where(['id' => '[0-9]+'])->name('major.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [MajorController::class, 'update'])->where(['id'=>'[0-9]+'])->name('major.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [MajorController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('major.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [MajorController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('major.destroy')
+    ->middleware('admin');
+});
                 /**Ajax  */
 Route::get('ajax/location/getLocation', [LocationController::class, 'getLocation'])->name('ajax.index')
 ->middleware('admin');

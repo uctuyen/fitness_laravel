@@ -63,7 +63,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('employee.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('member.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +111,6 @@
                                         {{$member->email}}
                                     </td>
                                     <td>
-                                        {{ $member->id }}
                                         {{$member->address}}
                                     </td>
                                     <td class="text-center" style="width: 100px">

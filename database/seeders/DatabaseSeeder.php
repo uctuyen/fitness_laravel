@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
-            employeeSeeder::class,
-            memberSeeder::class,
-            trainerSeeder::class
+            // employeeSeeder::class,
+            // memberSeeder::class,
+            // trainerSeeder::class
+            majorSeeder::class 
         ]);
     }
 }
