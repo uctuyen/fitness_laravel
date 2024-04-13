@@ -2,41 +2,40 @@
 
 namespace App\Services;
 
-use App\Services\Interfaces\MajorServiceInterface;
-use App\Repositories\Interfaces\MajorRepositoriesInterface as MajorRepositories;
+use App\Services\Interfaces\ClassServiceInterface;
+use App\Repositories\Interfaces\ClassRepositoriesInterface as ClassRepositories;
 use Illuminate\Support\Facades\DB;
-
 /**
- * Class MajorService
+ * Class ClassService
  * @package App\Services
  */
-class MajorService implements MajorServiceInterface
+class ClassService implements ClassServiceInterface
 {
-    protected $majorRepositories;
+    protected $classRepositories;
     public function __construct(
-        MajorRepositories $majorRepositories
+        ClassRepositories $classRepositories
     ){
-        $this->majorRepositories = $majorRepositories;
+        $this->classRepositories = $classRepositories;
     }
     public function getAllPaginate($request){
         $condition['keyword'] = addslashes($request->input('keyword'));
-        $majors = $this->majorRepositories->paginate
+        $classs = $this->classRepositories->paginate
             ($this->paginateSelect(),
             $condition,
             [],
-            ['path'=>'/major/index']
+            ['path'=>'/class/index']
         );
-        return $majors;
+        return $classs;
     }
     public function create($request)
     {
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $major = $this->majorRepositories->create($payload);
+            $class = $this->classRepositories->create($payload);
             DB::commit();
             return [
-                'major' => $major,
+                'class' => $class,
             ];
         } catch (\Exception $e) {
             DB::rollBack();
@@ -50,7 +49,7 @@ class MajorService implements MajorServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $major = $this->majorRepositories->update($id, $payload);
+            $class = $this->classRepositories->update($id, $payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -62,7 +61,7 @@ class MajorService implements MajorServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $major = $this->majorRepositories->delete($id);
+            $class = $this->classRepositories->delete($id);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -75,8 +74,9 @@ class MajorService implements MajorServiceInterface
     public function paginateSelect(){
         return [
             'id',
-            'major_name',
-            'description',
+            'name',
+            'price',
+            'member_quantity',
         ];
     }
 }

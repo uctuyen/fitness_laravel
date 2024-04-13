@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\MemberController;
 use App\Http\Controllers\Backend\TrainerController;
 use App\Http\Controllers\Backend\MajorController;
+use App\Http\Controllers\Backend\ClassController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Models\Employee;
@@ -97,6 +98,40 @@ Route::group(['prefix' => 'major'],function(){
     Route::delete('{id}/destroy', [MajorController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('major.destroy')
     ->middleware('admin');
 });
+                        /** 'class */
+Route::group(['prefix' => 'class'],function(){
+    Route::get('index', [ClassController::class, 'index'])->name('class.index')
+    ->middleware('admin');
+    Route::get('create', [ClassController::class, 'create'])->name('class.create')
+    ->middleware('admin');
+    Route::post('save', [ClassController::class, 'save'])->name('class.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [ClassController::class, 'edit'])->where(['id' => '[0-9]+'])->name('class.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [ClassController::class, 'update'])->where(['id'=>'[0-9]+'])->name('class.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [ClassController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('class.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [ClassController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('class.destroy')
+    ->middleware('admin');
+});                        
+                             /** 'equipment */
+Route::group(['prefix' => 'equipment'],function(){
+    Route::get('index', [EquipmentController::class, 'index'])->name('equipment.index')
+    ->middleware('admin');
+    Route::get('create', [EquipmentController::class, 'create'])->name('equipment.create')
+    ->middleware('admin');
+    Route::post('save', [EquipmentController::class, 'save'])->name('equipment.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [EquipmentController::class, 'edit'])->where(['id' => '[0-9]+'])->name('equipment.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [EquipmentController::class, 'update'])->where(['id'=>'[0-9]+'])->name('equipment.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [EquipmentController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('equipment.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [EquipmentController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('equipment.destroy')
+    ->middleware('admin');
+});                        
                 /**Ajax  */
 Route::get('ajax/location/getLocation', [LocationController::class, 'getLocation'])->name('ajax.index')
 ->middleware('admin');

@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form action="{{route('major.index')}}">
+                <form action="{{route('class.index')}}">
                     <div class="filter uk-flex uk-flex-space-between">
                         <div class="uk-flex uk-flex-middle">
                         </div>
@@ -45,7 +45,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('major.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('class.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -63,17 +63,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($majors) && is_object($majors))
-                                @foreach ($majors as $major)
+                            @if(isset($classes) && is_object($classes))
+                            {{dd($classes);}}
+                                @foreach ($classes as $class)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td>{{$major->major_name}}</td>
+                                    <td>{{$class->name}}</td>
                                     <td>
-                                        {{$major->description}}
+                                        {{$class->price}}
                                     </td>
                                     <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('major.edit', $major->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('major.delete', $major->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('class.delete', $class->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Major;
-use App\Repositories\Interfaces\MajorRepositoriesInterface;
+use App\Models\classModel;
+use App\Repositories\Interfaces\ClassRepositoriesInterface;
 use App\Repositories\BaseRepositories;
 /**
  * Class MajorService
  * @package App\Services
  */
-class MajorRepositories extends BaseRepositories implements MajorRepositoriesInterface
+class ClassRepositories extends BaseRepositories implements ClassRepositoriesInterface
 {
     protected $model;
     public function __construct(
-        Major $model  
+        classModel $model  
     ){
         $this->model = $model;
     }
@@ -27,7 +27,7 @@ class MajorRepositories extends BaseRepositories implements MajorRepositoriesInt
             $query = $this->model->select($column)
             ->where(function($query) use ($condition){
                 if(isset($condition['keyword']) && !empty($condition['keyword'])){
-                    $query->where('major_name','like','%'.$condition['keyword'].'%');
+                    $query->where('name','like','%'.$condition['keyword'].'%');
                 };
             });
             if(!empty($join)){

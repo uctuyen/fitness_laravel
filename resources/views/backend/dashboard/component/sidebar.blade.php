@@ -25,18 +25,18 @@
                 <ul class="nav nav-second-level">
                     <li><a href="{{route('dashboard.index')}}">Quản Lí Nhóm Người Dùng</a></li> 
                     <li><a href="{{route('employee.index')}}">Quản Lí Nhân Viên</a></li> 
-                    <li><a href="{{route('trainer.index')}}">Quản Lí Huấn Luyện Viên</a></li> 
                     <li><a href="{{route('member.index')}}">Quản Lí Học Viên</a></li> 
+                    <li><a href="{{route('trainer.index')}}">Quản Lí Huấn Luyện Viên</a></li> 
                 </ul>
             </li>
             <li class="active2">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lí CSHT</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="{{route('major.index')}}">Quản Lí Chuyên Môn</a></li> 
-                    <li><a href="#">Quản Lí Lớp</a></li> 
+                    <li><a href="{{route('class.index')}}">Quản Lí Lớp</a></li> 
+                    <li><a href="#">Quản Lí Ca Tập</a></li> 
+                    <li><a href="#">Quản Lí Thiết Bị</a></li> 
                     <li><a href="#">Quản Lí Phòng</a></li> 
-                    <li><a href="#">Ca Tập</a></li> 
-                    <li><a href="#">Thiết Bị</a></li> 
                 </ul>
             </li>
             {{-- <li class="active3">

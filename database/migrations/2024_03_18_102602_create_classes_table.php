@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price',8,2);
-            $table->string('quantity_member');
+            $table->decimal('price',8,2)->nullable();
+            $table->tinyInteger('quantity_member')->nullable();
             $table->timestamps();
         });
     }

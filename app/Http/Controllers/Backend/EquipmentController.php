@@ -22,8 +22,8 @@ class MajorController extends Controller
     public function index(Request $request){
         $majors = $this->majorService->getAllPaginate($request);
 
-        $config['seo'] = config('apps.major') ;
-        $template = 'backend.major.index';
+        $config['seo'] = config('apps.major');
+        $template = 'backend.equipment.index';
         return view('backend.dashboard.layout',compact(
             'majors',
             'template',
@@ -36,7 +36,7 @@ class MajorController extends Controller
         
         $config['seo'] = config('apps.major');
         $config['method'] = 'create';
-        $template = 'backend.major.save';
+        $template = 'backend.equipment.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
@@ -52,7 +52,7 @@ class MajorController extends Controller
         $major = $this->majorRepositories->findById($id);
         $config['seo'] = config('apps.major');
         $config['method'] = 'edit';
-        $template = 'backend.major.save';
+        $template = 'backend.equipment.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
@@ -69,7 +69,7 @@ class MajorController extends Controller
     public function delete($id){
         $config['seo'] = config('apps.major');
         $major = $this->majorRepositories->findById($id);
-        $template = 'backend.major.delete';
+        $template = 'backend.equipment.delete';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',

@@ -30,7 +30,7 @@ class MemberService implements MemberServiceInterface
             ($this->paginateSelect(),
             $condition,
             [],
-            ['path'=>'member/index'],$perPage);
+            ['path'=>'/member/index'],$perPage);
         return $members;
     }
     public function create($request)

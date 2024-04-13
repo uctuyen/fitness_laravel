@@ -23,12 +23,30 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form action="{{route('major.index')}}">
+                <form action="{{route('employee.index')}}">
                     <div class="filter uk-flex uk-flex-space-between">
                         <div class="uk-flex uk-flex-middle">
+                            <div class="perpage">
+                                @php
+                                    $perpage = request('perpage') ?: old('perpage');
+                                @endphp
+                                <div class="uk-flex uk-flex-middle">
+                                    <select name="perpage" class="form-control input sm perpage filter mr10">
+                                        @for($i = 20; $i <= 200; $i+=20)
+                                        <option {{($perpage == $i) ? 'selected' : ''}} value="{{$i}}">{{$i}} bảng ghi</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
+                                <select name='gender' class="form-control mr10 setupSelect2 ">
+                                    <option value="-1">Chọn giới tính</option>
+                                    <option value="0">Nam</option>
+                                    <option value="1">Nữ</option>
+                                    <option value="2">Khác</option>
+                                </select>
                                 <div  class="input-group">
                                     <input 
                                             type="text"
@@ -45,7 +63,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('major.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('employee.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -57,31 +75,57 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
+                                <th style="width: 90px">Avatar</th>
+                                <th>Họ</th>
                                 <th>Tên</th>
-                                <th>Mô tả</th>
+                                <th>SDT</th>
+                                <th>Ngày Sinh</th>
+                                <th>Giới tính</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($majors) && is_object($majors))
-                                @foreach ($majors as $major)
+                            @if(isset($employees) && is_object($employees))
+                                @foreach ($employees as $employee)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td>{{$major->major_name}}</td>
+                                    <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
                                     <td>
-                                        {{$major->description}}
+                                        {{$employee->first_name}}
+                                    </td>
+                                    <td>
+                                        {{$employee->last_name}}
+                                    </td>
+                                    <td>
+                                        {{$employee->phone_number}}
+                                    </td>
+                                    <td>
+                                        {{$employee->day_of_birth}}
+                                    </td>
+                                    <td>
+                                       {{ $genderLabels[$employee->gender] }}
+                                    </td>
+                                    <td> 
+                                        {{$employee->email}}
+                                    </td>
+                                    <td>
+                                        {{$employee->address}}
                                     </td>
                                     <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('major.edit', $major->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('major.delete', $major->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('employee.delete', $employee->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
+                        {{ $employees->links('pagination::bootstrap-4') }}
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

@@ -51,8 +51,7 @@ class Trainer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // public function majors(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Major::class, 'major_trainer', 'trainer_id', 'major_id');
-    // }
+    public function major(){
+        return $this->belongsTo(Major::class, 'trainer_major', 'major_id', 'trainer_id');
+    }
 }

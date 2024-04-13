@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('quantity');
+            $table->tinyInteger('quantity');
             $table->unsignedBigInteger('room_id');
             $table->tinyInteger('status');
 

@@ -32,7 +32,7 @@ class EmployeeService implements EmployeeServiceInterface
             ($this->paginateSelect(),
             $condition,
             [],
-            ['path'=>'employee/index'],$perPage);
+            ['path'=>'/employee/index'],$perPage);
         return $employees;
     }
     public function create($request)
