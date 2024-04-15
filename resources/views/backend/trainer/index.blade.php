@@ -117,7 +117,7 @@
                                     <td>
                                         @if($trainer->majors)
                                             @foreach($trainer->majors as $major)
-                                                <span>{{ $major->major_name }}</span>
+                                                {{ $major->major_name }}
                                             @endforeach
                                         @endif
                                     </td>

@@ -122,9 +122,12 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">chuyên môn
                                     </label>
-                                    <Select name="major_name" class="form-control setupSelect2 major_name">
+                                    <Select name="major_name[]" class="form-control setupSelect2 major_name" multiple>
                                         @foreach($majors as $major)
-                                            <option value="{{ $major->id }}">{{ $major->major_name }}</option>
+                                            <option value="{{ $major->id }}"
+                                                {{ in_array($major->id, optional(old('major_name', optional($trainer->majors)->pluck('id')))->toArray() ?? []) ? 'selected' : '' }}>
+                                                {{ $major->major_name }}
+                                            </option>
                                         @endforeach
                                     </Select>
                                 </div>

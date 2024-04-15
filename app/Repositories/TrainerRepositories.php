@@ -42,5 +42,8 @@ class TrainerRepositories extends BaseRepositories implements TrainerRepositorie
             }    
             return $query->paginate($perPage)->withQueryString()->withPath(env('APP_URL').$extend['path']);    
         }
-    
+        public function findByIdWithMajors($id)
+        {
+            return $this->model->with('majors')->find($id);
+        }
 }

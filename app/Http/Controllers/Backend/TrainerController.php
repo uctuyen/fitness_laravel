@@ -78,7 +78,7 @@ class TrainerController extends Controller
     }
     public function edit($id){
         $genderLabels = config('apps.trainer.create.genderLabels');
-        $trainer = $this->trainerRepositories->findById($id);
+        $trainer = $this->trainerRepositories->findByIdWithMajors($id);
         $provinces = $this->provinceRepositories->all();
         $majors = Major::all();
         
