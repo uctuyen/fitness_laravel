@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\MemberController;
 use App\Http\Controllers\Backend\TrainerController;
 use App\Http\Controllers\Backend\MajorController;
 use App\Http\Controllers\Backend\ClassController;
+use App\Http\Controllers\Backend\ClassSessionController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Models\Employee;
@@ -113,6 +114,23 @@ Route::group(['prefix' => 'class'],function(){
     Route::get('{id}/delete', [ClassController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('class.delete')
     ->middleware('admin');
     Route::delete('{id}/destroy', [ClassController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('class.destroy')
+    ->middleware('admin');
+});                        
+                        /** 'classSession */
+Route::group(['prefix' => 'classSession'],function(){
+    Route::get('index', [ClassSessionController::class, 'index'])->name('classSession.index')
+    ->middleware('admin');
+    Route::get('create', [ClassSessionController::class, 'create'])->name('classSession.create')
+    ->middleware('admin');
+    Route::post('save', [ClassSessionController::class, 'save'])->name('classSession.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [ClassSessionController::class, 'edit'])->where(['id' => '[0-9]+'])->name('classSession.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [ClassSessionController::class, 'update'])->where(['id'=>'[0-9]+'])->name('classSession.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [ClassSessionController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('classSession.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [ClassSessionController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('classSession.destroy')
     ->middleware('admin');
 });                        
                              /** 'equipment */

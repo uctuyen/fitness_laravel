@@ -34,9 +34,9 @@
                 <ul class="nav nav-second-level">
                     <li><a href="{{route('major.index')}}">Quản Lí Chuyên Môn</a></li> 
                     <li><a href="{{route('class.index')}}">Quản Lí Lớp</a></li> 
-                    <li><a href="#">Quản Lí Ca Tập</a></li> 
-                    <li><a href="#">Quản Lí Thiết Bị</a></li> 
+                    <li><a href="{{route('classSession.index')}}">Quản Lí Ca Tập</a></li> 
                     <li><a href="#">Quản Lí Phòng</a></li> 
+                    <li><a href="{{route('equipment.index')}}">Quản Lí Thiết Bị</a></li> 
                 </ul>
             </li>
             {{-- <li class="active3">
