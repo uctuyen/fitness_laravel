@@ -100,7 +100,7 @@ class TrainerService implements TrainerServiceInterface
             'email',
             'day_of_birth',
             'address',
-            'major'
+            'major_name'
         ];
     }
 }

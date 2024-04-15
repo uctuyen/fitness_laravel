@@ -11,6 +11,7 @@ use App\Repositories\Interfaces\TrainerRepositoriesInterface as TrainerRepositor
 use App\Http\Requests\SaveTrainerRequest;
 use App\Http\Requests\UpdateTrainerRequest;
 use Illuminate\Http\Request;
+use App\Models\Major;
 class TrainerController extends Controller
 {
     protected $trainerService;
@@ -30,14 +31,8 @@ class TrainerController extends Controller
     public function index(Request $request){
         $genderLabels = config('apps.trainer.create.genderLabels');
         $trainers = $this->trainerService->getAllPaginate($request);
-        $config = [
-            'css' => [
-                'backend/css/plugins/switchery/switchery.css',
-            ],
-            'js' => [
-                'backend/js/plugins/switchery/switchery.js',
-            ],
-        ];
+        
+        $majors = Major::all();
         
         $config['seo'] = config('apps.trainer');
         $template = 'backend.trainer.index';
@@ -45,14 +40,15 @@ class TrainerController extends Controller
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
-            'trainers',
             'genderLabels',
+            'majors',
+            'trainers'
         ));
         
     }
     public function create(){
-        
         $trainer = new Trainer;
+        $majors = Major::all();
         $genderLabels = config('apps.trainer.create.genderLabels');
         $provinces = $this->provinceRepositories->all();
         $config = [
@@ -71,6 +67,7 @@ class TrainerController extends Controller
             'genderLabels',
             'provinces',
             'trainer',
+            'majors'
         ));
     }
     public function save(SaveTrainerRequest $request){
@@ -83,7 +80,7 @@ class TrainerController extends Controller
         $genderLabels = config('apps.trainer.create.genderLabels');
         $trainer = $this->trainerRepositories->findById($id);
         $provinces = $this->provinceRepositories->all();
-
+        $majors = Major::all();
         
         $config = [
             'css' => ['https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css'],
@@ -101,6 +98,7 @@ class TrainerController extends Controller
             'trainer',
             'provinces',
             'genderLabels',
+            'majors'
         ));
     }
     public function update($id, UpdateTrainerRequest $request){
@@ -111,12 +109,14 @@ class TrainerController extends Controller
     }
     public function delete($id){
         $config['seo'] = config('apps.trainer');
+        $majors = Major::all();
         $trainer = $this->trainerRepositories->findById($id);
         $template = 'backend.trainer.delete';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
             'trainer',
+            'majors'
         ));
     }
     public function destroy($id){

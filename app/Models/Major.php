@@ -14,8 +14,8 @@ class Major extends Model
     ];
     protected $table = 'majors';
 
-    public function trainers()
+    public function major()
     {
-        return $this->belongsToMany(Trainer::class, 'trainer_major', 'major_id', 'trainer_id');
+        return $this->belongsToMany(Major::class, 'trainer_major', 'trainer_id', 'major_id');
     }
 }

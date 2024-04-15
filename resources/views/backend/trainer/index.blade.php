@@ -82,8 +82,8 @@
                                 <th>Ngày Sinh</th>
                                 <th>Giới tính</th>
                                 <th>Email</th>
-                                <th>Chuyên môn</th>
                                 <th>Địa chỉ</th>
+                                <th>Chuyên môn</th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
@@ -115,7 +115,11 @@
                                         {{$trainer->address}}
                                     </td>
                                     <td>
-                                        {{$trainer->major}}
+                                        @if($trainer->majors)
+                                            @foreach($trainer->majors as $major)
+                                                <span>{{ $major->major_name }}</span>
+                                            @endforeach
+                                        @endif
                                     </td>
                                     <td class="text-center" style="width: 100px">
                                         <a href="{{ route('trainer.edit', $trainer->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>

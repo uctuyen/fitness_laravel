@@ -54,7 +54,8 @@ class Trainer extends Authenticatable
     ];
     protected $table = 'trainers';
 
-    public function major(){
-        return $this->belongsToMany(Major::class, 'trainer_major', 'major_id', 'trainer_id');
+    public function trainers()
+    {
+        return $this->belongsToMany(Trainer::class, 'trainer_major', 'trainer_id', 'major_id');
     }
 }
