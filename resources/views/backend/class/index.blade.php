@@ -26,6 +26,18 @@
                 <form action="{{route('class.index')}}">
                     <div class="filter uk-flex uk-flex-space-between">
                         <div class="uk-flex uk-flex-middle">
+                            <div class="perpage">
+                                @php
+                                    $perpage = request('perpage') ?: old('perpage');
+                                @endphp
+                                <div class="uk-flex uk-flex-middle">
+                                    <select name="perpage" class="form-control input sm perpage filter mr10">
+                                        @for($i = 20; $i <= 200; $i+=20)
+                                        <option {{($perpage == $i) ? 'selected' : ''}} value="{{$i}}">{{$i}} bảng ghi</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
@@ -57,18 +69,23 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th>Tên</th>
-                                <th>Mô tả</th>
+                                <th>Tên lớp học</th>
+                                <th>Số lượng học viên</th>
+                                <th>Giá </th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if(isset($classes) && is_object($classes))
-                            {{dd($classes);}}
                                 @foreach ($classes as $class)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td>{{$class->name}}</td>
+                                    <td>
+                                        {{$class->name}}
+                                    </td>
+                                    <td>
+                                        {{$class->quantity_member}}
+                                    </td>
                                     <td>
                                         {{$class->price}}
                                     </td>
@@ -81,8 +98,10 @@
                             @endif
                         </tbody>
                     </table>
+                        {{ $classes->links('pagination::bootstrap-4') }}
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

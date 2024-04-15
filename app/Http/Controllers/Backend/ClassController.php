@@ -20,6 +20,7 @@ class ClassController extends Controller
         $this->classRepositories = $classRepositories; 
     }
     public function index(Request $request){
+
         $classes = $this->classService->getAllPaginate($request);
         $config['seo'] = config('apps.class');
         $template = 'backend.class.index';
@@ -43,9 +44,9 @@ class ClassController extends Controller
     }
     public function save(SaveClassRequest $request){
         if($this->classService->create($request)){
-         return redirect()->route('class.index')->with('success', 'Thêm mới chuyên môn thành công!');
+         return redirect()->route('class.index')->with('success', 'Thêm mới lớp học thành công!');
         };
-        return redirect()->route('class.index')->with('error', 'Thêm mới chuyên môn không thành công!');
+        return redirect()->route('class.index')->with('error', 'Thêm mới lớp học không thành công!');
      }
     public function edit($id){
         $class = $this->classRepositories->findById($id);
@@ -61,9 +62,9 @@ class ClassController extends Controller
     
     public function update($id, UpdateClassRequest $request){
         if($this->classService->update($id, $request)){
-            return redirect()->route('class.index')->with('success', 'Cập nhật chuyên môn thành công!');
+            return redirect()->route('class.index')->with('success', 'Cập nhật lớp học thành công!');
         };
-        return redirect()->route('class.index')->with('error', 'Cập nhật chuyên môn không thành công!');
+        return redirect()->route('class.index')->with('error', 'Cập nhật lớp học không thành công!');
     }
     public function delete($id){
         $config['seo'] = config('apps.class');
@@ -77,9 +78,9 @@ class ClassController extends Controller
     }
     public function destroy($id){
         if($this->classService->destroy($id)){
-            return redirect()->route('class.index')->with('success', 'Xóa chuyên môn thành công!');
+            return redirect()->route('class.index')->with('success', 'Xóa lớp học thành công!');
            };
-           return redirect()->route('class.index')->with('error', 'Xóa chuyên môn không thành công!');
+           return redirect()->route('class.index')->with('error', 'Xóa lớp học không thành công!');
     }
 
 }

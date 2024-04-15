@@ -31,6 +31,7 @@ class Trainer extends Authenticatable
         'district_id',
         'ward_id',
         'address',
+        'major',
     ];
 
     /**
@@ -51,7 +52,9 @@ class Trainer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $table = 'trainers';
+
     public function major(){
-        return $this->belongsTo(Major::class, 'trainer_major', 'major_id', 'trainer_id');
+        return $this->belongsToMany(Major::class, 'trainer_major', 'major_id', 'trainer_id');
     }
 }

@@ -76,7 +76,7 @@ class ClassService implements ClassServiceInterface
             'id',
             'name',
             'price',
-            'member_quantity',
+            'quantity_member',
         ];
     }
 }
