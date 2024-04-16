@@ -10,8 +10,8 @@
                 <div class="panel-head">
                     <div class="panel-title">Thông tin chung</div>
                     <div class="panel-description">
-                        <p> - Bạn có muốn xóa nhân viên có Email là: {{$trainer->mail}}</p>
-                        <p> - Lưu ý: Không thể khôi phục nhân viên này sau khi xóa <span class="text-danger">(*)</span> là không được để trống. </p>
+                        <p> - Bạn có muốn xóa huấn luyện viên có Email là: {{$trainer->mail}}</p>
+                        <p> - Lưu ý: Không thể khôi phục huấn luyện viên này sau khi xóa <span class="text-danger">(*)</span> là không được để trống. </p>
                     </div>
                 </div>
             </div>

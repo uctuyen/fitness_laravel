@@ -35,10 +35,12 @@ class BaseRepositories implements BaseRepositoriesInterface{
         $model = $this->model->create($payload);
         return $model->fresh();
     }
-    public function update(int $id = 0,  array $payload =[]){
+    public function update(int $id = 0, array $payload = []){
         $model = $this->findById($id);
-        return $model->update($payload);
-    }
+        $model->fill($payload);
+        $model->save();
+        return $model;
+     }
     public function delete(int $id = 0){
         return $this->findById($id)->delete();
     }

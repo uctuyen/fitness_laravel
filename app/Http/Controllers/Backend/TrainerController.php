@@ -7,6 +7,7 @@ use App\Services\TrainerService;
 use App\Models\Trainer;
 
 use App\Repositories\Interfaces\ProvinceRepositoriesInterface as ProvinceRepository;
+use App\Repositories\Interfaces\MajorRepositoriesInterface as MajorReposiudtories;
 use App\Repositories\Interfaces\TrainerRepositoriesInterface as TrainerRepositories;
 use App\Http\Requests\SaveTrainerRequest;
 use App\Http\Requests\UpdateTrainerRequest;
@@ -15,16 +16,19 @@ use App\Models\Major;
 class TrainerController extends Controller
 {
     protected $trainerService;
-    protected $trainerRepositories;
+    protected $majorRepositories;
     protected $provinceRepositories;
+    protected $trainerRepositories;
     public function __construct(
         TrainerService $trainerService,
-        TrainerRepositories $trainerRepositories,
+        MajorReposiudtories $majorRepositories,
         ProvinceRepository $provinceRepositories,
+        TrainerRepositories $trainerRepositories,
     ){
         $this->trainerService = $trainerService; 
-        $this->trainerRepositories = $trainerRepositories; 
+        $this->majorRepositories = $majorRepositories; 
         $this->provinceRepositories = $provinceRepositories; 
+        $this->trainerRepositories = $trainerRepositories;
     }
     
 
@@ -47,8 +51,7 @@ class TrainerController extends Controller
         
     }
     public function create(){
-        $trainer = new Trainer;
-        $majors = Major::all();
+        $majors = $this->majorRepositories->all();
         $genderLabels = config('apps.trainer.create.genderLabels');
         $provinces = $this->provinceRepositories->all();
         $config = [
@@ -66,7 +69,6 @@ class TrainerController extends Controller
             'config',
             'genderLabels',
             'provinces',
-            'trainer',
             'majors'
         ));
     }
@@ -78,9 +80,9 @@ class TrainerController extends Controller
     }
     public function edit($id){
         $genderLabels = config('apps.trainer.create.genderLabels');
+        $majors = $this->majorRepositories->all();
         $trainer = $this->trainerRepositories->findByIdWithMajors($id);
         $provinces = $this->provinceRepositories->all();
-        $majors = Major::all();
         
         $config = [
             'css' => ['https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css'],
@@ -95,10 +97,10 @@ class TrainerController extends Controller
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
-            'trainer',
             'provinces',
             'genderLabels',
-            'majors'
+            'majors',
+            'trainer'
         ));
     }
     public function update($id, UpdateTrainerRequest $request){
@@ -109,7 +111,7 @@ class TrainerController extends Controller
     }
     public function delete($id){
         $config['seo'] = config('apps.trainer');
-        $majors = Major::all();
+        $majors = $this->majorRepositories->all();
         $trainer = $this->trainerRepositories->findById($id);
         $template = 'backend.trainer.delete';
         return view('backend.dashboard.layout',compact(
@@ -120,9 +122,20 @@ class TrainerController extends Controller
         ));
     }
     public function destroy($id){
-        if($this->trainerService->destroy($id)){
-            return redirect()->route('trainer.index')->with('success', 'Xóa nhân viên thành công!');
-           };
-           return redirect()->route('trainer.index')->with('error', 'Xóa nhân viên không thành công!');
+        // Tìm huấn luyện viên bằng ID
+        $trainer = $this->trainerRepositories->findById($id);
+    
+        // Kiểm tra xem huấn luyện viên có tồn tại không
+        if(!$trainer) {
+            return redirect()->route('trainer.index')->with('error', 'Huấn luyện viên không tồn tại!');
+        }
+    
+        // Xóa tất cả các chuyên môn liên kết với huấn luyện viên
+        $trainer->majors()->delete();
+    
+        // Xóa huấn luyện viên
+        $this->trainerRepositories->delete($id);
+    
+        return redirect()->route('trainer.index')->with('success', 'Xóa huấn luyện viên thành công!');
     }
 }

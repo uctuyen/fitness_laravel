@@ -100,7 +100,7 @@
                                     <select name="gender" class="form-control setupSelect2">
                                         @foreach ($genderLabels as $key => $value)
                                             <option value="{{ $key }}"
-                                                {{ $key == old('gender', $trainer->gender) ? 'selected' : '' }}>
+                                                {{ $key == old('gender', $trainer->gender ?? '') ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
@@ -114,18 +114,21 @@
                                     <label for="" class="control-label text-Left">Ảnh đại điện
                                     </label>
                                     <input type="text" name="avatar" class="form-control"
-                                        value="{{ old('avatar', $trainer->avatar ?? '') }}" placeholder=""
-                                        autocomplete="off">
+                                    value="{{ old('avatar', isset($trainer) ? $trainer->avatar : '') }}" 
+                                    placeholder=""
+                                    autocomplete="off">
                                 </div>
                             </div>
+                            @php
+                                $majorList = (isset($trainer)) ? $trainer->majors->pluck('id')->toArray() : [];
+                            @endphp
                             <div class="col-lg-4">
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">chuyên môn
                                     </label>
-                                    <Select name="major_name[]" class="form-control setupSelect2 major_name" multiple>
+                                    <Select name="major_id[]" class="form-control setupSelect2 major_name" multiple>
                                         @foreach($majors as $major)
-                                            <option value="{{ $major->id }}"
-                                                {{ in_array($major->id, optional(old('major_name', optional($trainer->majors)->pluck('id')))->toArray() ?? []) ? 'selected' : '' }}>
+                                            <option value="{{ $major->id }}"  {{ (in_array($major->id, $majorList)) ? 'selected' : '' ;}} >
                                                 {{ $major->major_name }}
                                             </option>
                                         @endforeach

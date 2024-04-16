@@ -43,6 +43,13 @@ class TrainerService implements TrainerServiceInterface
             $payload['day_of_birth']  = $this->convertDate($payload['day_of_birth']);
             $payload['password'] = Hash::make($payload['password']);
             $trainer = $this->trainerRepositories->create($payload);
+
+            if($trainer->id > 0){
+                $majors = $request->only('major_id');
+                $trainer->majors()->sync($majors['major_id']);
+            }
+
+
             DB::commit();
             return [
                 'trainer' => $trainer,
@@ -59,12 +66,11 @@ class TrainerService implements TrainerServiceInterface
         try {
             $payload = $request->except('_token','send');
             $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
-            // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
             $trainer = $this->trainerRepositories->update($id, $payload);
+            $majors = $request->only('major_id');
+            $trainer->majors()->detach();
+            $trainer->majors()->sync($majors['major_id']);
             DB::commit();
-            // return [
-            //     'trainer' => $trainer,
-            // ];
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -75,7 +81,15 @@ class TrainerService implements TrainerServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $trainer = $this->trainerRepositories->delete($id);
+            $trainer = $this->trainerRepositories->findById($id);
+        // Kiểm tra xem huấn luyện viên có tồn tại không
+            if(!$trainer) {
+                return false;
+            }
+        // Xóa tất cả các mối quan hệ giữa huấn luyện viên và các chuyên môn
+            $trainer->majors()->detach();
+        // Xóa huấn luyện viên
+        $this->trainerRepositories->delete($id);
             DB::commit();
             return true;
         } catch (\Exception $e) {
