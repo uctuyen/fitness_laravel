@@ -32,7 +32,7 @@ class TrainerRepositories extends BaseRepositories implements TrainerRepositorie
                                                 ->orWhere('email','like','%'.$condition['keyword'].'%')
                                                 ->orWhere('address','like','%'.$condition['keyword'].'%')
                                                 ->orWhere('phone_number','like','%'.$condition['keyword'].'%');
-                                        };
+                                            };
                                         if(isset($condition['gender']) && $condition['gender'] > 0 ){
                                             $query->where('gender', $condition['gender']);
                                         }

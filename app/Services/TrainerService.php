@@ -81,16 +81,15 @@ class TrainerService implements TrainerServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $trainer = $this->trainerRepositories->findById($id);
-        // Kiểm tra xem huấn luyện viên có tồn tại không
-            if(!$trainer) {
-                return false;
-            }
-        // Xóa tất cả các mối quan hệ giữa huấn luyện viên và các chuyên môn
-            $trainer->majors()->detach();
-        // Xóa huấn luyện viên
+        $trainer = $this->trainerRepositories->findById($id);
+        if(!$trainer) {
+            return false;
+        }
+        $majorIds = $trainer->majors()->pluck('majors.id');
+        DB::table('trainer_majors')->where('trainer_id', $id)->whereIn('major_id', $majorIds)->delete();
+        $trainer->majors()->detach();
         $this->trainerRepositories->delete($id);
-            DB::commit();
+        DB::commit();
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -113,8 +112,7 @@ class TrainerService implements TrainerServiceInterface
             'last_name',
             'email',
             'day_of_birth',
-            'address',
-            'major_name'
+            'address'
         ];
     }
 }

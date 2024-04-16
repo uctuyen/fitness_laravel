@@ -25,13 +25,11 @@ class Trainer extends Authenticatable
         'day_of_birth',
         'phone_number',
         'email',
-        'major',
         'password',
         'province_id',
         'district_id',
         'ward_id',
         'address',
-        'major',
     ];
 
     /**

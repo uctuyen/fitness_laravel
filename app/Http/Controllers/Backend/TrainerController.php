@@ -122,20 +122,9 @@ class TrainerController extends Controller
         ));
     }
     public function destroy($id){
-        // Tìm huấn luyện viên bằng ID
-        $trainer = $this->trainerRepositories->findById($id);
-    
-        // Kiểm tra xem huấn luyện viên có tồn tại không
-        if(!$trainer) {
-            return redirect()->route('trainer.index')->with('error', 'Huấn luyện viên không tồn tại!');
-        }
-    
-        // Xóa tất cả các chuyên môn liên kết với huấn luyện viên
-        $trainer->majors()->delete();
-    
-        // Xóa huấn luyện viên
-        $this->trainerRepositories->delete($id);
-    
-        return redirect()->route('trainer.index')->with('success', 'Xóa huấn luyện viên thành công!');
+        if($this->trainerService->destroy($id)){
+            return redirect()->route('trainer.index')->with('success', 'Xóa huấn luyện viên thành công!');
+        };
+        return redirect()->route('trainer.index')->with('error', 'Xóa huấn luyện viên không thành công!');
     }
 }
