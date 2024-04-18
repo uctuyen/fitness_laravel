@@ -72,14 +72,9 @@
         }
     }
 
-    Uc.select2 = () =>{
-        $('.setupSelect2').select2();
-    }
-
     $(document).ready(function(){
         Uc.switchery();
         Uc.checkAll();
         Uc.checkBoxItem();
-        Uc.select2();
     });
 })(jQuery);

@@ -14,9 +14,14 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('trainer_id');
+            $table->string('major_id');
             $table->decimal('price',8,2)->nullable();
             $table->tinyInteger('quantity_member')->nullable();
             $table->timestamps();
+
+            $table->foreign('major_id')->references('id')->on('majors'); 
+            $table->foreign('trainer_id')->references('id')->on('trainers'); 
         });
     }
 

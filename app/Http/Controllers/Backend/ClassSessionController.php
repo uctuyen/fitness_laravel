@@ -80,5 +80,28 @@ class ClassSessionController extends Controller
            };
            return redirect()->route('classSession.index')->with('error', 'Xóa lớp học không thành công!');
     }
+    public function calendar()
+    {
+        $config['seo'] = config('apps.classSession');
+        $template = 'backend.classSession.calendar'; // Đường dẫn đến file view calendar của bạn
+    
+        return view('backend.dashboard.layout', compact(
+            'template',
+            'config',
+        ));
+    }
+        public function getEvents()
+        {
+        $classSessions = $this->classSessionRepositories->getAll(); // Lấy tất cả các phiên học
 
+        $events = [];
+        foreach ($classSessions as $session) {
+            $events[] = [
+                'title' => $session->name, 
+                'start' => $session->start_date->format('c'), // Chuyển đổi định dạng ngày giờ
+                'end' => $session->end_date->format('c'), // Chuyển đổi định dạng ngày giờ
+            ];
+        }
+        return response()->json($events);
+        }
 }

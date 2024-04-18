@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('district_id')->nullable();
             $table->string('ward_id')->nullable();
             $table->string('address')->nullable();
-            $table->string('major_name')->nullable();
             $table->string('password');
             $table->string('remember_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();

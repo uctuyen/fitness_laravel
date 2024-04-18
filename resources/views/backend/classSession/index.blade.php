@@ -51,9 +51,12 @@
                                             class="btn btn-primary mb0 btn-sm"> <i class="fa fa-search"></i> Tìm kiếm
                                         </button>
                                     </span>
+                                    
                                 </div>
-                                <a href="{{ route('classSession.create') }}" class="btn btn-danger"><i
-                                        class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{ route('classSession.calendar') }}" class="btn btn-warning" style="margin-right: 10px"><i
+                                    class="fa fa-plus"></i> Xuất lịch </a>
+                                <a href="{{ route('classSession.create') }}" class=" btn btn-danger ml-5"><i
+                                    class="fa fa-plus"></i> Thêm mới </a>
                             </div>
                         </div>
                     </div>

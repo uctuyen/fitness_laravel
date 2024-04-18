@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\TrainerController;
 use App\Http\Controllers\Backend\MajorController;
 use App\Http\Controllers\Backend\ClassController;
 use App\Http\Controllers\Backend\ClassSessionController;
+use App\Http\Controllers\Backend\CalendarController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use App\Models\Employee;
@@ -132,7 +133,11 @@ Route::group(['prefix' => 'classSession'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [ClassSessionController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('classSession.destroy')
     ->middleware('admin');
+
+    Route::get('calendar', [ClassSessionController::class, 'calendar'])->name('classSession.calendar')
+    ->middleware('admin');
 });                        
+                                              
                              /** 'equipment */
 Route::group(['prefix' => 'equipment'],function(){
     Route::get('index', [EquipmentController::class, 'index'])->name('equipment.index')
