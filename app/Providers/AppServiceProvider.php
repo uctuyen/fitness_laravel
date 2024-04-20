@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
         
         'App\Services\Interfaces\MajorServiceInterface' => 'App\Services\MajorService',
         'App\Repositories\Interfaces\MajorRepositoriesInterface' => 'App\Repositories\MajorRepositories',
+        
+        'App\Services\Interfaces\CalendarServiceInterface' => 'App\Services\CalendarService',
+        'App\Repositories\Interfaces\CalendarRepositoriesInterface' => 'App\Repositories\CalendarRepositories',
 
         'App\Services\Interfaces\ClassServiceInterface' => 'App\Services\ClassService',
         'App\Repositories\Interfaces\ClassRepositoriesInterface' => 'App\Repositories\ClassRepositories',

@@ -18,4 +18,8 @@ class Major extends Model
     {
         return $this->belongsToMany(Trainer::class, 'trainer_majors', 'major_id', 'trainer_id');
     }
+    public function classes()
+    {
+        return $this->hasMany(ClassModel::class, 'major_id');
+    }
 }

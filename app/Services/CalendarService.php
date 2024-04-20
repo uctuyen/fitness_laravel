@@ -2,40 +2,46 @@
 
 namespace App\Services;
 
-use App\Services\Interfaces\ClassServiceInterface;
-use App\Repositories\Interfaces\ClassRepositoriesInterface as ClassRepositories;
+use App\Services\Interfaces\CalendarServiceInterface;
+use App\Repositories\Interfaces\CalendarRepositoriesInterface as CalendarRepositories;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 /**
- * Class ClassService
+ * Calendare calendarService
  * @package App\Services
  */
-class ClassService implements ClassServiceInterface
+class CalendarService implements CalendarServiceInterface
 {
     protected $classRepositories;
     public function __construct(
-        ClassRepositories $classRepositories
+        CalendarRepositories $calendarRepositories
     ){
-        $this->classRepositories = $classRepositories;
+        $this->calendarRepositories = $calendarRepositories;
     }
-    public function getAllPaginate($request){
+    public function getAllPaginate($request, $dateRange = []){
         $condition['keyword'] = addslashes($request->input('keyword'));
-        $classs = $this->classRepositories->paginate
+        if (!empty($dateRange['start_date']) && !empty($dateRange['end_date'])) {
+            $condition['start_date'] = $dateRange['start_date'];
+            $condition['end_date'] = $dateRange['end_date'];
+        }
+        $calendars = $this->calendarRepositories->paginate
             ($this->paginateSelect(),
             $condition,
             [],
-            ['path'=>'/class/index']
+            ['path'=>'/calendar/index']
         );
-        return $classs;
+        return $calendars;
     }
     public function create($request)
     {
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $class = $this->classRepositories->create($payload);
+            $payload['day']  = $this->convertDate($payload['day']);
+            $calendar = $this->calendarRepositories->create($payload);
             DB::commit();
             return [
-                'class' => $class,
+                'calendar' => $calendar,
             ];
         } catch (\Exception $e) {
             DB::rollBack();
@@ -49,7 +55,8 @@ class ClassService implements ClassServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $class = $this->classRepositories->update($id, $payload);
+            $payload['day']  = $this->convertDate($payload['day']);
+            $calendar = $this->calendarRepositories->update($id, $payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -61,7 +68,7 @@ class ClassService implements ClassServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $class = $this->classRepositories->delete($id);
+            $calendar = $this->calendarRepositories->delete($id);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -70,15 +77,17 @@ class ClassService implements ClassServiceInterface
             return false;
         }
     }
-    
+    private function convertDate($day){
+        $carbonDate = Carbon::createFromFormat('Y-m-d', $day);
+        $day = $carbonDate->format('Y-m-d H:i:s');
+        return $day;
+    }
     public function paginateSelect(){
         return [
             'id',
-            'name',
-            'trainer_id',
-            'major_id',
-            'price',
-            'quantity_member',
+            'class_id',
+            'day',
+            'time',
         ];
     }
 }

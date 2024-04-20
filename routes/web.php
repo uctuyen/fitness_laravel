@@ -10,7 +10,6 @@ use App\Http\Controllers\Backend\ClassSessionController;
 use App\Http\Controllers\Backend\CalendarController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,6 +99,22 @@ Route::group(['prefix' => 'major'],function(){
     Route::delete('{id}/destroy', [MajorController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('major.destroy')
     ->middleware('admin');
 });
+Route::group(['prefix' => 'calendar'],function(){
+    Route::get('index', [CalendarController::class, 'index'])->name('calendar.index')
+    ->middleware('admin');
+    Route::get('create', [CalendarController::class, 'create'])->name('calendar.create')
+    ->middleware('admin');
+    Route::post('save', [CalendarController::class, 'save'])->name('calendar.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [CalendarController::class, 'edit'])->where(['id' => '[0-9]+'])->name('calendar.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [CalendarController::class, 'update'])->where(['id'=>'[0-9]+'])->name('calendar.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [CalendarController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('calendar.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [CalendarController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('calendar.destroy')
+    ->middleware('admin');
+});
                         /** 'class */
 Route::group(['prefix' => 'class'],function(){
     Route::get('index', [ClassController::class, 'index'])->name('class.index')
@@ -135,6 +150,8 @@ Route::group(['prefix' => 'classSession'],function(){
     ->middleware('admin');
 
     Route::get('calendar', [ClassSessionController::class, 'calendar'])->name('classSession.calendar')
+    ->middleware('admin');
+    Route::get('getEvents', [ClassSessionController::class, 'getEvents'])->name('classSession.getEvents')
     ->middleware('admin');
 });                        
                                               

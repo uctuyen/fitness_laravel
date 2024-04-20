@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\UniqueClassTrainer;
-class SaveClassRequest extends FormRequest
+
+class UpdateCalendarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,23 +22,18 @@ class SaveClassRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['somtimes', new UniqueClassTrainer],
             'name' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'quantity_member' => 'required|integer|min:0',
+            'time' => 'required|date_format:H:i',
         ];
     }
+    
     public function messages(): array
     {
         return [
             'name.required' => 'Không được để trống tên lớp!',
             'name.string' => 'Tên lớp phải định dạng kí tự!',
-            'price.required' => 'Không được để trống giá!',
-            'price.numeric' => 'Giá phải là một số!',
-            'price.min' => 'Giá không được âm!',
-            'quantity_member.required' => 'Không được để trống số lượng học viên!',
-            'quantity_member.integer' => 'Số lượng học viên phải là một số nguyên!',
-            'quantity_member.min' => 'Số lượng học viên không được âm!',
-        ];
+            'time.required' => 'Không được để trống thời gian bắt đầu!',
+            'time.date_format' => 'Thời gian bắt đầu phải đúng định dạng (ví dụ: 60:00)!',
+        ]; 
     }
 }

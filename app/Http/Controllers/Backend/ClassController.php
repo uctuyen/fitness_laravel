@@ -8,6 +8,8 @@ use App\Services\ClassService;
 use App\Repositories\Interfaces\ClassRepositoriesInterface as ClassRepositories;
 use App\Http\Requests\SaveClassRequest;
 use App\Http\Requests\UpdateClassRequest;
+use App\Models\Trainer;
+use App\Models\Major;
 class ClassController extends Controller
 {
     protected $classService;
@@ -33,13 +35,16 @@ class ClassController extends Controller
     }
 
     public function create(){
-        
+        $trainers = Trainer::all();
+        $majors = Major::all();
         $config['seo'] = config('apps.class');
         $config['method'] = 'create';
         $template = 'backend.class.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
+            'trainers',
+            'majors'
         ));
     }
     public function save(SaveClassRequest $request){
@@ -50,6 +55,8 @@ class ClassController extends Controller
      }
     public function edit($id){
         $class = $this->classRepositories->findById($id);
+        $trainers = Trainer::all();
+        $majors = Major::all();
         $config['seo'] = config('apps.class');
         $config['method'] = 'edit';
         $template = 'backend.class.save';
@@ -57,6 +64,8 @@ class ClassController extends Controller
             'template',
             'config',
             'class',
+            'trainers',
+            'majors'
         ));
     }
     

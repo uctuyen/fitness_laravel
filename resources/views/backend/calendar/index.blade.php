@@ -23,21 +23,9 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form action="{{route('class.index')}}">
+                <form action="{{route('calendar.index')}}">
                     <div class="filter uk-flex uk-flex-space-between">
                         <div class="uk-flex uk-flex-middle">
-                            <div class="perpage">
-                                @php
-                                    $perpage = request('perpage') ?: old('perpage');
-                                @endphp
-                                <div class="uk-flex uk-flex-middle">
-                                    <select name="perpage" class="form-control input sm perpage filter mr10">
-                                        @for($i = 20; $i <= 200; $i+=20)
-                                        <option {{($perpage == $i) ? 'selected' : ''}} value="{{$i}}">{{$i}} bảng ghi</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
@@ -57,7 +45,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('class.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('calendar.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -69,47 +57,37 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th>Tên lớp học</th>
+                                <th>Lớp</th>
                                 <th>Huấn luyện viên</th>
-                                <th>chuyên môn</th>
-                                <th>Số lượng học viên</th>
-                                <th>Giá </th>
+                                <th>Ngày</th>
+                                <th>Thời gian</th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($classes) && is_object($classes))
-                                @foreach ($classes as $class)
-                                <tr>
-                                    <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td>
-                                        {{$class->name}}
-                                    </td>
-                                    <td>
-                                        {{ $class->trainer->first_name . ' ' . $class->trainer->last_name }} <!-- Nối chuỗi tên đầu và tên cuối -->
-                                    </td>
-                                    <td>
-                                        {{$class->major->major_name}}
-                                    </td>
-                                    <td>
-                                        {{$class->quantity_member}}
-                                    </td>
-                                    <td>
-                                        {{$class->price}}
-                                    </td>
-                                    <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('class.delete', $class->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                        {{ $classes->links('pagination::bootstrap-4') }}
+
+                            @if(isset($calendars) && is_object($calendars))
+                               <!-- Hiển thị dữ liệu -->
+                                    @foreach ($calendars as $calendar)
+                                        <tr>
+                                            <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
+                                            <td>{{ $calendar->class->name }}</td>
+                                            <td>{{ optional($calendar->class)->trainer->name ?? 'Không có huấn luyện viên' }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($calendar->day)->format('Y-m-d') }}</td>                                            
+                                            <td>{{ $calendar->time }}</td>
+                                            <td class="text-center" style="width: 100px">
+                                                <a href="{{ route('calendar.edit', $calendar->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('calendar.delete', $calendar->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="{{ route('calendar.index', ['week' => max($week - 1, 1)]) }}" class="btn btn-primary">Previous</a>
+                    <a href="{{ route('calendar.index', ['week' => $week + 1]) }}" class="btn btn-primary">Next</a>
                 </div>
-            </div>
-            
         </div>
     </div>
 </div>

@@ -1,12 +1,11 @@
 @include('backend.dashboard.component.breadcumb', ['title' => $config['seo']['create']['title']])
-@section('script')
 
 <div id="calendar"></div>
-
+@section('script')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        var calendarId = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarId, {
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',

@@ -32,6 +32,7 @@
             <li class="active2">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lí CSHT</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                    <li><a href="{{route('calendar.index')}}">Quản Lí Ca Tập</a></li> 
                     <li><a href="{{route('major.index')}}">Quản Lí Chuyên Môn</a></li> 
                     <li><a href="{{route('class.index')}}">Quản Lí Lớp</a></li> 
                     <li><a href="{{route('classSession.index')}}">Quản Lí Ca Tập</a></li> 
