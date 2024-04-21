@@ -45,6 +45,8 @@
                                         </button>  
                                     </span>      
                                 </div>
+                                <a href="{{ route('calendar.calendar') }}" class="btn btn-warning" style="margin-right: 10px"><i
+                                    class="fa fa-plus"></i> Xuất lịch </a>
                                 <a href="{{route('calendar.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
@@ -65,16 +67,17 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @if(isset($calendars) && is_object($calendars))
                                <!-- Hiển thị dữ liệu -->
+
                                     @foreach ($calendars as $calendar)
                                         <tr>
                                             <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
                                             <td>{{ $calendar->class->name }}</td>
-                                            <td>{{ optional($calendar->class)->trainer->name ?? 'Không có huấn luyện viên' }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($calendar->day)->format('Y-m-d') }}</td>                                            
-                                            <td>{{ $calendar->time }}</td>
+                                            <td>{{ $calendar->class->trainer->first_name }} {{ $calendar->class->trainer->last_name }} </td>
+                                            {{-- <td>{{ \Carbon\Carbon::parse($calendar->start_date)->format('Y-m-d') }}</td>                                             --}}
+                                            <td>{{ $calendar->start_date }}</td>
+                                            <td>{{ $calendar->end_date }}</td>
                                             <td class="text-center" style="width: 100px">
                                                 <a href="{{ route('calendar.edit', $calendar->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                                 <a href="{{ route('calendar.delete', $calendar->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>

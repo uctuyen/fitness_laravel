@@ -10,8 +10,8 @@ class Calendar extends Model
     protected $table = 'calendars';
     protected $fillable = [
         'class_id',
-        'day',
-        'time',
+        'start_date',
+        'end_date',
     ];
     public function class()
     {

@@ -32,7 +32,10 @@ class CalendarRepositories extends BaseRepositories implements CalendarRepositor
             });
             if(!empty($join)){
                 $query -> join(...$join);
-            }    
+            }   
+            $query->with(['class' => function($query){
+                $query->with(['trainer']);
+            }]); 
             return $query->paginate($perPage)->withQueryString()->withPath(env('APP_URL').$extend['path']);   
         }
     

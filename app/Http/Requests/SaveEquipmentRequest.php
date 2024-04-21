@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCalendarRequest extends FormRequest
+class SaveEquipmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,13 @@ class UpdateCalendarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_day' => 'required|date',
-            'end_day' => 'required|date',
+            'name' => 'required|string ',
         ];
     }
-    
     public function messages(): array
     {
         return [
-            'start_day.required' => 'Không được để trống ngày!',
-            'end_day.required' => 'Không được để trống thời gian bắt đầu!',
-        ]; 
+            'name.required' => 'Không được để trống trường Email!',
+        ];
     }
 }

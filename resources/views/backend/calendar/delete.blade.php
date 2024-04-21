@@ -1,7 +1,7 @@
 @include('backend.dashboard.component.breadcumb', ['title' => $config['seo']['create']['title']])
 
 {{-- thông báo khi thêm người dùng --}}
-<form action="{{route('major.destroy', $major->id)}}" method="post" class="box">   
+<form action="{{route('calendar.destroy', $calendar->id)}}" method="post" class="box">   
     @csrf
     @method('DELETE')
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -10,7 +10,6 @@
                 <div class="panel-head">
                     <div class="panel-title">Thông tin chung</div>
                     <div class="panel-description">
-                        <p> - Bạn có muốn xóa chuyên môn có tên là: <span class="text-danger">{{$major->major_name}}</span></p>
                         <p> - Lưu ý: Không thể khôi phục chuyên môn này sau khi xóa</p>
                     </div>
                 </div>
@@ -26,7 +25,7 @@
                                     </label>
                                     <input 
                                         type="text" 
-                                        name="major_name" 
+                                        name="calendar_name" 
                                         class="form-control" 
                                         value="{{old('major_name',($major->major_name) ?? '')}}" 
                                         placeholder=""

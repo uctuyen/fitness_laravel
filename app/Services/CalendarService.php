@@ -30,6 +30,8 @@ class CalendarService implements CalendarServiceInterface
             [],
             ['path'=>'/calendar/index']
         );
+
+
         return $calendars;
     }
     public function create($request)
@@ -86,8 +88,8 @@ class CalendarService implements CalendarServiceInterface
         return [
             'id',
             'class_id',
-            'day',
-            'time',
+            'start_date',
+            'end_date',
         ];
     }
 }

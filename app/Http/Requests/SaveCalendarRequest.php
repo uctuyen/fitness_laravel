@@ -22,16 +22,16 @@ class SaveCalendarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => 'required|date',
-            'time' => 'required|date_format:H:i',
+            'start_day' => 'required|date',
+            'end_day' => 'required|date',
         ];
     }
     
     public function messages(): array
     {
         return [
-            'day.required' => 'Không được để trống ngày!',
-            'time.required' => 'Không được để trống thời gian bắt đầu!',
+            'start_day.required' => 'Không được để trống ngày!',
+            'end_day.required' => 'Không được để trống thời gian bắt đầu!',
         ]; 
     }
 }

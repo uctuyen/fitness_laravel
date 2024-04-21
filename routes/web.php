@@ -114,6 +114,10 @@ Route::group(['prefix' => 'calendar'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [CalendarController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('calendar.destroy')
     ->middleware('admin');
+
+    Route::get('calendar', [CalendarController::class, 'calendar'])->name('calendar.calendar')
+    ->middleware('admin');
+    Route::get('/calendar/events', 'CalendarController@getEvents')->name('calendar.events');
 });
                         /** 'class */
 Route::group(['prefix' => 'class'],function(){
@@ -151,8 +155,8 @@ Route::group(['prefix' => 'classSession'],function(){
 
     Route::get('calendar', [ClassSessionController::class, 'calendar'])->name('classSession.calendar')
     ->middleware('admin');
-    Route::get('getEvents', [ClassSessionController::class, 'getEvents'])->name('classSession.getEvents')
-    ->middleware('admin');
+    // Route::get('getEvents', [ClassSessionController::class, 'getEvents'])->name('classSession.getEvents')
+    // ->middleware('admin');
 });                        
                                               
                              /** 'equipment */

@@ -10,8 +10,9 @@ class Equipment extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'price',
-        'quantity_member',
+        'description',
+        'image',
+        'status',
     ];
-    protected $table = 'classes';
+    protected $table = 'equipments';
 }

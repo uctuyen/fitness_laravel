@@ -66,20 +66,20 @@
                         <div class="row mb15">
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Ngày dạy
+                                    <label for="" class="control-label text-Left">Ngày bắt đầu
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="date" name="day" class="form-control"
-                                        value="{{ old('day', $calendar->day ?? '') }}" required>
+                                    <input type="date" name="start_date" class="form-control"
+                                        value="{{ old('start_date', $calendar->start_date ?? '') }}" required>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Giờ dạy
+                                    <label for="" class="control-label text-Left">ngày kết thúc
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="time" name="time" class="form-control"
-                                        value="{{ old('time', $calendar->time ?? '') }}" required>
+                                    <input type="date" name="end_date" class="form-control"
+                                        value="{{ old('end_date', $calendar->end_date ?? '') }}" required>
                                 </div>
                             </div>
                         </div>
