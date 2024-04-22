@@ -102,22 +102,8 @@ Route::group(['prefix' => 'major'],function(){
 Route::group(['prefix' => 'calendar'],function(){
     Route::get('index', [CalendarController::class, 'index'])->name('calendar.index')
     ->middleware('admin');
-    Route::get('create', [CalendarController::class, 'create'])->name('calendar.create')
+    Route::get('save', [CalendarController::class, 'save'])->name('calendar.save')
     ->middleware('admin');
-    Route::post('save', [CalendarController::class, 'save'])->name('calendar.save')
-    ->middleware('admin');
-    Route::get('{id}/edit', [CalendarController::class, 'edit'])->where(['id' => '[0-9]+'])->name('calendar.edit')
-    ->middleware('admin');
-    Route::post('{id}/update', [CalendarController::class, 'update'])->where(['id'=>'[0-9]+'])->name('calendar.update')
-    ->middleware('admin');
-    Route::get('{id}/delete', [CalendarController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('calendar.delete')
-    ->middleware('admin');
-    Route::delete('{id}/destroy', [CalendarController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('calendar.destroy')
-    ->middleware('admin');
-
-    Route::get('calendar', [CalendarController::class, 'calendar'])->name('calendar.calendar')
-    ->middleware('admin');
-    Route::get('/calendar/events', 'CalendarController@getEvents')->name('calendar.events');
 });
                         /** 'class */
 Route::group(['prefix' => 'class'],function(){
