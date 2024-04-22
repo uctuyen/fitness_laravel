@@ -102,7 +102,9 @@ Route::group(['prefix' => 'major'],function(){
 Route::group(['prefix' => 'calendar'],function(){
     Route::get('index', [CalendarController::class, 'index'])->name('calendar.index')
     ->middleware('admin');
-    Route::get('save', [CalendarController::class, 'save'])->name('calendar.save')
+    Route::post('save', [CalendarController::class, 'save'])->name('calendar.save')
+    ->middleware('admin');
+    Route::PATCH('update/{id}', [CalendarController::class, 'update'])->name('calendar.update')
     ->middleware('admin');
 });
                         /** 'class */
