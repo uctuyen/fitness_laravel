@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 use App\Models\Calendar;
 use App\Services\CalendarService;
 use App\Repositories\Interfaces\CalendarRepositoriesInterface as CalendarRepositories;
-use App\Http\Requests\SaveCalendarRequest;
-use App\Http\Requests\UpdateCalendarRequest;
 use App\Models\classModel;
 use App\Models\Trainer;
 class CalendarController extends Controller
@@ -27,6 +25,19 @@ class CalendarController extends Controller
         $classes = classModel::all();
         $trainers = Trainer::all();
         $calendar = Calendar::all();
+        $color = [
+            '#66ffff',
+            '#009900',
+            '#ff99ff',
+            '#0000ff',
+            '#ff1a1a',
+            '#66ffcc',   
+            '#ff99ff',
+        ];
+        $classColors = [];
+        foreach ($classes as $class) {
+            $classColors[$class->id] = $color[$class->id % count($color)];
+        }
         foreach ($calendar as $item) {
             $class_id = $item->class_id;
             $events[] = [
@@ -34,6 +45,7 @@ class CalendarController extends Controller
                 'title' => $item->class->name . ' - ' . $item->class->trainer->first_name . ' ' . $item->class->trainer->last_name,
                 'start' => $item->start_date,
                 'end' => $item->end_date,
+                'color' => $classColors[$class_id],
             ];
         }
         return view('backend.dashboard.layout',['events'=>$events],compact(
@@ -51,6 +63,9 @@ class CalendarController extends Controller
             'trainer_id' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+        ],[
+            'class_id.required' => 'không được để trống tên lớp',
+            'trainer_id.required' => 'không được để trống tên huấn luyện viên',
         ]);
     
         $class = classModel::find($request->class_id);

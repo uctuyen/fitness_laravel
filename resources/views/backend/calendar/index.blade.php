@@ -50,24 +50,29 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <label for="class">Class:</label>
-                                                <select id="classSelect" name="class_id" class="form-control">
-                                                    @foreach ($classes as $class)
-                                                        <option value="{{ $class->id }}">
-                                                            {{ $class->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <span id="classTitleError" class="text-danger"></span>
-                                                <label for="trainer">Trainer:</label>
-                                                <select id="trainerSelect" name="trainer_id" class="form-control">
-                                                    @foreach ($trainers as $trainer)
-                                                        <option value="{{ $trainer->id }}">
-                                                            {{ $trainer->first_name . ' ' . $trainer->last_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <span id="trainerTitleError" class="text-danger"></span>
+                                                <div style="form-group">
+                                                    <label for="class">Class:</label>
+                                                    <select id="classSelect" name="class_id" class="form-control">
+                                                        @foreach ($classes as $class)
+                                                            <option value="{{ $class->id }}">
+                                                                {{ $class->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span id="classTitleError" class="text-danger"></span>
+                                                </div>
+                                                <div style="form-group">
+                                                    <label for="trainer">Trainer:</label>
+                                                    <select id="trainerSelect" name="trainer_id" class="form-control">
+                                                        @foreach ($trainers as $trainer)
+                                                            <option value="{{ $trainer->id }}">
+                                                                {{ $trainer->first_name . ' ' . $trainer->last_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span id="trainerTitleError" class="text-danger"></span>
+                                                </div>
+
                                                 <label for="start_time">Start Time:</label>
                                                 <input type="time" id="startTime" name="start_time" class="form-control">
                                                 <span id="startTimeError" class="text-danger"></span>
@@ -107,7 +112,10 @@
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                             }
                                         });
-
+                                        $('#calendarModal').on('show.bs.modal', function (e) {
+                                            $('#classSelect').val('1');
+                                                $('#trainerSelect').val('2');
+                                        });
                                         $('#calendar').fullCalendar({
                                             header: {
                                                 'left': 'prev,next today',
@@ -233,6 +241,10 @@
                                                 }
                                             });
                                         });
+                                        $("#calendarModal").on("hidden.bs.modal", function () {
+                                            $('#saveBtn').unbind();
+                                        });
+                                        $('.fc-event').css('height', '20px');
                                     });
                                 </script>
                             </body>

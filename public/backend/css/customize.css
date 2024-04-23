@@ -122,3 +122,13 @@ table strong{
     width: 15px;
     height: 15px;
 }
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-group label, .form-group span {
+    flex: 1;
+}
