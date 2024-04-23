@@ -68,6 +68,13 @@
                                                     @endforeach
                                                 </select>
                                                 <span id="trainerTitleError" class="text-danger"></span>
+                                                <label for="start_time">Start Time:</label>
+                                                <input type="time" id="startTime" name="start_time" class="form-control">
+                                                <span id="startTimeError" class="text-danger"></span>
+
+                                                <label for="end_time">End Time:</label>
+                                                <input type="time" id="endTime" name="end_time" class="form-control">
+                                                <span id="endTimeError" class="text-danger"></span>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" id="Closebtn" class="btn btn-secondary"
@@ -99,8 +106,8 @@
                                             headers: {
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                             }
-                                        }); 
-                                        
+                                        });
+
                                         $('#calendar').fullCalendar({
                                             header: {
                                                 'left': 'prev,next today',
@@ -110,11 +117,10 @@
                                             editable: true,
                                             eventDrop: function(event) {
                                                 var id = event.id;
-                                                console.log(event.id);
                                                 var start_date = moment(event.start).format('YYYY-MM-DD HH:mm');
                                                 var end_date = moment(event.end).format('YYYY-MM-DD HH:mm');
                                                 $.ajax({
-                                                    url: "{{ route('calendar.update','' ) }}" + '/' + id,
+                                                    url: "{{ route('calendar.update', '') }}" + '/' + id,
                                                     type: 'PATCH',
                                                     dataType: 'json',
                                                     data: {
@@ -123,14 +129,17 @@
                                                     },
                                                     success: function(response) {
                                                         swal("Good job!", "cập nhật lịch thành công!", "success");
-
                                                     },
                                                     error: function(error) {
                                                         if (error.responseJSON && error.responseJSON.errors) {
                                                             console.log(error);
                                                         }
                                                     }
-                                                }); 
+                                                });
+                                            },
+                                            selectAllow: function(event) {
+                                                return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1,
+                                                    'second').utcOffset(false), 'day');
                                             },
                                             events: calendar,
                                             selectable: true,
@@ -141,14 +150,38 @@
                                                 selectedEnd = end;
                                                 $('#calendarModal').modal('toggle');
                                             },
-                                            eventClick: function(calEvent, jsEvent, view) {
-                                                $('#calendarModal').on('show.bs.modal', function() {
-                                                    console.log('Modal is about to be shown');
-                                                });
-                                                $('#calendarModal').modal('show');
-                                            }
-                                        }); 
-                                    
+                                            eventClick: function(event) {
+                                                var id = event.id;
+                                                swal({
+                                                        title: "Cảnh báo",
+                                                        text: "Sau khi xóa sẽ không thể khôi phục sự kiện này được!",
+                                                        icon: "warning",
+                                                        buttons: true,
+                                                        dangerMode: true,
+                                                    })
+                                                    .then((willDelete) => {
+                                                        if (willDelete) {
+                                                            $.ajax({
+                                                                url: "{{ route('calendar.destroy', '') }}" + '/' + id,
+                                                                type: "DELETE",
+                                                                dataType: 'json',
+                                                                success: function(response) {
+                                                                    $('#calendar').fullCalendar('removeEvents',
+                                                                        response);
+                                                                    swal("Bạn đã xóa sự kiện này thành công!", {
+                                                                        icon: "success",
+                                                                    });
+                                                                },
+                                                                error: function(error) {
+                                                                    console.log(error)
+                                                                },
+                                                            });
+                                                        }
+                                                    });
+
+                                            },
+                                        });
+
                                         $('#Closebtn').click(function() {
                                             // Perform any additional actions here...
                                             // For example, you can clear the form fields
@@ -157,28 +190,26 @@
                                             // Close the modal
                                             $('#calendarModal').modal('hide');
                                         });
-                                    
+
                                         $('#Savebtn').click(function() {
                                             var classValue = $('#classSelect option:selected').text().trim();
-                                            console.log(classValue);
                                             var trainerValue = $('#trainerSelect option:selected').text().trim();
-                                            console.log(trainerValue);
+                                            var startTime = $('#startTime').val();
+                                            var endTime = $('#endTime').val();
+
                                             if (selectedStart) {
-                                                var start_date = moment(selectedStart).format('YYYY-MM-DD HH:mm');
-                                                console.log(start_date);
+                                                var start_date = moment(selectedStart).format('YYYY-MM-DD') + ' ' + startTime;
                                             }
                                             if (selectedEnd) {
-                                                var end_date = moment(selectedEnd).format('YYYY-MM-DD HH:mm');
-                                                console.log(end_date);
+                                                var end_date = moment(selectedEnd).format('YYYY-MM-DD') + ' ' + endTime;
                                             }
-                                    
+
                                             $.ajax({
                                                 url: "{{ route('calendar.save') }}",
                                                 type: 'POST',
                                                 dataType: 'json',
                                                 data: {
-                                                    title: $('#classSelect option:selected').text().trim() + ' ' + $(
-                                                        '#trainerSelect option:selected').text().trim(),
+                                                    title: classValue + ' ' + trainerValue,
                                                     class_id: $('#classSelect').val(),
                                                     trainer_id: $('#trainerSelect').val(),
                                                     start_date: start_date,
@@ -196,13 +227,14 @@
                                                     if (error.responseJSON && error.responseJSON.errors) {
                                                         $('#classTitleError').html(error.responseJSON.errors.class_id);
                                                         $('#trainerTitleError').html(error.responseJSON.errors.trainer_id);
-                                                        $('#titleError').html(error.responseJSON.errors.title)
+                                                        $('#startTimeError').html(error.responseJSON.errors.start_time);
+                                                        $('#endTimeError').html(error.responseJSON.errors.end_time);
                                                     }
                                                 }
-                                            }); 
-                                        }); 
-                                    }); 
-                                    </script>
+                                            });
+                                        });
+                                    });
+                                </script>
                             </body>
                         </div>
                     </form>

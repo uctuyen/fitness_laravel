@@ -82,5 +82,17 @@ class CalendarController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
-        return response()->json('Event updated');    }
+        return response()->json('Event updated');    
+    }
+    public function destroy($id)
+    {
+        $calendar = Calendar::find($id);
+        if(! $calendar) {
+            return response()->json([
+                'error' => 'Unable to locate the event'
+            ], 404);
+        }
+        $calendar->delete();
+        return $id;
+    }
 }

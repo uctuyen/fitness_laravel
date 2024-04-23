@@ -106,6 +106,8 @@ Route::group(['prefix' => 'calendar'],function(){
     ->middleware('admin');
     Route::PATCH('update/{id}', [CalendarController::class, 'update'])->name('calendar.update')
     ->middleware('admin');
+    Route::DELETE('calendar/destroy/{id}', [CalendarController::class, 'destroy'])->name('calendar.destroy')
+    ->middleware('admin');
 });
                         /** 'class */
 Route::group(['prefix' => 'class'],function(){
