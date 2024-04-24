@@ -4,10 +4,11 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\MemberController;
 use App\Http\Controllers\Backend\TrainerController;
+use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\MajorController;
 use App\Http\Controllers\Backend\ClassController;
-use App\Http\Controllers\Backend\ClassSessionController;
 use App\Http\Controllers\Backend\CalendarController;
+use App\Http\Controllers\Backend\EquipmentController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,7 @@ Route::get('/', function () {
 Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')
 ->middleware('admin');
 
-                /** actorrrrrrrrrrrrrrrrr */
+                /** actorrrrrrrrrrrrrrrrr *****************************************************/
                         /** employee */
 Route::group(['prefix' => 'employee'],function(){
     Route::get('index', [EmployeeController::class, 'index'])->name('employee.index')
@@ -66,22 +67,38 @@ Route::group(['prefix' => 'member'],function(){
 });
                         /** trainer */
 Route::group(['prefix' => 'trainer'],function(){
-    Route::get('index', [trainerController::class, 'index'])->name('trainer.index')
+    Route::get('index', [TrainerController::class, 'index'])->name('trainer.index')
     ->middleware('admin');
-    Route::get('create', [trainerController::class, 'create'])->name('trainer.create')
+    Route::get('create', [TrainerController::class, 'create'])->name('trainer.create')
     ->middleware('admin');
-    Route::post('save', [trainerController::class, 'save'])->name('trainer.save')
+    Route::post('save', [TrainerController::class, 'save'])->name('trainer.save')
     ->middleware('admin');
-    Route::get('{id}/edit', [trainerController::class, 'edit'])->where(['id' => '[0-9]+'])->name('trainer.edit')
+    Route::get('{id}/edit', [TrainerController::class, 'edit'])->where(['id' => '[0-9]+'])->name('trainer.edit')
     ->middleware('admin');
-    Route::post('{id}/update', [trainerController::class, 'update'])->where(['id'=>'[0-9]+'])->name('trainer.update')
+    Route::post('{id}/update', [TrainerController::class, 'update'])->where(['id'=>'[0-9]+'])->name('trainer.update')
     ->middleware('admin');
-    Route::get('{id}/delete', [trainerController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('trainer.delete')
+    Route::get('{id}/delete', [TrainerController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('trainer.delete')
     ->middleware('admin');
-    Route::delete('{id}/destroy', [trainerController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('trainer.destroy')
+    Route::delete('{id}/destroy', [TrainerController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('trainer.destroy')
     ->middleware('admin');
 });   
-                        /** item */
+Route::group(['prefix' => 'attendance'],function(){
+    Route::get('index', [AttendanceController::class, 'index'])->name('attendance.index')
+    ->middleware('admin');
+    Route::get('create', [AttendanceController::class, 'create'])->name('attendance.create')
+    ->middleware('admin');
+    Route::post('save', [AttendanceController::class, 'save'])->name('attendance.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [AttendanceController::class, 'edit'])->where(['id' => '[0-9]+'])->name('attendance.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [AttendanceController::class, 'update'])->where(['id'=>'[0-9]+'])->name('attendance.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [AttendanceController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('attendance.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [AttendanceController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('attendance.destroy')
+    ->middleware('admin');
+});   
+                        /** item *****************************************************/
                         /** major */
 Route::group(['prefix' => 'major'],function(){
     Route::get('index', [MajorController::class, 'index'])->name('major.index')
@@ -99,6 +116,7 @@ Route::group(['prefix' => 'major'],function(){
     Route::delete('{id}/destroy', [MajorController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('major.destroy')
     ->middleware('admin');
 });
+                        /** 'calendar */
 Route::group(['prefix' => 'calendar'],function(){
     Route::get('index', [CalendarController::class, 'index'])->name('calendar.index')
     ->middleware('admin');
@@ -125,30 +143,7 @@ Route::group(['prefix' => 'class'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [ClassController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('class.destroy')
     ->middleware('admin');
-});                        
-                        /** 'classSession */
-Route::group(['prefix' => 'classSession'],function(){
-    Route::get('index', [ClassSessionController::class, 'index'])->name('classSession.index')
-    ->middleware('admin');
-    Route::get('create', [ClassSessionController::class, 'create'])->name('classSession.create')
-    ->middleware('admin');
-    Route::post('save', [ClassSessionController::class, 'save'])->name('classSession.save')
-    ->middleware('admin');
-    Route::get('{id}/edit', [ClassSessionController::class, 'edit'])->where(['id' => '[0-9]+'])->name('classSession.edit')
-    ->middleware('admin');
-    Route::post('{id}/update', [ClassSessionController::class, 'update'])->where(['id'=>'[0-9]+'])->name('classSession.update')
-    ->middleware('admin');
-    Route::get('{id}/delete', [ClassSessionController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('classSession.delete')
-    ->middleware('admin');
-    Route::delete('{id}/destroy', [ClassSessionController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('classSession.destroy')
-    ->middleware('admin');
-
-    Route::get('calendar', [ClassSessionController::class, 'calendar'])->name('classSession.calendar')
-    ->middleware('admin');
-    // Route::get('getEvents', [ClassSessionController::class, 'getEvents'])->name('classSession.getEvents')
-    // ->middleware('admin');
-});                        
-                                              
+});                                                             
                              /** 'equipment */
 Route::group(['prefix' => 'equipment'],function(){
     Route::get('index', [EquipmentController::class, 'index'])->name('equipment.index')

@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form action="{{route('equipment.index')}}">
+                <form action="{{route('attendance.index')}}">
                     <div class="filter uk-flex uk-flex-space-between">
                         <div class="uk-flex uk-flex-middle">
                             <div class="perpage">
@@ -41,12 +41,6 @@
                         </div>
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
-                                <select name='gender' class="form-control mr10 setupSelect2 ">
-                                    <option value="-1">Chọn giới tính</option>
-                                    <option value="0">Nam</option>
-                                    <option value="1">Nữ</option>
-                                    <option value="2">Khác</option>
-                                </select>
                                 <div  class="input-group">
                                     <input 
                                             type="text"
@@ -63,7 +57,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('equipment.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('class.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -75,42 +69,44 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th style="width: 90px">Hình</th>
-                                <th>Tên</th>
-                                <th>Số lượng</th>
-                                <th>Mô tả</th>
-                                <th>Tình trạng</th>
+                                <th>Tên lớp học</th>
+                                <th>Tên học viên</th>
+                                <th>chuyên môn</th>
+                                <th>Số lượng học viên</th>
+                                <th>Giá </th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($equipments) && is_object($equipments))
-                                @foreach ($equipments as $equipment)
+                            @if(isset($classes) && is_object($classes))
+                                @foreach ($classes as $class)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td><img class="image image-cover" style="width: 50px" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
                                     <td>
-                                        {{$equipment->name}}
+                                        {{$class->name}}
                                     </td>
                                     <td>
-                                        {{$equipment->quantity}}
+                                        {{ $class->trainer->first_name . ' ' . $class->trainer->last_name }} <!-- Nối chuỗi tên đầu và tên cuối -->
                                     </td>
                                     <td>
-                                        {{$equipment->description}}
+                                        {{$class->major->major_name}}
                                     </td>
-                                    <td> 
-                                        {{$equipment->status}}
+                                    <td>
+                                        {{$class->quantity_member}}
+                                    </td>
+                                    <td>
+                                        {{$class->price}}
                                     </td>
                                     <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('equipment.edit', $equipment->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('equipment.delete', $equipment->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('class.delete', $class->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
-                        {{ $equipments->links('pagination::bootstrap-4') }}
+                        {{ $classes->links('pagination::bootstrap-4') }}
                 </div>
             </div>
             

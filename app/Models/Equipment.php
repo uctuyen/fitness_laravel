@@ -13,6 +13,10 @@ class Equipment extends Model
         'description',
         'image',
         'status',
+        'quantity',
+        'room_id'
     ];
     protected $table = 'equipments';
+
+    public function rooms(){}
 }

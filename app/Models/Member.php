@@ -50,5 +50,8 @@ class Member extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function attendace(){
+        return $this->hasMany(Attendance::class);
+    }
     protected $table = 'members';
 }

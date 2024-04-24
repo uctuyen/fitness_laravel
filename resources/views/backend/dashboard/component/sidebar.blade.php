@@ -27,6 +27,7 @@
                     <li><a href="{{route('employee.index')}}">Quản Lí Nhân Viên</a></li> 
                     <li><a href="{{route('member.index')}}">Quản Lí Học Viên</a></li> 
                     <li><a href="{{route('trainer.index')}}">QL Huấn Luyện Viên</a></li> 
+                    <li><a href="{{route('trainer.index')}}">QL Điểm Danh</a></li> 
                 </ul>
             </li>
             <li class="active2">
@@ -35,26 +36,10 @@
                     <li><a href="{{route('calendar.index')}}">Quản Lí lịch Tập</a></li> 
                     <li><a href="{{route('major.index')}}">Quản Lí Chuyên Môn</a></li> 
                     <li><a href="{{route('class.index')}}">Quản Lí Lớp</a></li> 
-                    <li><a href="{{route('classSession.index')}}">Quản Lí Ca Tập</a></li> 
                     <li><a href="#">Quản Lí Phòng</a></li> 
                     <li><a href="{{route('equipment.index')}}">Quản Lí Thiết Bị</a></li> 
                 </ul>
             </li>
-            {{-- <li class="active3">
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lí Chức Năng</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="#">Quản Lí Dạy</a></li> 
-                    <li><a href="#">Quản Lí Học</a></li> 
-                    <li><a href="#">Điểm Danh</a></li> 
-                </ul>
-            </li>
-            <li class="active4">
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lí Hiển Thị</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="#">Quản Lí Menus</a></li> 
-                    <li><a href="#">Quản Lí Banner & Slide</a></li> 
-                </ul>
-            </li> --}}
         </ul>
     </div>
 </nav>

@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\ClassSession;
-use App\Repositories\Interfaces\ClassSessionRepositoriesInterface;
+use App\Models\Major;
+use App\Repositories\Interfaces\MajorRepositoriesInterface;
 use App\Repositories\BaseRepositories;
 /**
  * Class MajorService
  * @package App\Services
  */
-class ClassSessionRepositories extends BaseRepositories implements ClassSessionRepositoriesInterface
+class MajorRepositories extends BaseRepositories implements MajorRepositoriesInterface
 {
     protected $model;
     public function __construct(
-        ClassSession $model  
+        Major $model  
     ){
         $this->model = $model;
     }
@@ -27,7 +27,7 @@ class ClassSessionRepositories extends BaseRepositories implements ClassSessionR
             $query = $this->model->select($column)
             ->where(function($query) use ($condition){
                 if(isset($condition['keyword']) && !empty($condition['keyword'])){
-                    $query->where('name','like','%'.$condition['keyword'].'%');
+                    $query->where('calendar_id','like','%'.$condition['keyword'].'%');
                 };
             });
             if(!empty($join)){

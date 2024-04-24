@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Employee;
-use App\Repositories\Interfaces\EmployeeRepositoriesInterface;
+use App\Models\Equipment;
+use App\Repositories\Interfaces\EquipmentRepositoriesInterface;
 use App\Repositories\BaseRepositories;
 /**
- * Class EmployeeService
+ * Class EquipmentService
  * @package App\Services
  */
-class EmployeeRepositories extends BaseRepositories implements EmployeeRepositoriesInterface
+class EquipmentRepositories extends BaseRepositories implements EquipmentRepositoriesInterface
 {
     protected $model;
     public function __construct(
-        Employee $model  
+        Equipment $model  
     ){
         $this->model = $model;
     }
@@ -28,16 +28,9 @@ class EmployeeRepositories extends BaseRepositories implements EmployeeRepositor
             $query = $this->model->select($column)
             ->where(function($query) use ($condition){
                 if(isset($condition['keyword']) && !empty($condition['keyword'])){
-                    $query->where('first_name','like','%'.$condition['keyword'].'%')
-                        ->orWhere('last_name','like','%'.$condition['keyword'].'%')
-                        ->orWhere('email','like','%'.$condition['keyword'].'%')
-                        ->orWhere('address','like','%'.$condition['keyword'].'%')
-                        ->orWhere('phone_number','like','%'.$condition['keyword'].'%');
+                    $query->where('name','like','%'.$condition['keyword'].'%')
+        ;
                 };
-                if(isset($condition['gender']) && $condition['gender'] != -1 ){
-                    $query->where('gender', $condition['gender']);
-                }
-                return $query;
             });
             if(!empty($join)){
                 $query -> join(...$join);

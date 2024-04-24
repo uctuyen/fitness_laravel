@@ -25,8 +25,6 @@ class EmployeeService implements EmployeeServiceInterface
     public function getAllPaginate($request){
         $condition['keyword'] = addslashes($request->input('keyword'));
         $condition['gender'] = (int)$request->input('gender');
-
-
         $perPage = (int)$request->input('perpage');
         $employees = $this->employeeRepositories->paginate
             ($this->paginateSelect(),
@@ -62,9 +60,6 @@ class EmployeeService implements EmployeeServiceInterface
             // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
             $employee = $this->employeeRepositories->update($id, $payload);
             DB::commit();
-            // return [
-            //     'employee' => $employee,
-            // ];
             return true;
         } catch (\Exception $e) {
             DB::rollBack();

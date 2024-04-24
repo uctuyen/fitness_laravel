@@ -10,7 +10,7 @@
     </div>
 @endif
 @php
-    $url = $config['method'] == 'create' ? route('classSession.save') : route('classSession.update', $classSession->id);
+    $url = $config['method'] == 'create' ? route('attendance.save') : route('attendance.update', $attendance->id);
 @endphp
 {{-- thông báo khi thêm người dùng --}}
 <form action="{{ $url }}" method="post" class="box">
@@ -21,7 +21,7 @@
                 <div class="panel-head">
                     <div class="panel-title">Thông tin chung</div>
                     <div class="panel-description">
-                        <p> - Nhập thông tin của ca tập</p>
+                        <p> - Nhập thông tin của lớp học</p>
                         <p> - Lưu ý: Những trường có đánh dấu <span class="text-danger">(*)</span> là không được để
                             trống. </p>
                     </div>
@@ -31,48 +31,62 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <div class="row mb15">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Tên ca tập
+                                    <label for="" class="control-label text-Left">Tên lớp học
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" name="name" class="form-control"
-                                        value="{{ old('name', $classSession->name ?? '') }}" placeholder=""
+                                        value="{{ old('name', $class->name ?? '') }}" placeholder=""
                                         autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Ngày trong tuần
+                                    <label for="" class="control-label text-Left">số lượng học viên
                                     </label>
-                                    <input type="text" name="day_of_week" class="form-control"
-                                        value="{{ old('day_of_week', $classSession->day_of_week ?? '') }}"
+                                    <input type="text" name="quantity_member" class="form-control"
+                                        value="{{ old('quantity_member', $class->quantity_member ?? '') }}"
                                         placeholder="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-row">
+                                    <label for="" class="control-label text-Left">giá
+                                    </label>
+                                    <input type="text" name="price" class="form-control"
+                                        value="{{ old('price', $class->price ?? '') }}" placeholder=""
+                                        autocomplete="off">
                                 </div>
                             </div>
                         </div>
                         <div class="row mb15">
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Giờ bắt đầu
+                                    <label for="" class="control-label text-Left">Tên huấn luyện viên
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" name="start_time" class="form-control"
-                                        value="{{ old('start_time', $classSession->start_time ?? '') }}" placeholder=""
-                                        autocomplete="off">
+                                    <select name="trainer_id" class="form-control">
+                                        @foreach($trainers as $trainer)
+                                            <option value="{{ $trainer->id }}" {{ (old('trainer_id', $class->trainer_id ?? '') == $trainer->id ? 'selected':'') }}>
+                                                {{ $trainer->first_name . ' ' . $trainer->last_name }} <!-- Nối chuỗi tên đầu và tên cuối -->
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Giờ kết thúc
+                                    <label for="" class="control-label text-Left">Chuyên môn
                                     </label>
-                                    <input type="text" name="end_time" class="form-control"
-                                        value="{{ old('end_time', $classSession->end_time ?? '') }}"
-                                        placeholder="" autocomplete="off">
+                                    <select name="major_id" class="form-control">
+                                        @foreach($majors as $major)
+                                            <option value="{{ $major->id }}" {{ (old('major_id', $class->major_id ?? '') == $major->id ? 'selected':'') }}>{{ $major->major_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

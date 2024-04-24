@@ -2,5 +2,5 @@
 
 namespace App\Repositories\Interfaces;
 
-interface ClassSessionRepositoriesInterface {
+interface AttendanceRepositoriesInterface {
 }

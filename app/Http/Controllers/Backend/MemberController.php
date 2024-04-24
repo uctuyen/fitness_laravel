@@ -29,16 +29,7 @@ class MemberController extends Controller
 
     public function index(Request $request){
         $genderLabels = config('apps.member.create.genderLabels');
-        $members = $this->memberService->getAllPaginate($request);
-        $config = [
-            'css' => [
-                'backend/css/plugins/switchery/switchery.css',
-            ],
-            'js' => [
-                'backend/js/plugins/switchery/switchery.js',
-            ],
-        ];
-        
+        $members = $this->memberService->getAllPaginate($request);     
         $config['seo'] = config('apps.member');
         $template = 'backend.member.index';
         
@@ -51,7 +42,6 @@ class MemberController extends Controller
         
     }
     public function create(){
-        
         $member = new Member;
         $genderLabels = config('apps.member.create.genderLabels');
         $provinces = $this->provinceRepositories->all();

@@ -60,9 +60,6 @@ class MemberService implements MemberServiceInterface
             // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
             $member = $this->memberRepositories->update($id, $payload);
             DB::commit();
-            return [
-                'member' => $member,
-            ];
         } catch (\Exception $e) {
             DB::rollBack();
             echo $e->getMessage();die();

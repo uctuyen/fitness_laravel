@@ -1,41 +1,41 @@
 <?php
 
 namespace App\Services;
-
-use App\Services\Interfaces\ClassSessionServiceInterface;
-use App\Repositories\Interfaces\ClassSessionRepositoriesInterface as ClassSessionRepositories;
+use App\Repositories\Interfaces\AttendanceRepositoriesInterface as AttendanceRepositories;
 use Illuminate\Support\Facades\DB;
+use App\Services\Interfaces\AttendanceServiceInterface;
+
 /**
- * ClassSession ClassSessionSessionService
+ * Class AttendanceService
  * @package App\Services
  */
-class ClassSessionService implements ClassSessionServiceInterface
+class AttendanceService implements AttendanceServiceInterface
 {
-    protected $classSessionRepositories;
+    protected $attendanceRepositories;
     public function __construct(
-        ClassSessionRepositories $classSessionRepositories
+        AttendanceRepositories $attendanceRepositories
     ){
-        $this->classSessionRepositories = $classSessionRepositories;
+        $this->attendanceRepositories = $attendanceRepositories;
     }
     public function getAllPaginate($request){
         $condition['keyword'] = addslashes($request->input('keyword'));
-        $classSessions = $this->classSessionRepositories->paginate
+        $attendances = $this->attendanceRepositories->paginate
             ($this->paginateSelect(),
             $condition,
             [],
-            ['path'=>'/classSession/index']
+            ['path'=>'/attendance/index']
         );
-        return $classSessions;
+        return $attendances;
     }
     public function create($request)
     {
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $classSession = $this->classSessionRepositories->create($payload);
+            $attendance = $this->attendanceRepositories->create($payload);
             DB::commit();
             return [
-                'classSession' => $classSession,
+                'attendance' => $attendance,
             ];
         } catch (\Exception $e) {
             DB::rollBack();
@@ -49,7 +49,7 @@ class ClassSessionService implements ClassSessionServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $classSession = $this->classSessionRepositories->update($id, $payload);
+            $attendance = $this->attendanceRepositories->update($id, $payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -61,7 +61,7 @@ class ClassSessionService implements ClassSessionServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $classSession = $this->classSessionRepositories->delete($id);
+            $attendance = $this->attendanceRepositories->delete($id);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -74,10 +74,8 @@ class ClassSessionService implements ClassSessionServiceInterface
     public function paginateSelect(){
         return [
             'id',
-            'name',
-            'day_of_week',
-            'start_time',
-            'end_time',
+            'member_id',
+            'calendar_id',
         ];
     }
 }

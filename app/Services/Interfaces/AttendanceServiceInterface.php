@@ -3,10 +3,10 @@
 namespace App\Services\Interfaces;
 
 /**
- * Interface ClassSessionServiceInterface
+ * Interface AttendanceServiceInterface
  * @package App\Services\Interfaces
  */
-interface ClassSessionServiceInterface
+interface AttendanceServiceInterface
 {
 
 }

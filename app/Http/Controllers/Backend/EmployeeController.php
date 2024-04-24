@@ -30,15 +30,6 @@ class EmployeeController extends Controller
     public function index(Request $request){
         $genderLabels = config('apps.employee.create.genderLabels');
         $employees = $this->employeeService->getAllPaginate($request);
-        $config = [
-            'css' => [
-                'backend/css/plugins/switchery/switchery.css',
-            ],
-            'js' => [
-                'backend/js/plugins/switchery/switchery.js',
-            ],
-        ];
-        
         $config['seo'] = config('apps.employee');
         $template = 'backend.employee.index';
         
@@ -51,7 +42,6 @@ class EmployeeController extends Controller
         
     }
     public function create(){
-        
         $employee = new Employee;
         $genderLabels = config('apps.employee.create.genderLabels');
         $provinces = $this->provinceRepositories->all();
@@ -83,8 +73,6 @@ class EmployeeController extends Controller
         $genderLabels = config('apps.employee.create.genderLabels');
         $employee = $this->employeeRepositories->findById($id);
         $provinces = $this->provinceRepositories->all();
-
-        
         $config = [
             'css' => ['https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css'],
             'js' => [
