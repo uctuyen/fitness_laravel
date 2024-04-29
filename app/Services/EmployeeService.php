@@ -91,7 +91,6 @@ class EmployeeService implements EmployeeServiceInterface
             'last_name',
             'gender',
             'phone_number',
-            'last_name',
             'email',
             'day_of_birth',
             'address'

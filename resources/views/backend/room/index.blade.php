@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="ibox-content">
-                <form action="{{route('equipment.index')}}">
+                <form action="{{route('room.index')}}">
                     <div class="filter uk-flex uk-flex-space-between">
                         <div class="uk-flex uk-flex-middle">
                             <div class="perpage">
@@ -41,12 +41,6 @@
                         </div>
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
-                                <select name='gender' class="form-control mr10 setupSelect2 ">
-                                    <option value="-1">Chọn giới tính</option>
-                                    <option value="0">Nam</option>
-                                    <option value="1">Nữ</option>
-                                    <option value="2">Khác</option>
-                                </select>
                                 <div  class="input-group">
                                     <input 
                                             type="text"
@@ -63,7 +57,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('equipment.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('room.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -75,46 +69,32 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th style="width: 90px">Hình</th>
-                                <th>Tên</th>
-                                <th>Tên phòng</th>
-                                <th>Số lượng</th>
-                                <th>Mô tả</th>
-                                <th>Tình trạng</th>
+                                <th>Tên Phòng</th>
+                                <th>Tên lớp Học</th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($equipments) && is_object($equipments))
-                                @foreach ($equipments as $equipment)
+                            @if(isset($rooms) && is_object($rooms))
+                                @foreach ($rooms as $room)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td><img class="image image-cover" style="width: 50px" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
                                     <td>
-                                        {{$equipment->name}}
+                                        {{$room->name}}
                                     </td>
                                     <td>
-                                        {{$equipment->room->name}}
-                                    </td>
-                                    <td>
-                                        {{$equipment->quantity}}
-                                    </td>
-                                    <td>
-                                        {{$equipment->description}}
-                                    </td>
-                                    <td> 
-                                        {{$equipment->status}}
+                                        {{ $room->class->name }}
                                     </td>
                                     <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('equipment.edit', $equipment->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('equipment.delete', $equipment->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('room.edit', $room->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('room.delete', $room->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
-                        {{ $equipments->links('pagination::bootstrap-4') }}
+                        {{ $rooms->links('pagination::bootstrap-4') }}
                 </div>
             </div>
             

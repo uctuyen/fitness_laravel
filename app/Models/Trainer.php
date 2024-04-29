@@ -17,6 +17,7 @@ class Trainer extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $guard = 'trainer';
     protected $fillable = [
         'avatar',
         'first_name',

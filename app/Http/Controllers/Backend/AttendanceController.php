@@ -2,48 +2,47 @@
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Attendance;
 use App\Services\AttendanceService;
 use App\Repositories\Interfaces\AttendanceRepositoriesInterface as AttendanceRepositories;
 use App\Models\classModel;
 use App\Models\Trainer;
+use App\Models\Attendance;
 class AttendanceController extends Controller
 {
-    protected $AttendanceService;
-    protected $AttendanceRepositories;
+    protected $attendanceService;
+    protected $attendanceRepositories;
     public function __construct(
-        AttendanceService $AttendanceService,
-        AttendanceRepositories $AttendanceRepositories,
+        AttendanceService $attendanceService,
+        AttendanceRepositories $attendanceRepositories,
     ){
-        $this->AttendanceService = $AttendanceService; 
-        $this->AttendanceRepositories = $AttendanceRepositories; 
+        $this->attendanceService = $attendanceService; 
+        $this->attendanceRepositories = $attendanceRepositories; 
     }
-    public function index (){
-        $config['seo'] = config('apps.Attendance');
+    public function index (Request $request){
+        $attendances = $this->attendanceService->getAllPaginate( $request);
+        $config['seo'] = config('apps.attendance');
         $template = 'backend.Attendance.index';
-        $events = [];
         $classes = classModel::all();
         $trainers = Trainer::all();
-        $calendar = Calendar::all();
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
+            'attendances',
             'classes',
             'trainers',
-            'calendar'
         ));
     }
     public function create(){
+        $classes = classModel::all();
         $trainers = Trainer::all();
-        $majors = Major::all();
         $config['seo'] = config('apps.attendance');
         $config['method'] = 'create';
         $template = 'backend.attendance.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
+            'classes',
             'trainers',
-            'majors'
         ));
     }
     public function save(SaveAttendanceRequest $request){
@@ -53,18 +52,18 @@ class AttendanceController extends Controller
         return redirect()->route('attendance.index')->with('error', 'Thêm mới lớp học không thành công!');
      }
     public function edit($id){
-        $attendance = $this->attendanceRepositories->findById($id);
+        $attendances = $this->attendanceRepositories->findById($id);
+        $classes = classModel::all();
         $trainers = Trainer::all();
-        $majors = Major::all();
         $config['seo'] = config('apps.attendance');
         $config['method'] = 'edit';
         $template = 'backend.attendance.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
-            'attendance',
+            'attendances',
+            'classes',
             'trainers',
-            'majors'
         ));
     }
     

@@ -18,5 +18,8 @@ class Equipment extends Model
     ];
     protected $table = 'equipments';
 
-    public function rooms(){}
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }

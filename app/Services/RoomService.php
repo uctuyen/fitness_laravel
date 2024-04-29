@@ -1,41 +1,41 @@
 <?php
 
 namespace App\Services;
-use App\Repositories\Interfaces\AttendanceRepositoriesInterface as AttendanceRepositories;
-use Illuminate\Support\Facades\DB;
-use App\Services\Interfaces\AttendanceServiceInterface;
 
+use App\Services\Interfaces\RoomServiceInterface;
+use App\Repositories\Interfaces\RoomRepositoriesInterface as RoomRepositories;
+use Illuminate\Support\Facades\DB;
 /**
- * Class AttendanceService
+ * room roomService
  * @package App\Services
  */
-class AttendanceService implements AttendanceServiceInterface
+class RoomService implements RoomServiceInterface
 {
-    protected $attendanceRepositories;
+    protected $roomRepositories;
     public function __construct(
-        AttendanceRepositories $attendanceRepositories
+        RoomRepositories $roomRepositories
     ){
-        $this->attendanceRepositories = $attendanceRepositories;
+        $this->roomRepositories = $roomRepositories;
     }
     public function getAllPaginate($request){
         $condition['keyword'] = addslashes($request->input('keyword'));
-        $attendances = $this->attendanceRepositories->paginate
+        $rooms = $this->roomRepositories->paginate
             ($this->paginateSelect(),
             $condition,
             [],
-            ['path'=>'/attendance/index']
+            ['path'=>'/room/index']
         );
-        return $attendances;
+        return $rooms;
     }
     public function create($request)
     {
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $attendance = $this->attendanceRepositories->create($payload);
+            $room = $this->roomRepositories->create($payload);
             DB::commit();
             return [
-                'attendance' => $attendance,
+                'room' => $room,
             ];
         } catch (\Exception $e) {
             DB::rollBack();
@@ -49,7 +49,7 @@ class AttendanceService implements AttendanceServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $attendance = $this->attendanceRepositories->update($id, $payload);
+            $room = $this->roomRepositories->update($id, $payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -61,7 +61,7 @@ class AttendanceService implements AttendanceServiceInterface
     public function destroy($id){
         DB::beginTransaction();
         try {
-            $attendance = $this->attendanceRepositories->delete($id);
+            $room = $this->roomRepositories->delete($id);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -74,10 +74,8 @@ class AttendanceService implements AttendanceServiceInterface
     public function paginateSelect(){
         return [
             'id',
-            'member_id',
-            'class_id',
-            'date_attendance',
-            'time'
+            'name',
+             'class_id'   
         ];
     }
 }

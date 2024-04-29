@@ -7,8 +7,9 @@ use App\Http\Controllers\Backend\TrainerController;
 use App\Http\Controllers\Backend\AttendanceController;
 use App\Http\Controllers\Backend\MajorController;
 use App\Http\Controllers\Backend\ClassController;
-use App\Http\Controllers\Backend\CalendarController;
+use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\EquipmentController;
+use App\Http\Controllers\Backend\CalendarController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
 use Illuminate\Support\Facades\Route;
@@ -82,6 +83,7 @@ Route::group(['prefix' => 'trainer'],function(){
     Route::delete('{id}/destroy', [TrainerController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('trainer.destroy')
     ->middleware('admin');
 });   
+
 Route::group(['prefix' => 'attendance'],function(){
     Route::get('index', [AttendanceController::class, 'index'])->name('attendance.index')
     ->middleware('admin');
@@ -143,7 +145,23 @@ Route::group(['prefix' => 'class'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [ClassController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('class.destroy')
     ->middleware('admin');
-});                                                             
+});     
+Route::group(['prefix' => 'room'],function(){
+    Route::get('index', [RoomController::class, 'index'])->name('room.index')
+    ->middleware('admin');
+    Route::get('create', [RoomController::class, 'create'])->name('room.create')
+    ->middleware('admin');
+    Route::post('save', [RoomController::class, 'save'])->name('room.save')
+    ->middleware('admin');
+    Route::get('{id}/edit', [RoomController::class, 'edit'])->where(['id' => '[0-9]+'])->name('room.edit')
+    ->middleware('admin');
+    Route::post('{id}/update', [RoomController::class, 'update'])->where(['id'=>'[0-9]+'])->name('room.update')
+    ->middleware('admin');
+    Route::get('{id}/delete', [RoomController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('room.delete')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [RoomController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('room.destroy')
+    ->middleware('admin');
+});                                                         
                              /** 'equipment */
 Route::group(['prefix' => 'equipment'],function(){
     Route::get('index', [EquipmentController::class, 'index'])->name('equipment.index')
@@ -168,3 +186,7 @@ Route::get('ajax/location/getLocation', [LocationController::class, 'getLocation
 Route::get('admin', [AuthController::class, 'index'])->name('auth.admin');
 Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login')->middleware('login');;
+
+
+
+

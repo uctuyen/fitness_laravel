@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Attendance;
-use App\Repositories\Interfaces\AttendanceRepositoriesInterface;
+use App\Models\Room;
+use App\Repositories\Interfaces\RoomRepositoriesInterface;
 use App\Repositories\BaseRepositories;
 /**
- * Class AttendanceService
+ * Class MajorService
  * @package App\Services
  */
-class AttendanceRepositories extends BaseRepositories implements AttendanceRepositoriesInterface
+class RoomRepositories extends BaseRepositories implements RoomRepositoriesInterface
 {
     protected $model;
     public function __construct(
-        Attendance $model  
+        Room $model  
     ){
         $this->model = $model;
     }
@@ -27,7 +27,7 @@ class AttendanceRepositories extends BaseRepositories implements AttendanceRepos
             $query = $this->model->select($column)
             ->where(function($query) use ($condition){
                 if(isset($condition['keyword']) && !empty($condition['keyword'])){
-                    $query->where('calendar_id','like','%'.$condition['keyword'].'%');
+                    $query->where('name','like','%'.$condition['keyword'].'%');
                 };
             });
             if(!empty($join)){

@@ -19,6 +19,22 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+    protected function mapTrainerRoutes()
+    {
+        Route::prefix('trainer')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/trainer.php'));
+            
+    }
+    protected function mapMemberRoutes()
+    {
+        Route::prefix('member')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/member.php'));
+    }
+    
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
@@ -30,10 +46,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-        });
+            $this->mapTrainerRoutes();
+            $this->mapMemberRoutes();
+        }); 
     }
 
     /**

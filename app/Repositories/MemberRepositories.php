@@ -33,7 +33,7 @@ class MemberRepositories extends BaseRepositories implements MemberRepositoriesI
                         ->orWhere('address','like','%'.$condition['keyword'].'%')
                         ->orWhere('phone_number','like','%'.$condition['keyword'].'%');
                 };
-                if(isset($condition['gender']) && $condition['gender'] != -1 ){
+                if(isset($condition['gender']) && $condition['gender'] != 0 ){
                     $query->where('gender', $condition['gender']);
                 }
                 return $query;
@@ -41,7 +41,7 @@ class MemberRepositories extends BaseRepositories implements MemberRepositoriesI
             if(!empty($join)){
                 $query -> join(...$join);
             }    
-            return $query->paginate($perPage)->withQueryString()->withPath(env('APP_URL').$extend['path']);   
+            return $query->paginate($perPage)->withQueryString()->withPath(config('app.url').$extend['path']);   
         }
     
 }

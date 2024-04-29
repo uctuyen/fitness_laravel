@@ -17,8 +17,6 @@ class Calendar extends Model
     {
         return $this->belongsTo(classModel::class, 'class_id');
     }
-    public function attendance(){
-            return $this->hasMany(Attendance::class);
-    }
+    
     // Define relationships and other methods here
 }

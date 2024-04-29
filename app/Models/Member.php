@@ -17,6 +17,8 @@ class Member extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $guard = 'member';
     protected $fillable = [
         'avatar',
         'first_name',

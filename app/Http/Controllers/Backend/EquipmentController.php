@@ -8,6 +8,7 @@ use App\Services\EquipmentService;
 use App\Repositories\Interfaces\EquipmentRepositoriesInterface as EquipmentRepositories;
 use App\Http\Requests\SaveEquipmentRequest;
 use App\Http\Requests\UpdateEquipmentRequest;
+use App\Models\Room;
 class EquipmentController extends Controller
 {
     protected $equipmentService;
@@ -21,25 +22,27 @@ class EquipmentController extends Controller
     }
     public function index(Request $request){
         $equipments = $this->equipmentService->getAllPaginate($request);
-
+        $rooms = Room::all();
         $config['seo'] = config('apps.equipment');
         $template = 'backend.equipment.index';
         return view('backend.dashboard.layout',compact(
             'equipments',
             'template',
             'config',
+            'rooms', 
         ));
         
     }
 
     public function create(){
-        
+        $rooms = Room::all();
         $config['seo'] = config('apps.equipment');
         $config['method'] = 'create';
         $template = 'backend.equipment.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
+            'rooms',
         ));
     }
     public function save(SaveEquipmentRequest $request){
@@ -49,6 +52,7 @@ class EquipmentController extends Controller
         return redirect()->route('equipment.index')->with('error', 'Thêm mới chuyên môn không thành công!');
      }
     public function edit($id){
+        $rooms = Room::all();
         $equipment = $this->equipmentRepositories->findById($id);
         $config['seo'] = config('apps.equipment');
         $config['method'] = 'edit';
@@ -57,6 +61,7 @@ class EquipmentController extends Controller
             'template',
             'config',
             'equipment',
+            'rooms',
         ));
     }
     

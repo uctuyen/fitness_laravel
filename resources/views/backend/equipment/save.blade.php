@@ -82,6 +82,20 @@
                                         autocomplete="off">
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-label text-Left">Tên phòng
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <select name="room_id" class="form-control">
+                                        @foreach($rooms as $room)
+                                            <option value="{{ $room->id }}" {{ (old('room_id', $class->room_id ?? '') == $room->id ? 'selected':'') }}>
+                                                {{ $room->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

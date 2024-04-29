@@ -22,7 +22,6 @@ class ClassController extends Controller
         $this->classRepositories = $classRepositories; 
     }
     public function index(Request $request){
-
         $classes = $this->classService->getAllPaginate($request);
         $config['seo'] = config('apps.class');
         $template = 'backend.class.index';

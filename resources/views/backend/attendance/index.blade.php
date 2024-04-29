@@ -57,7 +57,7 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('class.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('attendance.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -69,44 +69,36 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th>Tên lớp học</th>
                                 <th>Tên học viên</th>
-                                <th>chuyên môn</th>
-                                <th>Số lượng học viên</th>
-                                <th>Giá </th>
+                                <th>Tên lớp học</th>
+                                <th>Tên huấn luyện viên</th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($classes) && is_object($classes))
-                                @foreach ($classes as $class)
+                            @if(isset($attendances) && is_object($attendances))
+                                @foreach ($attendances as $attendance)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
                                     <td>
-                                        {{$class->name}}
+                                        {{$attendance->member->first_name . ' ' . $attendance->member->last_name}}
                                     </td>
                                     <td>
-                                        {{ $class->trainer->first_name . ' ' . $class->trainer->last_name }} <!-- Nối chuỗi tên đầu và tên cuối -->
+                                        {{$attendance->class->name}}
                                     </td>
                                     <td>
-                                        {{$class->major->major_name}}
-                                    </td>
-                                    <td>
-                                        {{$class->quantity_member}}
-                                    </td>
-                                    <td>
-                                        {{$class->price}}
+                                        {{$attendance->class->trainer->first_name . ' ' . $attendance->class->trainer->last_name}}
                                     </td>
                                     <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('class.delete', $class->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('attendance.edit', $attendance->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('attendance.delete', $attendance->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
-                        {{ $classes->links('pagination::bootstrap-4') }}
+                        {{ $attendances->links('pagination::bootstrap-4') }}
                 </div>
             </div>
             

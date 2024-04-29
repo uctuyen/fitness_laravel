@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'employees',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
         'trainer' => [
             'driver' => 'session',
             'provider' => 'trainers',
@@ -72,7 +76,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
         ],
-
+       
         'trainers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Trainer::class,
@@ -105,6 +109,18 @@ return [
     'passwords' => [
         'employees' => [
             'provider' => 'employees',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'trainers' => [
+            'provider' => 'trainers',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'members' => [
+            'provider' => 'members',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

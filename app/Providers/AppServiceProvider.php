@@ -21,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
         'App\Services\Interfaces\TrainerServiceInterface' => 'App\Services\TrainerService',
         'App\Repositories\Interfaces\TrainerRepositoriesInterface' => 'App\Repositories\TrainerRepositories',
         
+        'App\Services\Interfaces\AttendanceServiceInterface' => 'App\Services\AttendanceService',
+        'App\Repositories\Interfaces\AttendanceRepositoriesInterface' => 'App\Repositories\AttendanceRepositories',
+        
         'App\Services\Interfaces\MajorServiceInterface' => 'App\Services\MajorService',
         'App\Repositories\Interfaces\MajorRepositoriesInterface' => 'App\Repositories\MajorRepositories',
         
@@ -29,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
         
         'App\Services\Interfaces\EquipmentServiceInterface' => 'App\Services\EquipmentService',
         'App\Repositories\Interfaces\EquipmentRepositoriesInterface' => 'App\Repositories\EquipmentRepositories',
+        
+        'App\Services\Interfaces\RoomServiceInterface' => 'App\Services\RoomService',
+        'App\Repositories\Interfaces\RoomRepositoriesInterface' => 'App\Repositories\RoomRepositories',
 
         'App\Services\Interfaces\ClassServiceInterface' => 'App\Services\ClassService',
         'App\Repositories\Interfaces\ClassRepositoriesInterface' => 'App\Repositories\ClassRepositories',

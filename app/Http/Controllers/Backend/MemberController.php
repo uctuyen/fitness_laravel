@@ -30,9 +30,10 @@ class MemberController extends Controller
     public function index(Request $request){
         $genderLabels = config('apps.member.create.genderLabels');
         $members = $this->memberService->getAllPaginate($request);     
+
+        // dd($members);
         $config['seo'] = config('apps.member');
         $template = 'backend.member.index';
-        
         return view('backend.dashboard.layout',compact(
             'template',
             'config',

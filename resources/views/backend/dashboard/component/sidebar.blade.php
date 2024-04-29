@@ -27,7 +27,7 @@
                     <li><a href="{{route('employee.index')}}">Quản Lí Nhân Viên</a></li> 
                     <li><a href="{{route('member.index')}}">Quản Lí Học Viên</a></li> 
                     <li><a href="{{route('trainer.index')}}">QL Huấn Luyện Viên</a></li> 
-                    <li><a href="{{route('trainer.index')}}">QL Điểm Danh</a></li> 
+                    <li><a href="{{route('attendance.index')}}">QL Điểm Danh</a></li> 
                 </ul>
             </li>
             <li class="active2">
@@ -36,7 +36,7 @@
                     <li><a href="{{route('calendar.index')}}">Quản Lí lịch Tập</a></li> 
                     <li><a href="{{route('major.index')}}">Quản Lí Chuyên Môn</a></li> 
                     <li><a href="{{route('class.index')}}">Quản Lí Lớp</a></li> 
-                    <li><a href="#">Quản Lí Phòng</a></li> 
+                    <li><a href="{{route('room.index')}}">Quản Lí Phòng</a></li> 
                     <li><a href="{{route('equipment.index')}}">Quản Lí Thiết Bị</a></li> 
                 </ul>
             </li>

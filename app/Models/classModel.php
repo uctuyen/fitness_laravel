@@ -29,4 +29,11 @@ class classModel extends Model
     {
         return $this->hasMany(Calendar::class, 'class_id');
     }
+    public function room()
+    {
+        return $this->hasOne(Room::class, 'class_id');
+    }
+    public function attendance(){
+        return $this->hasMany(Attendance::class);
+}
 }
