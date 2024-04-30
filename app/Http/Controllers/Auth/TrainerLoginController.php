@@ -11,25 +11,21 @@ class TrainerLoginController extends Controller
     public function __construct(){
 
     }
-    public function index()
+    public function indexTrainer()
     {
         return view('backendTrainer.auth.login');
     }
     public function login (AuthRequest $request){
-        $credentials = [
-            'email' =>  $request->input('email'),
-            'password' =>  $request->input('password'),có 
-        ];
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.index')->with('success', 'Đăng nhập thành công!');
+        if (Auth::guard('trainer')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->route('trainer.dashboardTrainer')->with('success', 'Đăng nhập thành công!');
+        } else {
+            return redirect()->route('trainer.indexTrainer')->with('error', 'Email hoặc Password không chính xác!');
         }
-        echo 2;
-        return redirect()->route('auth.admin')->with('error','Email hoặc Password không chính xác!');
     }
 
     public function logout()
     {
         Auth::guard('trainer')->logout();
-        return redirect()->route('auth.trainer');
+        return redirect()->route('trainer.index');
     }
 }

@@ -2,7 +2,7 @@
     color: red;
     font-size: 12px;
     font-style: italic;
-    margin-top: 5pxz;
+    margin-top: 2px;
 }
 input::placeholder{
     font-size: 13px;
@@ -131,4 +131,10 @@ table strong{
 
 .form-group label, .form-group span {
     flex: 1;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
