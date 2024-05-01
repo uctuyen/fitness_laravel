@@ -13,6 +13,9 @@ class TrainerLoginController extends Controller
     }
     public function indexTrainer()
     {
+        if(Auth::guard('trainer')->id()>0){
+            return redirect()->route('trainer.dashboardTrainer');
+        }
         return view('backendTrainer.auth.login');
     }
     public function login (AuthRequest $request){
@@ -23,9 +26,11 @@ class TrainerLoginController extends Controller
         }
     }
 
-    public function logout()
+    public function trainerLogout(Request $request)
     {
         Auth::guard('trainer')->logout();
-        return redirect()->route('trainer.index');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('trainer.login'); 
     }
 }

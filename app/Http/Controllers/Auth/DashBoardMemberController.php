@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashBoardTrainerController extends Controller
+class DashBoardMemberController extends Controller
 {
     public function __construct(){
 
     }
 
-    public function dashboardTrainer(){
+    public function dashboardMember(){
         $config = $this->config();
-        $template = 'backendTrainer.dashboard.home.index';
-        return view('backendTrainer.dashboard.layout', compact(
+        $template = 'backendMember.dashboard.home.index';
+        return view('backendMember.dashboard.layout', compact(
             'template',
             'config'
         ));

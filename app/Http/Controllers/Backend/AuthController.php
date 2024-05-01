@@ -30,7 +30,7 @@ class AuthController extends Controller
         return redirect()->route('auth.admin')->with('error','Email hoặc Password không chính xác!');
     }
     public function logout(Request $request){
-        Auth::logout();
+        Auth::guard()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('auth.admin');

@@ -15,23 +15,24 @@ class MemberLoginController extends Controller
     }
     public function index() : View
     {
+        if(Auth::guard('member')->id()>0){
+            return redirect()->route('member.dashboardMember');
+        }
         return view('backendMember.auth.login');
     }
     public function login (AuthRequest $request){
-        $credentials = [
-            'email' =>  $request->input('email'),
-            'password' =>  $request->input('password'),
-        ];
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.index')->with('success', 'Đăng nhập thành công!');
+        if (Auth::guard('member')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->route('member.dashboardMember')->with('success', 'Đăng nhập thành công!');
+        } else {
+            return redirect()->route('member.indexMember')->with('error', 'Email hoặc Password không chính xác!');
         }
-        echo 2;
-        return redirect()->route('auth.admin')->with('error','Email hoặc Password không chính xác!');
     }
 
-    public function logout()
+    public function memberLogout(Request $request)
     {
-        Auth::guard('Member')->megout();
-        return redirect()->route('auth.member');
+        Auth::guard('member')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('member.login'); 
     }
 }
