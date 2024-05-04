@@ -54,7 +54,6 @@ class EquipmentService implements EquipmentServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token','send');
-            $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
             $equipment = $this->equipmentRepositories->update($id, $payload);
             DB::commit();

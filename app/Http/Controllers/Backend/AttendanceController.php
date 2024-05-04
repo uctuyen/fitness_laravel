@@ -19,7 +19,7 @@ class AttendanceController extends Controller
         $this->attendanceRepositories = $attendanceRepositories; 
     }
     public function index (Request $request){
-        $attendances = $this->attendanceService->getAllPaginate( $request);
+        $attendances = $this->attendanceService->getAllPaginate($request);
         $config['seo'] = config('apps.attendance');
         $template = 'backend.Attendance.index';
         $classes = classModel::all();

@@ -11,7 +11,7 @@ class TrainerLoginController extends Controller
     public function __construct(){
 
     }
-    public function indexTrainer()
+    public function index()
     {
         if(Auth::guard('trainer')->id()>0){
             return redirect()->route('trainer.dashboardTrainer');

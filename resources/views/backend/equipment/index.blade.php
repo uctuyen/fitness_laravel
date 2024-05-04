@@ -89,7 +89,7 @@
                                 @foreach ($equipments as $equipment)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td><img class="image image-cover" style="width: 50px" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
+                                    <td><img class="image image-cover" style="width: 50px" src="{{ $equipment->image }}" alt=""></td>
                                     <td>
                                         {{$equipment->name}}
                                     </td>

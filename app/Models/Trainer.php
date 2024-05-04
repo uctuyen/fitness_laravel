@@ -57,7 +57,7 @@ class Trainer extends Authenticatable
     {
         return $this->belongsToMany(Major::class, 'trainer_majors', 'trainer_id', 'major_id');
     }
-    public function class()
+    public function classes()
     {
         return $this->hasMany(classModel::class, 'trainer_id');
     }

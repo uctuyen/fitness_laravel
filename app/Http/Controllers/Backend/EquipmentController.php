@@ -24,6 +24,7 @@ class EquipmentController extends Controller
         $equipments = $this->equipmentService->getAllPaginate($request);
         $rooms = Room::all();
         $config['seo'] = config('apps.equipment');
+        
         $template = 'backend.equipment.index';
         return view('backend.dashboard.layout',compact(
             'equipments',
@@ -36,6 +37,12 @@ class EquipmentController extends Controller
 
     public function create(){
         $rooms = Room::all();
+        $config = [
+            'js' => [
+                'backend/plugin/ckfinder_2/ckfinder.js',
+                'backend/library/finder.js'
+            ],
+        ];
         $config['seo'] = config('apps.equipment');
         $config['method'] = 'create';
         $template = 'backend.equipment.save';
@@ -54,6 +61,12 @@ class EquipmentController extends Controller
     public function edit($id){
         $rooms = Room::all();
         $equipment = $this->equipmentRepositories->findById($id);
+        $config = [
+            'js' => [
+                'backend/plugin/ckfinder_2/ckfinder.js',
+                'backend/library/finder.js'
+            ],
+        ];
         $config['seo'] = config('apps.equipment');
         $config['method'] = 'edit';
         $template = 'backend.equipment.save';

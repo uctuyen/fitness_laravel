@@ -23,7 +23,7 @@
             <li class="active">
                 <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Huấn Luyện Viên</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    {{-- <li><a href="{{route('trainer.attendance')}}">Quản Lí Điểm Danh</a></li>  --}}
+                    <li><a href="{{route('trainer.attendance')}}">Điểm Danh</a></li>
                     <li><a href="#">Lịch Dạy</a></li> 
                 </ul>
             </li>

@@ -35,5 +35,5 @@ class classModel extends Model
     }
     public function attendance(){
         return $this->hasMany(Attendance::class);
-}
+    }
 }

@@ -116,4 +116,9 @@ class MemberController extends Controller
            };
            return redirect()->route('member.index')->with('error', 'Xóa nhân viên không thành công!');
     }
+    public function show($id)
+    {
+        $member = Member::find($id);
+        return response()->json($member);
+    }
 }

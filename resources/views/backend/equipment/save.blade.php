@@ -36,8 +36,12 @@
                                     <label for="" class="control-label text-Left">Tên
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" name="name" class="form-control" value=""
-                                        placeholder="" autocomplete="off">
+                                    <input type="text" 
+                                            name="name" 
+                                            class="form-control" 
+                                            value="{{ old('name', $equipment->name ?? '') }}" 
+                                            placeholder="" 
+                                            autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -45,8 +49,14 @@
                                     <label for="" class="control-label text-Left">Hình ảnh
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" name="image" class="form-control" value=""
-                                        placeholder="" autocomplete="off">
+                                    <input type="text" 
+                                            name="image" 
+                                            class="form-control upload-image" 
+                                            value=""
+                                            placeholder="" 
+                                            autocomplete="off"
+                                            data-type="Images"
+                                        >
                                 </div>
                             </div>
                         </div>
@@ -56,8 +66,12 @@
                                     <label for="" class="control-label text-Left">Tình trạng
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" name="description" class="form-control" value=""
-                                        placeholder="" autocomplete="off">
+                                    <input type="text" 
+                                    name="description" 
+                                    class="form-control" 
+                                    value="{{ old('description', $equipment->description ?? '')}}"
+                                    placeholder="" 
+                                    autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -65,8 +79,11 @@
                                     <label for="" class="control-label text-Left">Số lượng
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" name="quantity" class="form-control"
-                                        value="{{ old('quantity', $equipment->quantity ?? '') }}" placeholder=""
+                                    <input type="text" 
+                                        name="quantity" 
+                                        class="form-control"
+                                        value="{{ old('quantity', $equipment->quantity ?? '') }}" 
+                                        placeholder=""
                                         autocomplete="off">
                                 </div>
                             </div>
@@ -77,8 +94,11 @@
                                     <label for="" class="control-label text-Left">Mô tả
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" name="description" class="form-control"
-                                        value="{{ old('description', $equipment->description ?? '') }}" placeholder=""
+                                    <input type="text" 
+                                        name="description" 
+                                        class="form-control"
+                                        value="{{ old('description', $equipment->description ?? '') }}" 
+                                        placeholder=""
                                         autocomplete="off">
                                 </div>
                             </div>

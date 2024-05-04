@@ -7,11 +7,6 @@ return [
     ],
     'create' => [
         'title' => 'Thêm mới Thiết bị',
-        'genderLabels' => [
-            0 => 'Nam',
-            1 => 'Nữ',
-            2 => 'Khác',
-        ]
     ],
     'delete' => [
         'title' => 'Xóa Thiết bị',
