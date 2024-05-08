@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Hình ảnh
+                                    <label for=""  class="control-label text-Left">Hình ảnh
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
@@ -67,9 +67,9 @@
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
-                                    name="description" 
+                                    name="status" 
                                     class="form-control" 
-                                    value="{{ old('description', $equipment->description ?? '')}}"
+                                    value="{{ old('status', $equipment->status ?? '')}}"
                                     placeholder="" 
                                     autocomplete="off">
                                 </div>

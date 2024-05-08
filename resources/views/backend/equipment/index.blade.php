@@ -75,7 +75,7 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th style="width: 90px">Hình</th>
+                                <th style="width:90px">Hình</th>
                                 <th>Tên</th>
                                 <th>Tên phòng</th>
                                 <th>Số lượng</th>
@@ -89,7 +89,7 @@
                                 @foreach ($equipments as $equipment)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td><img class="image image-cover" style="width: 50px" src="{{ $equipment->image }}" alt=""></td>
+                                    <td><img class="image image-cover" style="width: 150px; height: 150px;" src="{{ $equipment->image }}" alt=""></td>
                                     <td>
                                         {{$equipment->name}}
                                     </td>
