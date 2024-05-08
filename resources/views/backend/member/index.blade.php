@@ -91,7 +91,7 @@
                                 @foreach ($members as $member)
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td><img class="avatar avatar-cover" src="https://top10dienbien.com/wp-content/uploads/2022/10/avatar-cute-9.jpg" alt=""></td>
+                                    <td><img class="image image-cover" style="width: 100px; height: 100px;" src="{{ $member->avatar }}" alt=""></td>
                                     <td>
                                         {{$member->first_name}}
                                     </td>

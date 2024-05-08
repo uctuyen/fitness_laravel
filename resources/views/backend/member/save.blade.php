@@ -150,7 +150,7 @@
                                     <input 
                                         type="text" 
                                         name="avatar" 
-                                        class="form-control" 
+                                        class="form-control upload-image" 
                                         value="{{old('avatar',($member->avatar) ?? '')}}" 
                                         placeholder=""
                                         autocomplete="off"

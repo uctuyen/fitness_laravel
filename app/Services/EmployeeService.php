@@ -87,6 +87,7 @@ class EmployeeService implements EmployeeServiceInterface
     public function paginateSelect(){
         return [
             'id',
+            'avatar',
             'first_name',
             'last_name',
             'gender',

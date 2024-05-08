@@ -91,6 +91,7 @@ class MemberService implements MemberServiceInterface
             'first_name',
             'last_name',
             'gender',
+            'avatar',
             'phone_number',
             'email',
             'day_of_birth',

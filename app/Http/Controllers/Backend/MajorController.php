@@ -21,7 +21,6 @@ class MajorController extends Controller
     }
     public function index(Request $request){
         $majors = $this->majorService->getAllPaginate($request);
-
         $config['seo'] = config('apps.major') ;
         $template = 'backend.major.index';
         return view('backend.dashboard.layout',compact(
@@ -33,7 +32,6 @@ class MajorController extends Controller
     }
 
     public function create(){
-        
         $config['seo'] = config('apps.major');
         $config['method'] = 'create';
         $template = 'backend.major.save';

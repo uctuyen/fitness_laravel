@@ -66,12 +66,11 @@
                                     <label for="" class="control-label text-Left">Tình trạng
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" 
-                                    name="status" 
-                                    class="form-control" 
-                                    value="{{ old('status', $equipment->status ?? '')}}"
-                                    placeholder="" 
-                                    autocomplete="off">
+                                    <select name="status" class="form-control setupSelect2">
+                                        @foreach(config('apps.status') as $key => $value)
+                                            <option value="{{ $key }}"> {{ $value }}</option>
+                                        @endforeach    
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">

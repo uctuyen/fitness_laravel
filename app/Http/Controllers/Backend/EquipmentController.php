@@ -22,6 +22,7 @@ class EquipmentController extends Controller
     }
     public function index(Request $request){
         $equipments = $this->equipmentService->getAllPaginate($request);
+        $status = config('apps.status');
         $rooms = Room::all();
         $config['seo'] = config('apps.equipment');
         
@@ -31,11 +32,12 @@ class EquipmentController extends Controller
             'template',
             'config',
             'rooms', 
+            'status',   
         ));
         
     }
 
-    public function create(){
+    public function create(Request $request){
         $rooms = Room::all();
         $config = [
             'js' => [
