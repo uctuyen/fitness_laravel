@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form action="{{ route('admin.calendar.index') }}">
+                    <form action="{{ route('calendar.index') }}">
                         <div class="uk-flex uk-flex-middle">
                         </div>
                         <div class="action">
