@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TrainerLoginController;
 use App\Http\Controllers\Auth\DashBoardTrainerController;
 use App\Http\Controllers\Auth\TrainerAttendanceController;
+use App\Http\Controllers\Auth\TrainerCalendarController;
 
 Route::prefix('trainer')->group(function () {
     Route::middleware(['auth:trainer'])->group(function () {
@@ -20,5 +21,8 @@ Route::prefix('trainer')->group(function () {
         Route::post('attendance/update/{id}', [TrainerAttendanceController::class, 'update'])->name('trainer.attendance.update');
         Route::get('attendance/delete/{id}', [TrainerAttendanceController::class, 'delete'])->name('trainer.attendance.delete');
         Route::get('attendance/destroy/{id}', [TrainerAttendanceController::class, 'destroy'])->name('trainer.attendance.destroy');
+    });
+    Route::middleware(['auth:trainer'])->group(function () {
+        Route::get('calendar/index', [TrainerCalendarController::class, 'index'])->name('calendar.index');
     });
 });
