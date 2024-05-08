@@ -31,6 +31,6 @@ class TrainerLoginController extends Controller
         Auth::guard('trainer')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('trainer.login'); 
+        return redirect()->route('trainer.indexTrainer'); 
     }
 }

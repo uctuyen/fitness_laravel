@@ -23,6 +23,6 @@ Route::prefix('trainer')->group(function () {
         Route::get('attendance/destroy/{id}', [TrainerAttendanceController::class, 'destroy'])->name('trainer.attendance.destroy');
     });
     Route::middleware(['auth:trainer'])->group(function () {
-        Route::get('calendar/index', [TrainerCalendarController::class, 'index'])->name('calendar.index');
+        Route::get('calendar/index', [TrainerCalendarController::class, 'index'])->name('trainer.calendar.index');
     });
 });

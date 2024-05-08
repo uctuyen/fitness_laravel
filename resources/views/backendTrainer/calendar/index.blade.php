@@ -59,6 +59,7 @@
                                                 'right': 'month,agendaWeek,agendaDay'
                                             },
                                             locale: 'vi',
+                                            editable: false,
                                         });
                                     });
                                 </script>

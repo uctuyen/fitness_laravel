@@ -110,7 +110,7 @@
 
 
             <li>
-                <a href="{{route('auth.logout')}}">
+                <a href="{{route('member.logout')}}">
                     <i class="fa fa-sign-out"></i> Đăng xuất
                 </a>
             </li>
