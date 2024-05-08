@@ -120,7 +120,7 @@ Route::group(['prefix' => 'major'],function(){
 });
                         /** 'calendar */
 Route::group(['prefix' => 'calendar'],function(){
-    Route::get('index', [CalendarController::class, 'index'])->name('calendar.index')
+    Route::get('index', [CalendarController::class, 'index'])->name('admin.calendar.index')
     ->middleware('admin');
     Route::post('save', [CalendarController::class, 'save'])->name('calendar.save')
     ->middleware('admin');
