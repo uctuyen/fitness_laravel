@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\MemberLoginController;
 use App\Http\Controllers\Auth\DashBoardMemberController;
+use App\Http\Controllers\Auth\AttendanceController;
 
 Route::prefix('member')->group(function () {
     Route::middleware(['auth:member'])->group(function () {
@@ -11,4 +12,6 @@ Route::prefix('member')->group(function () {
     Route::post('login', [MemberLoginController::class, 'login'])->name('member.login');
     Route::get('dashboardMember', [DashBoardMemberController::class, 'dashboardMember'])->name('member.dashboardMember');
 
+    Route::resource('attendances', AttendanceController::class);
+    Route::post('attendance/get-calendar-list', [AttendanceController::class, 'getCalendarList']);
 });

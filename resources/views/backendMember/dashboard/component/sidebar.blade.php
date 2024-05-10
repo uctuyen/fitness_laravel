@@ -23,7 +23,7 @@
             <li class="active">
                 <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Học Viên</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="#">Lịch Học</a></li> 
+                    <li><a href="{{ route('attendances.index') }}">Lịch Học</a></li>
                 </ul>
             </li>
         </ul>
