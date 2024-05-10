@@ -52,7 +52,7 @@
                                     <input type="text" 
                                             name="image" 
                                             class="form-control upload-image" 
-                                            value=""
+                                            value="{{ old('image', $equipment->image ?? '') }}"
                                             placeholder="" 
                                             autocomplete="off"
                                             data-type="Images"
@@ -67,7 +67,7 @@
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <select name="status" class="form-control setupSelect2">
-                                        @foreach(config('apps.status') as $key => $value)
+                                        @foreach(config('apps.status.status') as $key => $value)
                                             <option value="{{ $key }}"> {{ $value }}</option>
                                         @endforeach    
                                     </select>

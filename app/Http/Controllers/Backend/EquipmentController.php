@@ -22,7 +22,7 @@ class EquipmentController extends Controller
     }
     public function index(Request $request){
         $equipments = $this->equipmentService->getAllPaginate($request);
-        $status = config('apps.status');
+        $status = config('apps.status.status');
         $rooms = Room::all();
         $config['seo'] = config('apps.equipment');
         
@@ -39,6 +39,7 @@ class EquipmentController extends Controller
 
     public function create(Request $request){
         $rooms = Room::all();
+        $status = config('apps.status.status');
         $config = [
             'js' => [
                 'backend/plugin/ckfinder_2/ckfinder.js',
@@ -51,6 +52,7 @@ class EquipmentController extends Controller
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
+            'status', 
             'rooms',
         ));
     }

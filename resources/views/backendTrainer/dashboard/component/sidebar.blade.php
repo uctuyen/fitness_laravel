@@ -2,12 +2,19 @@
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
-                <div class="dropdown profile-element"> <span>
-                        <img alt="image" class="img-circle" src="backend/img/profile_small.jpg" />
-                         </span>
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                         </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                <div class="dropdown profile-element"> 
+                    <span>
+                        @if(Auth::guard('trainer')->check())
+                            <img style="width: 50px; height: 50px;"  alt="image" class="img-circle" src="{{ Auth::guard('trainer')->user()->avatar }}" />
+                        @endif                        
+                    </span>
+                    <span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            @if(Auth::guard('trainer')->check())
+                            <strong class="font-bold">{{ Auth::guard('trainer')->user()->first_name }} {{ Auth::guard('trainer')->user()->last_name }}</strong>
+                        @endif                         
+                    </span> 
+                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="profile.html">Profile</a></li>
                         <li><a href="contacts.html">Contacts</a></li>

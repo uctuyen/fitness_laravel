@@ -103,7 +103,7 @@
                                         {{$equipment->description}}
                                     </td>
                                     <td> 
-                                        {{$equipment->status}}
+                                        {{config('apps.status.status')[$equipment->status]}}
                                     </td>
                                     <td class="text-center" style="width: 100px">
                                         <a href="{{ route('equipment.edit', $equipment->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
