@@ -22,14 +22,14 @@ class MemberController extends Controller
         MemberRepositories $memberRepositories,
         ProvinceRepository $provinceRepositories,
     ){
-        $this->memberService = $memberService; 
-        $this->memberRepositories = $memberRepositories; 
-        $this->provinceRepositories = $provinceRepositories; 
+        $this->memberService = $memberService;
+        $this->memberRepositories = $memberRepositories;
+        $this->provinceRepositories = $provinceRepositories;
     }
 
     public function index(Request $request){
         $genderLabels = config('apps.member.create.genderLabels');
-        $members = $this->memberService->getAllPaginate($request);     
+        $members = $this->memberService->getAllPaginate($request);
 
         // dd($members);
         $config['seo'] = config('apps.member');
@@ -40,7 +40,7 @@ class MemberController extends Controller
             'members',
             'genderLabels',
         ));
-        
+
     }
     public function create(){
         $member = new Member;
@@ -54,7 +54,7 @@ class MemberController extends Controller
                 'backend/plugin/ckfinder_2/ckfinder.js',
                 'backend/library/finder.js'
             ],
-        ];  
+        ];
         $config['seo'] = config('apps.member');
         $config['method'] = 'create';
         $template = 'backend.member.save';
@@ -77,7 +77,7 @@ class MemberController extends Controller
         $member = $this->memberRepositories->findById($id);
         $provinces = $this->provinceRepositories->all();
 
-        
+
         $config = [
             'css' => ['https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css'],
             'js' => [

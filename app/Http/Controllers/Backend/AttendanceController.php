@@ -7,6 +7,10 @@ use App\Repositories\Interfaces\AttendanceRepositoriesInterface as AttendanceRep
 use App\Models\classModel;
 use App\Models\Trainer;
 use App\Models\Attendance;
+use App\Models\Calendar;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class AttendanceController extends Controller
 {
     protected $attendanceService;
@@ -19,25 +23,10 @@ class AttendanceController extends Controller
         $this->attendanceRepositories = $attendanceRepositories; 
     }
     public function index (Request $request){
-        $attendances = $this->attendanceService->getAllPaginate($request);
         $config['seo'] = config('apps.attendance');
         $template = 'backend.Attendance.index';
-        $classes = classModel::all();
+        $classes = Attendance::groupBy('calendar_id')->paginate(10);
         $trainers = Trainer::all();
-        return view('backend.dashboard.layout',compact(
-            'template',
-            'config',
-            'attendances',
-            'classes',
-            'trainers',
-        ));
-    }
-    public function create(){
-        $classes = classModel::all();
-        $trainers = Trainer::all();
-        $config['seo'] = config('apps.attendance');
-        $config['method'] = 'create';
-        $template = 'backend.attendance.save';
         return view('backend.dashboard.layout',compact(
             'template',
             'config',
@@ -45,48 +34,38 @@ class AttendanceController extends Controller
             'trainers',
         ));
     }
-    public function save(SaveAttendanceRequest $request){
-        if($this->attendanceService->create($request)){
-         return redirect()->route('attendance.index')->with('success', 'Thêm mới lớp học thành công!');
-        };
-        return redirect()->route('attendance.index')->with('error', 'Thêm mới lớp học không thành công!');
-     }
-    public function edit($id){
-        $attendances = $this->attendanceRepositories->findById($id);
-        $classes = classModel::all();
-        $trainers = Trainer::all();
+     public function checkIn(Calendar $calendar) {
         $config['seo'] = config('apps.attendance');
-        $config['method'] = 'edit';
-        $template = 'backend.attendance.save';
-        return view('backend.dashboard.layout',compact(
+        $config['method'] = 'check-in';
+        $template = 'backend.attendance.check-in';
+
+        $attendances = $calendar->attendances;
+        return view('backend.dashboard.layout', compact(
             'template',
             'config',
-            'attendances',
-            'classes',
-            'trainers',
+            'attendances', 
+            'calendar', 
         ));
     }
     
-    public function update($id, UpdateAttendanceRequest $request){
-        if($this->attendanceService->update($id, $request)){
-            return redirect()->route('attendance.index')->with('success', 'Cập nhật lớp học thành công!');
-        };
-        return redirect()->route('attendance.index')->with('error', 'Cập nhật lớp học không thành công!');
-    }
-    public function delete($id){
-        $config['seo'] = config('apps.attendance');
-        $attendance = $this->attendanceRepositories->findById($id);
-        $template = 'backend.attendance.delete';
-        return view('backend.dashboard.layout',compact(
-            'template',
-            'config',
-            'attendance',
-        ));
-    }
-    public function destroy($id){
-        if($this->attendanceService->destroy($id)){
-            return redirect()->route('attendance.index')->with('success', 'Xóa lớp học thành công!');
-           };
-           return redirect()->route('attendance.index')->with('error', 'Xóa lớp học không thành công!');
+    public function postCheckIn(Request $request, $calendar_id) {
+        try {
+            DB::beginTransaction();
+
+            Attendance::where('calendar_id', $calendar_id)->update(['status' => 0]);
+            if (!empty($request->attendance_id)) {
+                foreach ($request->attendance_id as $attendance_id => $value) {
+                    Attendance::find($attendance_id)->update(['status' => 1]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('attendance.index')->with('success', 'Điểm danh thành công!');
+        } catch (Exception) {
+            DB::rollback();
+
+            return redirect()->back()->with('error', 'Điểm danh không thành công!');
+        }
     }
 }

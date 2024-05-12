@@ -1,9 +1,11 @@
-@include('backend.dashboard.component.breadcumb', ['title' => $config['seo']['index']['title']])
+@extends('backendMember.layout')
+
+@section('content')
 <div class="row mt20">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>{{$config['seo']['index']['table'];}}</h5>
+                <h5></h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -33,7 +35,7 @@
                                 <div class="uk-flex uk-flex-middle">
                                     <select name="perpage" class="form-control input sm perpage filter mr10">
                                         @for($i = 20; $i <= 200; $i+=20)
-                                        <option {{($perpage == $i) ? 'selected' : ''}} value="{{$i}}">{{$i}} bảng ghi</option>
+                                        <option {{ ($perpage == $i) ? 'selected' : '' }} value="{{ $i }}">{{ $i }} bảng ghi</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -42,7 +44,7 @@
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
                                 <div  class="input-group">
-                                    <input 
+                                    <input
                                             type="text"
                                             name="keyword"
                                             value="{{ request()->get('keyword') ?: old('keyword')}}"
@@ -54,9 +56,10 @@
                                                 name="search"
                                                 value="search"
                                                 class="btn btn-primary mb0 btn-sm"> <i class="fa fa-search"></i> Tìm kiếm
-                                        </button>  
-                                    </span>      
+                                        </button>
+                                    </span>
                                 </div>
+                                <a href="{{route('attendances.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -70,44 +73,31 @@
                                 </th>
                                 <th>Tên lớp học</th>
                                 <th>Tên huấn luyện viên</th>
-                                <th>Ngày dạy</th>
-                                <th>Ca dạy</th>
-                                <th class="text-center">Thao tác</th>
+                                <th>Ngày học</th>
+                                <th>Giờ bắt đầu</th>
+                                <th>Giờ kết thúc</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($classes as $attendance)
+                            @foreach ($attendances as $attendance)
                             <tr>
                                 <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
+                                <td>{{ $attendance->calendar->class->name }}</td>
                                 <td>
-                                    {{ $attendance->calendar->class->name }}
+                                    {{ $attendance->calendar->class->trainer->first_name.' '.$attendance->calendar->class->trainer->last_name }}
                                 </td>
-                                <td>
-                                    {{ $attendance->calendar->class->trainer->first_name . ' ' . $attendance->calendar->class->trainer->last_name }}
-                                </td>
-                                <td>
-                                    {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('d/m/Y') }}
-                                </td>
-                                <td>
-                                    {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('H:i') . ' - ' . \Carbon\Carbon::parse($attendance->calendar->end_date)->format('H:i') }}                                
-                                </td>
-                                <td class="text-center" style="width: 100px">
-                                    @if (now() >= \Carbon\Carbon::parse($attendance->calendar->start_date)
-                                    ->subMinutes(10) && now() <= \Carbon\Carbon::parse($attendance->calendar->end_date)
-                                    ->addMinutes(10))
-                                        <a href="{{ route('attendance.check-in', $attendance->calendar_id) }}" 
-                                            class="btn btn-primary">
-                                        <i class="fa fa-check"></i> Điểm danh</a>
-                                    @endif
-                                </td>
+                                <td>{{ formatDate($attendance->calendar->start_date, 'd-m-Y') }}</td>
+                                <td>{{ formatDate($attendance->calendar->start_date, 'H:i:s') }}</td>
+                                <td>{{ formatDate($attendance->calendar->end_date, 'H:i:s') }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $classes->links('pagination::bootstrap-4') }}
+                    {{ $attendances->links('pagination::bootstrap-4') }}
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
+@endsection

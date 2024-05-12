@@ -15,12 +15,10 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id');
-            $table->unsignedBigInteger('class_id');
-            $table->unsignedBigInteger('class_session_id');
-            $table->date('attendance_date');
-            
-            $table->foreign('class_id')->references('class_id')->on('class_session_classes');
-            $table->foreign('class_session_id')->references('class_session_id')->on('class_session_classes');
+            $table->unsignedBigInteger('calendar_id');
+            $table->tinyInteger('status')->default(0);
+            $table->foreign('member_id')->references('id')->on('members');
+            $table->foreign('calendar_id')->references('id')->on('calendars');
             $table->timestamps();
         });
     }

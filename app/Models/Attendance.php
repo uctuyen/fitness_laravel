@@ -10,16 +10,15 @@ class Attendance extends Model
     use HasFactory;
     protected $fillable = [
         'member_id',
-        'class_id',
-        'date_attendance',
-        'time'
+        'calendar_id',
+        'status',
     ];
     protected $table = 'attendances';
 
     public function member (){
         return $this->belongsTo(Member::class);
     }
-    public function class (){
-        return $this->belongsTo(classModel::class);
+    public function calendar (){
+        return $this->belongsTo(Calendar::class);
     }
 }

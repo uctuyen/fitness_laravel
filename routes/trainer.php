@@ -15,12 +15,8 @@ Route::prefix('trainer')->group(function () {
 
    Route::middleware(['auth:trainer'])->group(function () {
         Route::get('attendance', [TrainerAttendanceController::class, 'index'])->name('trainer.attendance');
-        Route::get('attendance/create', [TrainerAttendanceController::class, 'create'])->name('trainer.attendance.create');
-        Route::post('attendance/save', [TrainerAttendanceController::class, 'save'])->name('trainer.attendance.save');
-        Route::get('attendance/edit/{id}', [TrainerAttendanceController::class, 'edit'])->name('trainer.attendance.edit');
-        Route::post('attendance/update/{id}', [TrainerAttendanceController::class, 'update'])->name('trainer.attendance.update');
-        Route::get('attendance/delete/{id}', [TrainerAttendanceController::class, 'delete'])->name('trainer.attendance.delete');
-        Route::get('attendance/destroy/{id}', [TrainerAttendanceController::class, 'destroy'])->name('trainer.attendance.destroy');
+        Route::get('attendance/check-in/{calendar}', [TrainerAttendanceController::class, 'checkIn'])->name('trainer.attendance.check-in');
+        Route::post('attendance/check-in/{calendar}', [TrainerAttendanceController::class, 'postCheckIn'])->name('trainer.attendance.post-check-in');
     });
     Route::middleware(['auth:trainer'])->group(function () {
         Route::get('calendar/index', [TrainerCalendarController::class, 'index'])->name('trainer.calendar.index');

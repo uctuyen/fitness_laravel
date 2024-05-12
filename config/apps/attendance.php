@@ -8,6 +8,9 @@ return [
     'create' => [
         'title' => 'Thêm mới điểm danh',
     ],
+    'check-in' => [
+        'title' => 'Điểm danh',
+    ],
     'delete' => [
         'title' => 'Xóa điểm danh',
     ],

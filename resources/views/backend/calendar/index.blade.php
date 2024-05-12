@@ -176,7 +176,7 @@
                                                                 success: function(response) {
                                                                     $('#calendar').fullCalendar('removeEvents',
                                                                         response);
-                                                                    swal("Bạn đã xóa sự kiện này thành công!", {
+                                                                    swal("Bạn đã xóa sự kiện thành công!", {
                                                                         icon: "success",
                                                                     });
                                                                 },

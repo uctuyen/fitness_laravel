@@ -33,6 +33,9 @@ class CalendarController extends Controller
             '#ff1a1a',
             '#66ffcc',   
             '#ff99ff',
+            '#ffcc00',
+            '#ff0000',
+            '#ff6600',
         ];
         $classColors = [];
         foreach ($classes as $class) {
