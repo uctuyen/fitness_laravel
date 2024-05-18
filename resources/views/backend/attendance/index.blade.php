@@ -57,7 +57,6 @@
                                         </button>  
                                     </span>      
                                 </div>
-                                <a href="{{route('attendance.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
                             </div>
                         </div>
                     </div>
@@ -69,36 +68,43 @@
                                 <th>
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
-                                <th>Tên học viên</th>
                                 <th>Tên lớp học</th>
                                 <th>Tên huấn luyện viên</th>
+                                <th>Ngày dạy</th>
+                                <th>Ca dạy</th>
                                 <th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($attendances) && is_object($attendances))
-                                @foreach ($attendances as $attendance)
-                                <tr>
-                                    <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
-                                    <td>
-                                        {{$attendance->member->first_name . ' ' . $attendance->member->last_name}}
-                                    </td>
-                                    <td>
-                                        {{$attendance->class->name}}
-                                    </td>
-                                    <td>
-                                        {{$attendance->class->trainer->first_name . ' ' . $attendance->class->trainer->last_name}}
-                                    </td>
-                                    <td class="text-center" style="width: 100px">
-                                        <a href="{{ route('attendance.edit', $attendance->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('attendance.delete', $attendance->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endif
+                            @foreach ($classes as $attendance)
+                            <tr>
+                                <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
+                                <td>
+                                    {{ $attendance->calendar->class->name }}
+                                </td>
+                                <td>
+                                    {{ $attendance->calendar->class->trainer->first_name . ' ' . $attendance->calendar->class->trainer->last_name }}
+                                </td>
+                                <td>
+                                    {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('d/m/Y') }}
+                                </td>
+                                <td>
+                                    {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('H:i') . ' - ' . \Carbon\Carbon::parse($attendance->calendar->end_date)->format('H:i') }}                                
+                                </td>
+                                <td class="text-center" style="width: 100px">
+                                    @if (now() >= \Carbon\Carbon::parse($attendance->calendar->start_date)
+                                    ->subMinutes(10) && now() <= \Carbon\Carbon::parse($attendance->calendar->end_date)
+                                    ->addMinutes(10))
+                                        <a href="{{ route('attendance.check-in', $attendance->calendar_id) }}" 
+                                            class="btn btn-primary">
+                                        <i class="fa fa-check"></i> Điểm danh</a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                        {{ $attendances->links('pagination::bootstrap-4') }}
+                    {{ $classes->links('pagination::bootstrap-4') }}
                 </div>
             </div>
             

@@ -87,18 +87,8 @@ Route::group(['prefix' => 'trainer'],function(){
 Route::group(['prefix' => 'attendance'],function(){
     Route::get('index', [AttendanceController::class, 'index'])->name('attendance.index')
     ->middleware('admin');
-    Route::get('create', [AttendanceController::class, 'create'])->name('attendance.create')
-    ->middleware('admin');
-    Route::post('save', [AttendanceController::class, 'save'])->name('attendance.save')
-    ->middleware('admin');
-    Route::get('{id}/edit', [AttendanceController::class, 'edit'])->where(['id' => '[0-9]+'])->name('attendance.edit')
-    ->middleware('admin');
-    Route::post('{id}/update', [AttendanceController::class, 'update'])->where(['id'=>'[0-9]+'])->name('attendance.update')
-    ->middleware('admin');
-    Route::get('{id}/delete', [AttendanceController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('attendance.delete')
-    ->middleware('admin');
-    Route::delete('{id}/destroy', [AttendanceController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('attendance.destroy')
-    ->middleware('admin');
+    Route::get('check-in/{calendar}', [AttendanceController::class, 'checkIn'])->name('attendance.check-in');
+    Route::post('check-in/{calendar}', [AttendanceController::class, 'postCheckIn'])->name('attendance.post-check-in');
 });   
                         /** item *****************************************************/
                         /** major */
@@ -119,8 +109,8 @@ Route::group(['prefix' => 'major'],function(){
     ->middleware('admin');
 });
                         /** 'calendar */
-Route::group(['prefix' => 'calendar'],function(){
-    Route::get('index', [CalendarController::class, 'index'])->name('calendar.index')
+Route::group(['prefix' => 'admin'],function(){
+    Route::get('calendar/index', [CalendarController::class, 'index'])->name('calendar.index')
     ->middleware('admin');
     Route::post('save', [CalendarController::class, 'save'])->name('calendar.save')
     ->middleware('admin');

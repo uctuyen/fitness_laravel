@@ -84,7 +84,7 @@
                                 <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
                                 <td>{{ $attendance->calendar->class->name }}</td>
                                 <td>
-                                    {{ $attendance->calendar->class->trainer->first_name.' '.$attendance->calendar->class->trainer->first_name }}
+                                    {{ $attendance->calendar->class->trainer->first_name.' '.$attendance->calendar->class->trainer->last_name }}
                                 </td>
                                 <td>{{ formatDate($attendance->calendar->start_date, 'd-m-Y') }}</td>
                                 <td>{{ formatDate($attendance->calendar->start_date, 'H:i:s') }}</td>

@@ -45,13 +45,13 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Lịch tập</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div style="form-group">
-                                                    <label for="class">Class:</label>
+                                                    <label for="class">Lớp:</label>
                                                     <select id="classSelect" name="class_id" class="form-control">
                                                         @foreach ($classes as $class)
                                                             <option value="{{ $class->id }}">
@@ -62,7 +62,7 @@
                                                     <span id="classTitleError" class="text-danger"></span>
                                                 </div>
                                                 <div style="form-group">
-                                                    <label for="trainer">Trainer:</label>
+                                                    <label for="trainer">Huấn Luyện Viên:</label>
                                                     <select id="trainerSelect" name="trainer_id" class="form-control">
                                                         @foreach ($trainers as $trainer)
                                                             <option value="{{ $trainer->id }}">
@@ -73,19 +73,19 @@
                                                     <span id="trainerTitleError" class="text-danger"></span>
                                                 </div>
 
-                                                <label for="start_time">Start Time:</label>
+                                                <label for="start_time">Giờ bắt đầu:</label>
                                                 <input type="time" id="startTime" name="start_time" class="form-control">
                                                 <span id="startTimeError" class="text-danger"></span>
 
-                                                <label for="end_time">End Time:</label>
+                                                <label for="end_time">Giờ kết thúc:</label>
                                                 <input type="time" id="endTime" name="end_time" class="form-control">
                                                 <span id="endTimeError" class="text-danger"></span>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" id="Closebtn" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" id="Savebtn" class="btn btn-primary">Save
-                                                    changes</button>
+                                                    data-bs-dismiss="modal">Đóng</button>
+                                                <button type="button" id="Savebtn" class="btn btn-primary">Lưu
+                                                    thay đổi</button>
                                             </div>
                                         </div>
                                     </div>
@@ -176,7 +176,7 @@
                                                                 success: function(response) {
                                                                     $('#calendar').fullCalendar('removeEvents',
                                                                         response);
-                                                                    swal("Bạn đã xóa sự kiện này thành công!", {
+                                                                    swal("Bạn đã xóa sự kiện thành công!", {
                                                                         icon: "success",
                                                                     });
                                                                 },

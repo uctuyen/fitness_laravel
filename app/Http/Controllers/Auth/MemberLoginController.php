@@ -33,6 +33,6 @@ class MemberLoginController extends Controller
         Auth::guard('member')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('member.login'); 
+        return redirect()->route('member.indexMember'); 
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Services\AttendanceService;
 use App\Repositories\Interfaces\AttendanceRepositoriesInterface as AttendanceRepositories;
@@ -21,13 +22,14 @@ class TrainerAttendanceController extends Controller
         AttendanceService $attendanceService,
         AttendanceRepositories $attendanceRepositories,
     ){
-        $this->attendanceService = $attendanceService; 
-        $this->attendanceRepositories = $attendanceRepositories; 
+        $this->attendanceService = $attendanceService;
+        $this->attendanceRepositories = $attendanceRepositories;
     }
 
     public function index (Request $request){
-        $loggedInTrainer = Auth::user();
-        $classes = Attendance::groupBy('calendar_id')->paginate(10);
+        $classes = Attendance::whereHas('calendar.class', function (Builder $query) {
+            $query->where('trainer_id', Auth::id());
+        })->groupBy('calendar_id')->paginate(10);
         $config['seo'] = config('apps.attendance');
         $template = 'backendTrainer.Attendance.index';
         $trainers = Trainer::all();
@@ -38,28 +40,6 @@ class TrainerAttendanceController extends Controller
             'trainers',
         ));
     }
-    public function create(){
-        $loggedInTrainer = Auth::user();
-        $classes = $loggedInTrainer->classes;
-        $trainers = Trainer::all();
-        $config['seo'] = config('apps.attendance');
-        $config['method'] = 'create';
-        $template = 'backendTrainer.attendance.save';
-        return view('backendTrainer.dashboard.layout',compact(
-            'template',
-            'config',
-            'classes',
-            'loggedInTrainer',
-            'trainers', 
-        ));
-    }
-    public function save(SaveAttendanceRequest $request){
-        if($this->attendanceService->create($request)){
-         return redirect()->route('attendance.index')->with('success', 'Thêm mới lớp học thành công!');
-        };
-        return redirect()->route('attendance.index')->with('error', 'Thêm mới lớp học không thành công!');
-    }
-
     public function checkIn(Calendar $calendar) {
         $config['seo'] = config('apps.attendance');
         $config['method'] = 'check-in';
@@ -69,18 +49,20 @@ class TrainerAttendanceController extends Controller
         return view('backendTrainer.dashboard.layout', compact(
             'template',
             'config',
-            'attendances', 
-            'calendar', 
+            'attendances',
+            'calendar',
         ));
     }
-    
+
     public function postCheckIn(Request $request, $calendar_id) {
         try {
             DB::beginTransaction();
 
             Attendance::where('calendar_id', $calendar_id)->update(['status' => 0]);
-            foreach ($request->attendance_id as $attendance_id => $value) {
-                Attendance::find($attendance_id)->update(['status' => 1]);
+            if (!empty($request->attendance_id)) {
+                foreach ($request->attendance_id as $attendance_id => $value) {
+                    Attendance::find($attendance_id)->update(['status' => 1]);
+                }
             }
 
             DB::commit();

@@ -1,4 +1,4 @@
-@include('backendTrainer.dashboard.component.breadcumb', ['title' => $config['seo']['check-in']['title']])
+@include('backend.dashboard.component.breadcumb', ['title' => $config['seo']['check-in']['title']])
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -9,7 +9,7 @@
         </ul>
     </div>
 @endif
-<form action="{{ route('trainer.attendance.post-check-in', $calendar->id) }}" method="post" class="box">
+<form action="{{ route('attendance.post-check-in', $calendar->id) }}" method="post" class="box">
     @csrf
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row bg-info">
@@ -17,10 +17,10 @@
             <div class="col-lg-4">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"
+                        <input type="checkbox" 
                             name="attendance_id[{{ $item->id }}]"
                             {{ $item->status == 1 ? 'checked' : '' }}
-                        >
+                        > 
                         {{ $item->member->first_name . ' ' . $item->member->last_name }}
                     </label>
                 </div>

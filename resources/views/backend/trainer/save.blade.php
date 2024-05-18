@@ -113,7 +113,9 @@
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Ảnh đại điện
                                     </label>
-                                    <input type="text" name="avatar" class="form-control"
+                                    <input type="text" 
+                                    name="avatar" 
+                                    class="form-control upload-image"
                                     value="{{ old('avatar', isset($trainer) ? $trainer->avatar : '') }}" 
                                     placeholder=""
                                     autocomplete="off">

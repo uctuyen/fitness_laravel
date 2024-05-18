@@ -36,25 +36,22 @@
                                     >
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mb15">
-                                <div class="col-lg-5">
-                                    <div class="form-row">
-                                        <label for="" class="control-label text-Left">Email
-                                            <span class="text-danger">(*)</span>
-                                        </label>
-                                        <input 
-                                            type="email" 
-                                            name="email" 
-                                            class="form-control" 
-                                            value="{{old('email',($equipment->email) ?? '')}}" 
-                                            placeholder=""
-                                            autocomplete="off"
-                                            readonly
-
-                                        >
-                                    </div>
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <label for="" class="control-label text-Left">Tên Phòng
+                                        <span class="text-danger">(*)</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        name="name" 
+                                        class="form-control" 
+                                        value="{{old('name',($equipment->room->name) ?? '')}}" 
+                                        placeholder=""
+                                        autocomplete="off"
+                                        readonly
+                                    >
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>

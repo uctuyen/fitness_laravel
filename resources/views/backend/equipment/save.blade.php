@@ -46,13 +46,13 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">Hình ảnh
+                                    <label for=""  class="control-label text-Left">Hình ảnh
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                             name="image" 
                                             class="form-control upload-image" 
-                                            value=""
+                                            value="{{ old('image', $equipment->image ?? '') }}"
                                             placeholder="" 
                                             autocomplete="off"
                                             data-type="Images"
@@ -66,12 +66,11 @@
                                     <label for="" class="control-label text-Left">Tình trạng
                                         <span class="text-danger">(*)</span>
                                     </label>
-                                    <input type="text" 
-                                    name="description" 
-                                    class="form-control" 
-                                    value="{{ old('description', $equipment->description ?? '')}}"
-                                    placeholder="" 
-                                    autocomplete="off">
+                                    <select name="status" class="form-control setupSelect2">
+                                        @foreach(config('apps.status.status') as $key => $value)
+                                            <option value="{{ $key }}"> {{ $value }}</option>
+                                        @endforeach    
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">

@@ -23,7 +23,10 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attendances = Attendance::with('calendar.class.trainer')->where('member_id', Auth::guard('member')->id())->paginate(20);
+        $attendances = Attendance::with('calendar.class.trainer')
+        ->where('member_id', Auth::guard('member')
+        ->id())
+        ->paginate(20);
 
         $data = [
             'attendances' => $attendances
@@ -40,7 +43,6 @@ class AttendanceController extends Controller
     public function create()
     {
         $classes = classModel::all();
-
         $data = [
             'classes' => $classes,
         ];
@@ -58,7 +60,7 @@ class AttendanceController extends Controller
     {
         try {
             DB::beginTransaction();
-            
+
             Attendance::create([
                 'member_id' => Auth::guard('member')->id(),
                 'calendar_id' => $request->calendar_id,
@@ -76,7 +78,9 @@ class AttendanceController extends Controller
 
     public function getCalendarList(Request $request)
     {
-        $calendarIds = Attendance::where('member_id', Auth::guard('member')->id())->pluck('id');
+        $calendarIds = Attendance::where('member_id', Auth::guard('member')
+        ->id())
+        ->pluck('calendar_id');
 
         $data = Calendar::where('class_id', $request->class_id)
             ->whereDate('start_date', '>', Carbon::now()->endOfDay())
