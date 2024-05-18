@@ -14,7 +14,7 @@ class Calendar extends Model
         'end_date',
     ];
 
-    protected $appends = array('time_calendar');
+    protected $appends = ['time_calendar'];
 
     public function class()
     {
@@ -30,6 +30,14 @@ class Calendar extends Model
         return Attribute::make(
             get: fn (mixed $value, array $attributes)
             => 'Ngày: ' . formatDate($attributes['start_date'], 'd-m-Y') . ' | ' . formatDate($attributes['start_date'], 'H:i') . ' - ' . formatDate($attributes['end_date'], 'H:i'),
+        );
+    }
+
+    public function duration(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes)
+            => formatDate($attributes['start_date'], 'H:i') . ' - ' . formatDate($attributes['end_date'], 'H:i'),
         );
     }
 

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
+use App\Models\Calendar;
+use App\Models\classModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashBoardMemberController extends Controller
 {
@@ -11,12 +16,37 @@ class DashBoardMemberController extends Controller
 
     }
 
-    public function dashboardMember(){
+    public function dashboardMember(Request $request){
+        $calendarIds = Attendance::where('member_id', Auth::guard('member')->id())
+            ->groupBy('calendar_id')
+            ->pluck('calendar_id');
+
+        $classIds = Calendar::whereIn('id', $calendarIds)
+            ->groupBy('class_id')
+            ->pluck('class_id');
+
+        $classes = classModel::whereIn('id', $classIds)->get();
+
+        $calendars = [];
+        if (!empty($request->class_id)) {
+            $now = Carbon::now();
+            $startDate = $now->startOfWeek(Carbon::MONDAY)->format('Y-m-d H:i:s');
+            $endDate = $now->endOfWeek(Carbon::SUNDAY)->format('Y-m-d H:i:s');
+            $calendars = Calendar::with('class.trainer')
+                ->where('class_id', $request->class_id)
+                ->whereBetween('start_date', [$startDate, $endDate])
+                ->orderBy('start_date', 'desc')
+                ->get();
+        }
+
         $config = $this->config();
         $template = 'backendMember.dashboard.home.index';
+
         return view('backendMember.dashboard.layout', compact(
             'template',
-            'config'
+            'config',
+            'classes',
+            'calendars',
         ));
     }
     private function config (){

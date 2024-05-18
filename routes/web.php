@@ -12,6 +12,8 @@ use App\Http\Controllers\Backend\EquipmentController;
 use App\Http\Controllers\Backend\CalendarController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Ajax\LocationController;
+use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +27,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Trang đăng ký vãng lai
+Route::get('/', [WebController::class, 'home'])->name('web.home');
+Route::post('/register-customer', [WebController::class, 'registerCustomer'])->name('web.register-customer');
+
 Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index')
 ->middleware('admin');
 
@@ -47,6 +50,13 @@ Route::group(['prefix' => 'employee'],function(){
     Route::get('{id}/delete', [EmployeeController::class, 'delete'])->where(['id'=>'[0-9]+'])->name('employee.delete')
     ->middleware('admin');
     Route::delete('{id}/destroy', [EmployeeController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('employee.destroy')
+    ->middleware('admin');
+});
+
+Route::group(['prefix' => 'customer'],function(){
+    Route::get('index', [CustomerController::class, 'index'])->name('customer.index')
+    ->middleware('admin');
+    Route::delete('{id}/destroy', [CustomerController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('customer.destroy')
     ->middleware('admin');
 });
                         /** member */
@@ -82,14 +92,14 @@ Route::group(['prefix' => 'trainer'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [TrainerController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('trainer.destroy')
     ->middleware('admin');
-});   
+});
 
 Route::group(['prefix' => 'attendance'],function(){
     Route::get('index', [AttendanceController::class, 'index'])->name('attendance.index')
     ->middleware('admin');
     Route::get('check-in/{calendar}', [AttendanceController::class, 'checkIn'])->name('attendance.check-in');
     Route::post('check-in/{calendar}', [AttendanceController::class, 'postCheckIn'])->name('attendance.post-check-in');
-});   
+});
                         /** item *****************************************************/
                         /** major */
 Route::group(['prefix' => 'major'],function(){
@@ -135,7 +145,7 @@ Route::group(['prefix' => 'class'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [ClassController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('class.destroy')
     ->middleware('admin');
-});     
+});
 Route::group(['prefix' => 'room'],function(){
     Route::get('index', [RoomController::class, 'index'])->name('room.index')
     ->middleware('admin');
@@ -151,7 +161,7 @@ Route::group(['prefix' => 'room'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [RoomController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('room.destroy')
     ->middleware('admin');
-});                                                         
+});
                              /** 'equipment */
 Route::group(['prefix' => 'equipment'],function(){
     Route::get('index', [EquipmentController::class, 'index'])->name('equipment.index')
@@ -168,7 +178,7 @@ Route::group(['prefix' => 'equipment'],function(){
     ->middleware('admin');
     Route::delete('{id}/destroy', [EquipmentController::class, 'destroy'])->where(['id'=>'[0-9]+'])->name('equipment.destroy')
     ->middleware('admin');
-});                        
+});
                 /**Ajax  */
 Route::get('ajax/location/getLocation', [LocationController::class, 'getLocation'])->name('ajax.index')
 ->middleware('admin');
@@ -176,7 +186,3 @@ Route::get('ajax/location/getLocation', [LocationController::class, 'getLocation
 Route::get('admin', [AuthController::class, 'index'])->name('auth.admin');
 Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login')->middleware('login');;
-
-
-
-
