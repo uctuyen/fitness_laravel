@@ -80,11 +80,6 @@ class MemberService implements MemberServiceInterface
             return false;
         }
     }
-    private function convertDate($day_of_birth){
-        $carbonDate = Carbon::createFromFormat('Y-m-d', $day_of_birth);
-        $day_of_birth = $carbonDate->format('Y-m-d H:i:s');
-        return $day_of_birth;
-    }
     public function paginateSelect(){
         return [
             'id',
