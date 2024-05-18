@@ -17,10 +17,10 @@
             <div class="col-lg-4">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" 
+                        <input type="checkbox"
                             name="attendance_id[{{ $item->id }}]"
                             {{ $item->status == 1 ? 'checked' : '' }}
-                        > 
+                        >
                         {{ $item->member->first_name . ' ' . $item->member->last_name }}
                     </label>
                 </div>

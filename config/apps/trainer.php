@@ -11,7 +11,7 @@ return [
             0 => 'Nam',
             1 => 'Nữ',
             2 => 'Khác',
-        ]
+        ],
     ],
     'delete' => [
         'title' => 'Xóa huấn luyện viên',

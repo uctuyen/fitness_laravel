@@ -8,14 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Equipment extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
         'image',
         'status',
         'quantity',
-        'room_id'
+        'room_id',
     ];
+
     protected $table = 'equipments';
 
     public function room()

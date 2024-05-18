@@ -27,6 +27,7 @@ class UpdateClassRequest extends FormRequest
             'quantity_member' => 'required|integer|min:0',
         ];
     }
+
     public function messages(): array
     {
         return [
@@ -38,7 +39,7 @@ class UpdateClassRequest extends FormRequest
             'quantity_member.required' => 'Không được để trống số lượng học viên!',
             'quantity_member.integer' => 'Số lượng học viên phải là một số nguyên!',
             'quantity_member.min' => 'Số lượng học viên không được âm!',
-            'quantity_member.max' => 'Số lượng tối đa là 50 học viên!'
+            'quantity_member.max' => 'Số lượng tối đa là 50 học viên!',
         ];
     }
 }

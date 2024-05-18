@@ -42,7 +42,7 @@
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
                                 <div  class="input-group">
-                                    <input 
+                                    <input
                                             type="text"
                                             name="keyword"
                                             value="{{ request()->get('keyword') ?: old('keyword')}}"
@@ -54,8 +54,8 @@
                                                 name="search"
                                                 value="search"
                                                 class="btn btn-primary mb0 btn-sm"> <i class="fa fa-search"></i> Tìm kiếm
-                                        </button>  
-                                    </span>      
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +89,13 @@
                                     {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('d/m/Y') }}
                                 </td>
                                 <td>
-                                    {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('H:i') . ' - ' . \Carbon\Carbon::parse($attendance->calendar->end_date)->format('H:i') }}                                
+                                    {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('H:i') . ' - ' . \Carbon\Carbon::parse($attendance->calendar->end_date)->format('H:i') }}
                                 </td>
                                 <td class="text-center" style="width: 100px">
                                     @if (now() >= \Carbon\Carbon::parse($attendance->calendar->start_date)
                                     ->subMinutes(10) && now() <= \Carbon\Carbon::parse($attendance->calendar->end_date)
                                     ->addMinutes(10))
-                                        <a href="{{ route('trainer.attendance.check-in', $attendance->calendar_id) }}" 
+                                        <a href="{{ route('trainer.attendance.check-in', $attendance->calendar_id) }}"
                                             class="btn btn-primary">
                                         <i class="fa fa-check"></i> Điểm danh</a>
                                     @endif
@@ -107,7 +107,7 @@
                     {{ $classes->links('pagination::bootstrap-4') }}
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

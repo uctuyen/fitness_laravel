@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyInteger('gender')->nullable();
             $table->dateTime('day_of_birth')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('phone_number',20)->nullable();
+            $table->string('phone_number', 20)->nullable();
             $table->string('email')->unique();
             $table->string('province_id')->nullable();
             $table->string('district_id')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('rememberToken')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            
+
             $table->timestamps();
         });
     }

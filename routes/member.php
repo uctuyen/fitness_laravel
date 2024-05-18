@@ -1,8 +1,9 @@
 <?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\MemberLoginController;
-use App\Http\Controllers\Auth\DashBoardMemberController;
+
 use App\Http\Controllers\Auth\AttendanceController;
+use App\Http\Controllers\Auth\DashBoardMemberController;
+use App\Http\Controllers\Auth\MemberLoginController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('member')->group(function () {
     Route::middleware(['auth:member'])->group(function () {
