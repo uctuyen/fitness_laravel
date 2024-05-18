@@ -55,15 +55,15 @@ function ShowFileInfo( fileUrl, data )
 	<p style="padding-left: 30px; padding-right: 30px;">
 <?php
 
-require_once '../../ckfinder.php' ;
+require_once '../../ckfinder.php';
 
 // You can use the "CKFinder" class to render CKFinder in a page:
-$finder = new CKFinder() ;
-$finder->BasePath = '../../' ;	// The path for the installation of CKFinder (default = "/ckfinder/").
-$finder->SelectFunction = 'ShowFileInfo' ;
+$finder = new CKFinder();
+$finder->BasePath = '../../';	// The path for the installation of CKFinder (default = "/ckfinder/").
+$finder->SelectFunction = 'ShowFileInfo';
 // The default height is 400.
 $finder->Height = 600;
-$finder->Create() ;
+$finder->Create();
 
 // It can also be done in a single line, calling the "static"
 // Create( basePath, width, height, selectFunction ) function:

@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Auth\User;
 use App\Models\Trainer;
+use Illuminate\Database\Seeder;
+
 class trainerSeeder extends Seeder
 {
     /**

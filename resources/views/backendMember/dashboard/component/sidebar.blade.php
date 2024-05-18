@@ -29,6 +29,7 @@
             <li class="active">
                 <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">Học Viên</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                    <li><a href="{{ route('member.dashboardMember') }}">Lich Tập Trung Tâm</a></li>
                     <li><a href="{{ route('attendances.index') }}">Đăng kí ca học</a></li>
                 </ul>
             </li>

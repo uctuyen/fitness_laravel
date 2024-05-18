@@ -102,7 +102,7 @@
                                         {{$employee->phone_number}}
                                     </td>
                                     <td>
-                                        {{$employee->day_of_birth}}
+                                        {{\Carbon\Carbon::parse($employee->day_of_birth)->format('d/m/Y')}}
                                     </td>
                                     <td>
                                        {{ $genderLabels[$employee->gender] }}

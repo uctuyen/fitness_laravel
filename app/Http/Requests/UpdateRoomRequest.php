@@ -25,6 +25,7 @@ class UpdateRoomRequest extends FormRequest
             'name' => 'required|string',
         ];
     }
+
     public function messages(): array
     {
         return [

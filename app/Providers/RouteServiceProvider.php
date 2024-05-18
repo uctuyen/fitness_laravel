@@ -25,8 +25,9 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/trainer.php'));
-            
+
     }
+
     protected function mapMemberRoutes()
     {
         Route::prefix('member')
@@ -34,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/member.php'));
     }
-    
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
@@ -50,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
             $this->mapTrainerRoutes();
             $this->mapMemberRoutes();
-        }); 
+        });
     }
 
     /**

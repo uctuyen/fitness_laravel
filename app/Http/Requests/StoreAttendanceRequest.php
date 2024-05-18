@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
+
 class StoreAttendanceRequest extends FormRequest
 {
     /**
@@ -10,6 +13,7 @@ class StoreAttendanceRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +26,7 @@ class StoreAttendanceRequest extends FormRequest
             'calendar_id' => 'required|exists:calendars,id',
         ];
     }
-    
+
     public function messages(): array
     {
         return [
@@ -30,6 +34,6 @@ class StoreAttendanceRequest extends FormRequest
             'class_id.exists' => 'Lớp học không tồn tại hoặc không có huấn luyện viên!',
             'calendar_id.required' => 'Không được để trống ca học!',
             'calendar_id.exists' => 'Ca học không tồn tại!',
-        ]; 
+        ];
     }
 }

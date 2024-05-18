@@ -10,24 +10,22 @@
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
-if (!defined('IN_CKFINDER')) exit;
+if (! defined('IN_CKFINDER')) {
+    exit;
+}
 
 /**
- * @package CKFinder
- * @subpackage ErrorHandler
  * @copyright CKSource - Frederico Knabben
  */
 
 /**
  * Include base error handling class
  */
-require_once CKFINDER_CONNECTOR_LIB_DIR . "/ErrorHandler/Base.php";
+require_once CKFINDER_CONNECTOR_LIB_DIR.'/ErrorHandler/Base.php';
 
 /**
  * HTTP error handler
  *
- * @package CKFinder
- * @subpackage ErrorHandler
  * @copyright CKSource - Frederico Knabben
  */
 class CKFinder_Connector_ErrorHandler_Http extends CKFinder_Connector_ErrorHandler_Base
@@ -35,9 +33,8 @@ class CKFinder_Connector_ErrorHandler_Http extends CKFinder_Connector_ErrorHandl
     /**
      * Throw file upload error, return true if error has been thrown, false if error has been catched
      *
-     * @param int $number
-     * @param string $text
-     * @access public
+     * @param  int  $number
+     * @param  string  $text
      */
     public function throwError($number, $text = false, $exit = true)
     {
@@ -45,24 +42,23 @@ class CKFinder_Connector_ErrorHandler_Http extends CKFinder_Connector_ErrorHandl
             return false;
         }
 
-        switch ($number)
-        {
+        switch ($number) {
             case CKFINDER_CONNECTOR_ERROR_INVALID_REQUEST:
             case CKFINDER_CONNECTOR_ERROR_INVALID_NAME:
             case CKFINDER_CONNECTOR_ERROR_THUMBNAILS_DISABLED:
             case CKFINDER_CONNECTOR_ERROR_UNAUTHORIZED:
-                header("HTTP/1.0 403 Forbidden");
-                header("X-CKFinder-Error: ". $number);
+                header('HTTP/1.0 403 Forbidden');
+                header('X-CKFinder-Error: '.$number);
                 break;
 
             case CKFINDER_CONNECTOR_ERROR_ACCESS_DENIED:
-                header("HTTP/1.0 500 Internal Server Error");
-                header("X-CKFinder-Error: ".$number);
+                header('HTTP/1.0 500 Internal Server Error');
+                header('X-CKFinder-Error: '.$number);
                 break;
 
             default:
-                header("HTTP/1.0 404 Not Found");
-                header("X-CKFinder-Error: ". $number);
+                header('HTTP/1.0 404 Not Found');
+                header('X-CKFinder-Error: '.$number);
                 break;
         }
 

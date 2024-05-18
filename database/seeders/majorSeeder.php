@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Generator as Faker;
 
 class MajorSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class MajorSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        foreach (range(1,5) as $index) {
+        foreach (range(1, 5) as $index) {
             DB::table('majors')->insert([
                 'major_name' => $faker->word,
                 // Add more fields as necessary

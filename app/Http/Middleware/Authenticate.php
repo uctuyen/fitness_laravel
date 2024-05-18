@@ -3,13 +3,9 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Http\Request;
-use Illuminate\Auth\AuthenticationException;
 
 class Authenticate extends Middleware
 {
-  
-
     protected function unauthenticated($request, array $guards)
     {
         $role = $guards[0];
@@ -18,6 +14,7 @@ class Authenticate extends Middleware
         } else {
             $toRoute = 'member.login';
         }
+
         return $request->expectsJson() ? null : route($toRoute);
     }
 }

@@ -26,6 +26,7 @@ class SaveRoomRequest extends FormRequest
             'class_id' => 'required|gt:0',
         ];
     }
+
     public function messages(): array
     {
         return [

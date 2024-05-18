@@ -1,24 +1,30 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Calendar;
-use App\Services\CalendarService;
-use App\Repositories\Interfaces\CalendarRepositoriesInterface as CalendarRepositories;
 use App\Models\classModel;
 use App\Models\Trainer;
+use App\Repositories\Interfaces\CalendarRepositoriesInterface as CalendarRepositories;
+use App\Services\CalendarService;
+
 class TrainerCalendarController extends Controller
 {
     protected $calendarService;
+
     protected $calendarRepositories;
+
     public function __construct(
         CalendarService $calendarService,
         CalendarRepositories $calendarRepositories,
-    ){
-        $this->calendarService = $calendarService; 
-        $this->calendarRepositories = $calendarRepositories; 
+    ) {
+        $this->calendarService = $calendarService;
+        $this->calendarRepositories = $calendarRepositories;
     }
-    public function index (){
+
+    public function index()
+    {
         $config['seo'] = config('apps.calendar');
         $template = 'backend.calendar.index';
         $events = [];
@@ -31,7 +37,7 @@ class TrainerCalendarController extends Controller
             '#ff99ff',
             '#0000ff',
             '#ff1a1a',
-            '#66ffcc',   
+            '#66ffcc',
             '#ff99ff',
         ];
         $classColors = [];
@@ -42,13 +48,14 @@ class TrainerCalendarController extends Controller
             $class_id = $item->class_id;
             $events[] = [
                 'id' => $item->id,
-                'title' => $item->class->name . ' - ' . $item->class->trainer->first_name . ' ' . $item->class->trainer->last_name,
+                'title' => $item->class->name.' - '.$item->class->trainer->first_name.' '.$item->class->trainer->last_name,
                 'start' => $item->start_date,
                 'end' => $item->end_date,
                 'color' => $classColors[$class_id],
             ];
         }
-        return view('backendTrainer.dashboard.layout',['events'=>$events],compact(
+
+        return view('backendTrainer.dashboard.layout', ['events' => $events], compact(
             'template',
             'events',
             'config',

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
-use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMajorRequest extends FormRequest
 {
@@ -17,6 +17,7 @@ class UpdateMajorRequest extends FormRequest
             'major_name' => 'required|string',
         ];
     }
+
     public function messages(): array
     {
         return [

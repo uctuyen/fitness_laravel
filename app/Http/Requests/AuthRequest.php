@@ -26,12 +26,13 @@ class AuthRequest extends FormRequest
             'password' => 'required',
         ];
     }
+
     public function messages(): array
     {
         return [
             'email.required' => 'Không được để trống Email!',
             'email.email' => 'Sai định dạng Email! (ví dụ: abcd@gmail.com)',
-            'password.required' => 'Không được để trống Password!'
+            'password.required' => 'Không được để trống Password!',
         ];
     }
 }

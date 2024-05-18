@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('class_sessions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('day_of_week', ['Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'])->nullable();           
+            $table->enum('day_of_week', ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'])->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->timestamps();

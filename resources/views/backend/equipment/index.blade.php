@@ -103,7 +103,22 @@
                                         {{$equipment->description}}
                                     </td>
                                     <td> 
-                                        {{config('apps.status.status')[$equipment->status]}}
+                                        @switch($equipment->status)
+                                            @case(1)
+                                                <span class="text-success">{{config('apps.status.status')[$equipment->status]}}</span>
+                                                @break
+                                    
+                                            @case(2)
+                                                <span class="text-warning">{{config('apps.status.status')[$equipment->status]}}</span>
+                                                @break
+                                    
+                                            @case(3)
+                                                <span class="text-danger">{{config('apps.status.status')[$equipment->status]}}</span>
+                                                @break
+                                    
+                                            @default
+                                                <span>{{config('apps.status.status')[$equipment->status]}}</span>
+                                        @endswitch
                                     </td>
                                     <td class="text-center" style="width: 100px">
                                         <a href="{{ route('equipment.edit', $equipment->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>

@@ -2,5 +2,6 @@
 
 namespace App\Repositories\Interfaces;
 
-interface CalendarRepositoriesInterface {
+interface CalendarRepositoriesInterface
+{
 }

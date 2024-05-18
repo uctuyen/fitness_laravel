@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
+
 class SaveCalendarRequest extends FormRequest
 {
     /**
@@ -10,6 +13,7 @@ class SaveCalendarRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -17,7 +21,7 @@ class SaveCalendarRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [    
+        return [
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'class_id' => [
@@ -29,8 +33,8 @@ class SaveCalendarRequest extends FormRequest
             'trainer_id' => 'required|exists:trainers,id',
         ];
     }
-    
-        public function messages(): array
+
+    public function messages(): array
     {
         return [
             'start_date.required' => 'Không được để trống ngày bắt đầu!',
@@ -38,6 +42,6 @@ class SaveCalendarRequest extends FormRequest
             'end_date.after_or_equal' => 'Ngày kết thúc phải sau hoặc bằng ngày bắt đầu!',
             'class_id.required' => 'Không được để trống lớp học!',
             'class_id.exists' => 'Lớp học không tồn tại hoặc không có huấn luyện viên!',
-        ]; 
+        ];
     }
 }

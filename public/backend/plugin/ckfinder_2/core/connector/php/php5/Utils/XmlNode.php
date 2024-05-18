@@ -10,19 +10,17 @@
  * modifying or distribute this file or part of its contents. The contents of
  * this file is part of the Source Code of CKFinder.
  */
-if (!defined('IN_CKFINDER')) exit;
+if (! defined('IN_CKFINDER')) {
+    exit;
+}
 
 /**
- * @package CKFinder
- * @subpackage Utils
  * @copyright CKSource - Frederico Knabben
  */
 
 /**
  * Simple class which provides some basic API for creating XML nodes and adding attributes
  *
- * @package CKFinder
- * @subpackage Utils
  * @copyright CKSource - Frederico Knabben
  */
 class Ckfinder_Connector_Utils_XmlNode
@@ -30,28 +28,27 @@ class Ckfinder_Connector_Utils_XmlNode
     /**
      * Array that stores XML attributes
      *
-     * @access private
      * @var array
      */
-    private $_attributes = array();
+    private $_attributes = [];
+
     /**
      * Array that stores child nodes
      *
-     * @access private
      * @var array
      */
-    private $_childNodes = array();
+    private $_childNodes = [];
+
     /**
      * Node name
      *
-     * @access private
      * @var string
      */
     private $_name;
+
     /**
      * Node value
      *
-     * @access private
      * @var string
      */
     private $_value;
@@ -59,34 +56,34 @@ class Ckfinder_Connector_Utils_XmlNode
     /**
      * Create new node
      *
-     * @param string $nodeName node name
-     * @param string $nodeValue node value
+     * @param  string  $nodeName  node name
+     * @param  string  $nodeValue  node value
      * @return Ckfinder_Connector_Utils_XmlNode
      */
-    function __construct($nodeName, $nodeValue = null)
+    public function __construct($nodeName, $nodeValue = null)
     {
         $this->_name = $nodeName;
-        if (!is_null($nodeValue)) {
+        if (! is_null($nodeValue)) {
             $this->_value = $nodeValue;
         }
     }
 
-    function getChild($name)
+    public function getChild($name)
     {
         foreach ($this->_childNodes as $i => $node) {
             if ($node->_name == $name) {
                 return $this->_childNodes[$i];
             }
         }
+
         return null;
     }
 
     /**
      * Add attribute
      *
-     * @param string $name
-     * @param string $value
-     * @access public
+     * @param  string  $name
+     * @param  string  $value
      */
     public function addAttribute($name, $value)
     {
@@ -96,8 +93,7 @@ class Ckfinder_Connector_Utils_XmlNode
     /**
      * Get attribute value
      *
-     * @param string $name
-     * @access public
+     * @param  string  $name
      */
     public function getAttribute($name)
     {
@@ -107,9 +103,8 @@ class Ckfinder_Connector_Utils_XmlNode
     /**
      * Set element value
      *
-     * @param string $name
-     * @param string $value
-     * @access public
+     * @param  string  $name
+     * @param  string  $value
      */
     public function setValue($value)
     {
@@ -119,9 +114,8 @@ class Ckfinder_Connector_Utils_XmlNode
     /**
      * Get element value
      *
-     * @param string $name
-     * @param string $value
-     * @access public
+     * @param  string  $name
+     * @param  string  $value
      */
     public function getValue()
     {
@@ -131,17 +125,17 @@ class Ckfinder_Connector_Utils_XmlNode
     /**
      * Adds new child at the end of the children
      *
-     * @param Ckfinder_Connector_Utils_XmlNode $node
-     * @access public
+     * @param  Ckfinder_Connector_Utils_XmlNode  $node
      */
     public function addChild(&$node)
     {
-        $this->_childNodes[] =& $node;
+        $this->_childNodes[] = &$node;
     }
 
     /**
      * Checks whether the string is valid UTF8
-     * @param string $string
+     *
+     * @param  string  $string
      */
     public function asUTF8($string)
     {
@@ -149,7 +143,7 @@ class Ckfinder_Connector_Utils_XmlNode
             return $string;
         }
 
-        $ret = "";
+        $ret = '';
         for ($i = 0; $i < strlen($string); $i++) {
             $ret .= CKFinder_Connector_Utils_Misc::isValidUTF8($string[$i]) ? $string[$i] : "\xEF\xBF\xBD";
         }
@@ -161,41 +155,41 @@ class Ckfinder_Connector_Utils_XmlNode
      * Return a well-formed XML string based on Ckfinder_Connector_Utils_XmlNode element
      *
      * @return string
-     * @access public
      */
     public function asXML()
     {
-        $ret = "<" . $this->_name;
+        $ret = '<'.$this->_name;
 
         //print Attributes
-        if (sizeof($this->_attributes)>0) {
+        if (count($this->_attributes) > 0) {
             foreach ($this->_attributes as $_name => $_value) {
-                $ret .= " " . $_name . '="' . htmlspecialchars($this->asUTF8($_value)) . '"';
+                $ret .= ' '.$_name.'="'.htmlspecialchars($this->asUTF8($_value)).'"';
             }
         }
 
         //if there is nothing more todo, close empty tag and exit
-        if (is_null($this->_value) && !sizeof($this->_childNodes)) {
-            $ret .= " />";
+        if (is_null($this->_value) && ! count($this->_childNodes)) {
+            $ret .= ' />';
+
             return $ret;
         }
 
         //close opening tag
-        $ret .= ">";
+        $ret .= '>';
 
         //print value
-        if (!is_null($this->_value)) {
+        if (! is_null($this->_value)) {
             $ret .= htmlspecialchars($this->asUTF8($this->_value));
         }
 
         //print child nodes
-        if (sizeof($this->_childNodes)>0) {
+        if (count($this->_childNodes) > 0) {
             foreach ($this->_childNodes as $_node) {
                 $ret .= $_node->asXml();
             }
         }
 
-        $ret .= "</" . $this->_name . ">";
+        $ret .= '</'.$this->_name.'>';
 
         return $ret;
     }

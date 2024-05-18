@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('registrater_date');
             $table->date('start_date');
             $table->date('end_date');
-            $table->decimal('amount',8,2);
+            $table->decimal('amount', 8, 2);
 
             $table->foreign('attendances_id')->references('id')->on('attendances');
 

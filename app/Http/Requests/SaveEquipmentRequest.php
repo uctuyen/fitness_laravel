@@ -23,12 +23,17 @@ class SaveEquipmentRequest extends FormRequest
     {
         return [
             'name' => 'required|string ',
+            'status' => 'required|gt:0',
         ];
     }
+
     public function messages(): array
     {
         return [
             'name.required' => 'Không được để trống trường Email!',
+            'name.string' => 'Tên thiết bị phải là chuỗi!',
+            'status.required' => 'Không được để trống trường Status!',
+            'status.gt' => 'Hãy chọn tình trạng!',
         ];
     }
 }

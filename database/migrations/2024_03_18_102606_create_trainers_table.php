@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyInteger('gender')->nullable();
             $table->dateTime('day_of_birth')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('phone_number',20)->nullable();
+            $table->string('phone_number', 20)->nullable();
             $table->string('email')->unique();
             $table->string('major')->nullable();
             $table->string('province_id')->nullable();

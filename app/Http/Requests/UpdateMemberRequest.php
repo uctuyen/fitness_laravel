@@ -27,6 +27,7 @@ class UpdateMemberRequest extends FormRequest
             'last_name' => 'required|string ',
         ];
     }
+
     public function messages(): array
     {
         return [

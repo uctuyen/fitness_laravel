@@ -24,7 +24,7 @@ class UpdateAttendanceRequest extends FormRequest
         return [
         ];
     }
-    
+
     public function messages(): array
     {
         return [
