@@ -138,3 +138,6 @@ table strong{
     justify-content: space-between;
     align-items: flex-start;
 }
+.menuContainer .setupSelect2{
+    width: 100% !important;
+}
