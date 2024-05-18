@@ -24,7 +24,7 @@ class SaveAttendanceRequest extends FormRequest
         return [
         ];
     }
-    
+
     public function messages(): array
     {
         return [

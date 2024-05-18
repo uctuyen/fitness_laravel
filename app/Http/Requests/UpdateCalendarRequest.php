@@ -26,12 +26,12 @@ class UpdateCalendarRequest extends FormRequest
             'end_day' => 'required|date',
         ];
     }
-    
+
     public function messages(): array
     {
         return [
             'start_day.required' => 'Không được để trống ngày!',
             'end_day.required' => 'Không được để trống thời gian bắt đầu!',
-        ]; 
+        ];
     }
 }

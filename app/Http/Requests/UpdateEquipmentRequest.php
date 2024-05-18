@@ -26,6 +26,7 @@ class UpdateEquipmentRequest extends FormRequest
             'status' => 'required|gt:0',
         ];
     }
+
     public function messages(): array
     {
         return [

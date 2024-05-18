@@ -8,17 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Attendance extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'member_id',
         'calendar_id',
         'status',
     ];
+
     protected $table = 'attendances';
 
-    public function member (){
+    public function member()
+    {
         return $this->belongsTo(Member::class);
     }
-    public function calendar (){
+
+    public function calendar()
+    {
         return $this->belongsTo(Calendar::class);
     }
 }

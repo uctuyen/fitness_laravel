@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Trainer extends Authenticatable
 {
@@ -18,6 +18,7 @@ class Trainer extends Authenticatable
      * @var array<int, string>
      */
     protected $guard = 'trainer';
+
     protected $fillable = [
         'avatar',
         'first_name',
@@ -51,12 +52,14 @@ class Trainer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     protected $table = 'trainers';
 
     public function majors()
     {
         return $this->belongsToMany(Major::class, 'trainer_majors', 'trainer_id', 'major_id');
     }
+
     public function classes()
     {
         return $this->hasMany(classModel::class, 'trainer_id');
@@ -65,8 +68,7 @@ class Trainer extends Authenticatable
     public function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes)
-            => $attributes['first_name'] . ' '. $attributes['last_name'],
+            get: fn (mixed $value, array $attributes) => $attributes['first_name'].' '.$attributes['last_name'],
         );
     }
 }

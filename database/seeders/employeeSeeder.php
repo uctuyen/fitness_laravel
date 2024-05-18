@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Auth\User;
 use App\Models\Employee;
+use Illuminate\Database\Seeder;
+
 class employeeSeeder extends Seeder
 {
     /**

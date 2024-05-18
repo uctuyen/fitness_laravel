@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
+use App\Models\classModel;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use App\Models\classModel;
+
 class UniqueClassTrainer implements ValidationRule
 {
     /**
@@ -16,14 +17,15 @@ class UniqueClassTrainer implements ValidationRule
     {
         //
     }
+
     public function passes($attribute, $value)
     {
         $classId = request()->get('id');
         $trainerId = request()->get('trainer_id');
 
-        return !classModel::where('id', $classId)
-                        ->where('trainer_id', $trainerId)
-                        ->exists();
+        return ! classModel::where('id', $classId)
+            ->where('trainer_id', $trainerId)
+            ->exists();
     }
 
     public function message()

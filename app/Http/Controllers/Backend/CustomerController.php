@@ -8,25 +8,29 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $customers = Customer::query();
-        if (!empty($request->keyword)) {
-            $customers = $customers->where('name','like','%'.$request->keyword.'%')
-                ->orWhere('email','like','%'.$request->keyword.'%')
-                ->orWhere('phone_number','like','%'.$request->keyword.'%')
-                ->orWhere('address','like','%'.$request->keyword.'%');
+        if (! empty($request->keyword)) {
+            $customers = $customers->where('name', 'like', '%'.$request->keyword.'%')
+                ->orWhere('email', 'like', '%'.$request->keyword.'%')
+                ->orWhere('phone_number', 'like', '%'.$request->keyword.'%')
+                ->orWhere('address', 'like', '%'.$request->keyword.'%');
         }
         $customers = $customers->paginate($request->perpage ?? 20);
 
         $config['seo'] = config('apps.customer');
         $template = 'backend.customer.index';
-        return view('backend.dashboard.layout',compact(
+
+        return view('backend.dashboard.layout', compact(
             'template',
             'config',
             'customers',
         ));
     }
-    public function destroy($id){
+
+    public function destroy($id)
+    {
         if (Customer::destroy($id)) {
             return redirect()->route('customer.index')->with('success', 'Xóa khách thành công!');
         }

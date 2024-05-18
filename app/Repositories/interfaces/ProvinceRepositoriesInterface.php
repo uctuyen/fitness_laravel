@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface ProvinceRepositoriesInterface{
+interface ProvinceRepositoriesInterface
+{
     public function all();
 }

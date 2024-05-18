@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
 class AuthenticateMiddleware
 {
     /**
@@ -15,9 +16,10 @@ class AuthenticateMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::id() == null){
+        if (Auth::id() == null) {
             return redirect()->route('auth.admin')->with('error', 'Bạn phải là admin mới sử dụng được chức năng này!');
-        } 
+        }
+
         return $next($request);
     }
 }

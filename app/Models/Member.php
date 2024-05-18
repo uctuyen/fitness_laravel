@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Model;
+
 class Member extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -17,8 +17,8 @@ class Member extends Authenticatable
      *
      * @var array<int, string>
      */
-
     protected $guard = 'member';
+
     protected $fillable = [
         'avatar',
         'first_name',
@@ -52,8 +52,11 @@ class Member extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function attendace(){
+
+    public function attendace()
+    {
         return $this->hasMany(Attendance::class);
     }
+
     protected $table = 'members';
 }

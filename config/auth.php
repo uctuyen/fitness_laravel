@@ -76,7 +76,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
         ],
-       
+
         'trainers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Trainer::class,

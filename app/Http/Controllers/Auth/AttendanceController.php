@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Models\Attendance;
 use App\Models\Calendar;
 use App\Models\classModel;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
 
 class AttendanceController extends Controller
 {
@@ -24,12 +23,12 @@ class AttendanceController extends Controller
     public function index()
     {
         $attendances = Attendance::with('calendar.class.trainer')
-        ->where('member_id', Auth::guard('member')
-        ->id())
-        ->paginate(20);
+            ->where('member_id', Auth::guard('member')
+                ->id())
+            ->paginate(20);
 
         $data = [
-            'attendances' => $attendances
+            'attendances' => $attendances,
         ];
 
         return view('backendMember.attendance.index', $data);
@@ -79,8 +78,8 @@ class AttendanceController extends Controller
     public function getCalendarList(Request $request)
     {
         $calendarIds = Attendance::where('member_id', Auth::guard('member')
-        ->id())
-        ->pluck('calendar_id');
+            ->id())
+            ->pluck('calendar_id');
 
         $data = Calendar::where('class_id', $request->class_id)
             ->whereDate('start_date', '>', Carbon::now()->endOfDay())

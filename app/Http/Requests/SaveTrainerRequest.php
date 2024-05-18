@@ -29,6 +29,7 @@ class SaveTrainerRequest extends FormRequest
             're_password' => 'required|string|same:password',
         ];
     }
+
     public function messages(): array
     {
         return [
@@ -43,7 +44,7 @@ class SaveTrainerRequest extends FormRequest
             'last_name.string' => 'Họ phải là dạng kí tự!',
             'password.required' => 'Không được để trống Password!',
             're_password.required' => 'Không được để trống trường Nhập lại mật khẩu!',
-            're_password.same' => 'Mật khẩu không khớp!'
+            're_password.same' => 'Mật khẩu không khớp!',
         ];
     }
 }
