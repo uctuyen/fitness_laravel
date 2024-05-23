@@ -90,6 +90,18 @@ class CalendarController extends Controller
         if ($trainer === null) {
             return response()->json(['error' => 'Trainer not found'], 404);
         }
+        // // Kiểm tra xem huấn luyện viên đã có sự kiện nào khác vào thời điểm đó hay không
+        // $existingEvent = Event::where('trainer_id', $trainer->id)
+        // ->where(function ($query) use ($request) {
+        //     $query->whereBetween('start_date', [$request->start_date, $request->end_date])
+        //         ->orWhereBetween('end_date', [$request->start_date, $request->end_date]);
+        // })
+        // ->first();
+
+        // if ($existingEvent) {
+        //     // Nếu có, trả về lỗi
+        //     return response()->json(['error' => 'Huấn luyện viên chỉ được dạy 1 lớp vào 1 thời điểm'], 400);
+        // }
         $calendar = Calendar::create([
             'class_id' => $request->class_id,
             'trainer_id' => $request->trainer_id,

@@ -112,6 +112,32 @@
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                             }
                                         });
+                                        function updateClassList(trainerId) {
+                                            $.ajax({
+                                                url: '/getClassesByTrainer/' + trainerId,  // Update with your actual route
+                                                type: 'GET',
+                                                dataType: 'json',
+                                                success: function(data) {
+                                                    $('#classSelect').empty();
+                                                    $.each(data.classes, function(key, classItem) {
+                                                        $('#classSelect').append('<option value="' + classItem.id + '">' + classItem.name + '</option>');
+                                                    });
+                                                },
+                                                error: function(error) {
+                                                    console.log(error);
+                                                }
+                                            });
+                                        }
+
+                                        $('#trainerSelect').change(function() {
+                                            var trainerId = $(this).val();
+                                            updateClassList(trainerId);
+                                        });
+
+                                        $('#calendarModal').on('show.bs.modal', function (e) {
+                                            $('#classSelect').val('1');
+                                            $('#trainerSelect').val('2');
+                                        });
                                         $('#calendarModal').on('show.bs.modal', function (e) {
                                             $('#classSelect').val('1');
                                                 $('#trainerSelect').val('2');
@@ -221,7 +247,7 @@
                                                     class_id: $('#classSelect').val(),
                                                     trainer_id: $('#trainerSelect').val(),
                                                     start_date: start_date,
-                                                    end_date: end_date
+                                                    end_date: end_date,
                                                 },
                                                 success: function(response) {
                                                     $('#calendar').fullCalendar('renderEvent', {

@@ -99,6 +99,7 @@
                                             class="btn btn-primary">
                                         <i class="fa fa-check"></i> Điểm danh</a>
                                     @endif
+                                    <a href="{{route('attendance.delete',$attendance->id)}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach

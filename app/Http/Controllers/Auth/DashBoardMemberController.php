@@ -33,7 +33,7 @@ class DashBoardMemberController extends Controller
         if (! empty($request->class_id)) {
             $now = Carbon::now();
             $startDate = $now->startOfWeek(Carbon::MONDAY)->format('Y-m-d H:i:s');
-            $endDate = $now->endOfWeek(Carbon::SUNDAY)->format('Y-m-d H:i:s');
+            $endDate = $now->endOfWeek(Carbon::SATURDAY)->format('Y-m-d H:i:s');
             $calendars = Calendar::with('class.trainer')
                 ->where('class_id', $request->class_id)
                 ->whereBetween('start_date', [$startDate, $endDate])
@@ -51,7 +51,15 @@ class DashBoardMemberController extends Controller
             'calendars',
         ));
     }
-
+    public function destroy($id)
+    {
+        $attendance = Attendance::find($id);
+        if ($attendance) {
+            $attendance->delete();
+            return redirect()->route('attendance.index')->with('success', 'Xóa thành công!');
+        }
+        return redirect()->route('attendance.index')->with('error', 'Xóa không thành công!');
+    }
     private function config()
     {
         return [

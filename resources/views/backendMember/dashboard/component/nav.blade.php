@@ -10,7 +10,7 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                <span class="m-r-sm text-muted welcome-message">Chúc học viên {{ Auth::guard('member')->user()->first_name }} {{ Auth::guard('member')->user()->last_name }}  một ngày tốt lành. </span>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -70,14 +70,6 @@
                     <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="mailbox.html">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
                     <li class="divider"></li>
                     <li>
                         <a href="profile.html">
@@ -112,11 +104,6 @@
             <li>
                 <a href="{{route('member.logout')}}">
                     <i class="fa fa-sign-out"></i> Đăng xuất
-                </a>
-            </li>
-            <li>
-                <a class="right-sidebar-toggle">
-                    <i class="fa fa-tasks"></i>
                 </a>
             </li>
         </ul>

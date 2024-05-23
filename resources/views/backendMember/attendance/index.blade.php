@@ -59,7 +59,7 @@
                                         </button>
                                     </span>
                                 </div>
-                                <a href="{{route('attendances.create')}}" class="btn btn-danger"><i class="fa fa-plus"></i> Thêm mới</a>
+                                <a href="{{route('attendances.create')}}" class="btn btn-success"><i class="fa fa-plus"> </i> Đăng kí ca tập</a>
                             </div>
                         </div>
                     </div>
@@ -76,6 +76,7 @@
                                 <th>Ngày học</th>
                                 <th>Giờ bắt đầu</th>
                                 <th>Giờ kết thúc</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,6 +90,8 @@
                                 <td>{{ formatDate($attendance->calendar->start_date, 'd-m-Y') }}</td>
                                 <td>{{ formatDate($attendance->calendar->start_date, 'H:i:s') }}</td>
                                 <td>{{ formatDate($attendance->calendar->end_date, 'H:i:s') }}</td>
+                                <td class="text-center" style="width: 100px">
+                                    <a href="#" class="btn btn-danger" data-id="{{ $attendance->id }}">Hủy đăng kí</i></a>                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -100,4 +103,28 @@
         </div>
     </div>
 </div>
+<script>
+    document.querySelectorAll('.delete-btn').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+                var id = this.dataset.id;
+                fetch('/member/attendance/' + id, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+           .then(function(response) {
+                    console.log(response);
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Xóa không thành công!');
+                    }
+                });
+            }
+        });
+    });
+</script>
 @endsection

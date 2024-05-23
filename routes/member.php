@@ -14,5 +14,6 @@ Route::prefix('member')->group(function () {
     Route::get('dashboardMember', [DashBoardMemberController::class, 'dashboardMember'])->name('member.dashboardMember');
 
     Route::resource('attendances', AttendanceController::class);
+    Route::delete('attendance/{id}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
     Route::post('attendance/get-calendar-list', [AttendanceController::class, 'getCalendarList']);
 });
