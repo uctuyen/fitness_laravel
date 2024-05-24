@@ -68,7 +68,7 @@
                                     </label>
                                     <select name="trainer_id" class="form-control">
                                         @foreach($trainers as $trainer)
-                                            <option value="{{ $trainer->id }}" {{ (old('trainer_id', $class->trainer_id ?? '') == $trainer->id ? 'selected':'') }}>
+                                        <option value="{{ $trainer->id }}" {{ (old('trainer_id', $class->trainer_id ?? '') == $trainer->id ? 'selected':'') }}>
                                                 {{ $trainer->first_name . ' ' . $trainer->last_name }} <!-- Nối chuỗi tên đầu và tên cuối -->
                                             </option>
                                         @endforeach
@@ -81,7 +81,7 @@
                                     </label>
                                     <select name="major_id" class="form-control">
                                         @foreach($majors as $major)
-                                            <option value="{{ $major->id }}" {{ (old('major_id', $class->major_id ?? '') == $major->id ? 'selected':'') }}>{{ $major->major_name }}</option>
+                                        <option value="{{ $major->id }}" {{ (old('major_id', $class->major_id ?? '') == $major->id ? 'selected':'') }}>{{ $major->major_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
