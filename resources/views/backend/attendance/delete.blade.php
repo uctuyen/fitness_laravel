@@ -37,7 +37,7 @@
                                 </div>
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-Left">tên huấn luyện viên 
+                                    <label for="" class="control-label text-Left">Tên huấn luyện viên 
                                     </label>
                                     <input 
                                     type="text" 

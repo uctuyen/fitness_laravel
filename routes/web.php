@@ -101,10 +101,10 @@ Route::group(['prefix' => 'attendance'], function () {
         ->middleware('admin');
     Route::get('check-in/{calendar}', [AttendanceController::class, 'checkIn'])->name('attendance.check-in');
     Route::post('check-in/{calendar}', [AttendanceController::class, 'postCheckIn'])->name('attendance.post-check-in');
-    Route::get('{id}/delete', [AttendanceController::class, 'delete'])->where(['id' => '[0-9]+'])->name('attendance.delete')
+    Route::get('delete/{id}', [AttendanceController::class, 'delete'])->where(['id' => '[0-9]+'])->name('attendance.delete')
         ->middleware('admin');
     Route::delete('{id}/destroy', [AttendanceController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('attendance.destroy')
-        ->middleware('admin');
+    ->middleware('admin');
 });
 /** item *****************************************************/
 /** major */
