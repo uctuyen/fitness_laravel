@@ -68,10 +68,10 @@ class EquipmentController extends Controller
     public function save(SaveEquipmentRequest $request)
     {
         if ($this->equipmentService->create($request)) {
-            return redirect()->route('equipment.index')->with('success', 'Thêm mới chuyên môn thành công!');
+            return redirect()->route('equipment.index')->with('success', 'Thêm mới thiết bị thành công!');
         }
 
-        return redirect()->route('equipment.index')->with('error', 'Thêm mới chuyên môn không thành công!');
+        return redirect()->route('equipment.index')->with('error', 'Thêm mới thiết bị không thành công!');
     }
 
     public function edit($id)
@@ -99,10 +99,10 @@ class EquipmentController extends Controller
     public function update($id, UpdateEquipmentRequest $request)
     {
         if ($this->equipmentService->update($id, $request)) {
-            return redirect()->route('equipment.index')->with('success', 'Cập nhật chuyên môn thành công!');
+            return redirect()->route('equipment.index')->with('success', 'Cập nhật thiết bị thành công!');
         }
 
-        return redirect()->route('equipment.index')->with('error', 'Cập nhật chuyên môn không thành công!');
+        return redirect()->route('equipment.index')->with('error', 'Cập nhật thiết bị không thành công!');
     }
 
     public function delete($id)
@@ -121,9 +121,9 @@ class EquipmentController extends Controller
     public function destroy($id)
     {
         if ($this->equipmentService->destroy($id)) {
-            return redirect()->route('equipment.index')->with('success', 'Xóa chuyên môn thành công!');
+            return redirect()->route('equipment.index')->with('success', 'Xóa thiết bị thành công!');
         }
 
-        return redirect()->route('equipment.index')->with('error', 'Xóa chuyên môn không thành công!');
+        return redirect()->route('equipment.index')->with('error', 'Xóa thiết bị không thành công!');
     }
 }

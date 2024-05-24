@@ -24,11 +24,11 @@ class EquipmentService implements EquipmentServiceInterface
         $condition['keyword'] = addslashes($request->input('keyword'));
         $condition['gender'] = (int) $request->input('gender');
 
-        $perPage = (int) $request->input('perpage');
+        $perPage = (int) $request->input('perpage',4);
         $equipments = $this->equipmentRepositories->paginate($this->paginateSelect(),
             $condition,
             [],
-            ['path' => '/equipment/index'], $perPage);
+            ['path' => 'equipment/index'], $perPage);
 
         return $equipments;
     }

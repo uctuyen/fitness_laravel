@@ -39,7 +39,6 @@ class TrainerService implements TrainerServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token', 'send', 're_password');
-            $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             $payload['password'] = Hash::make($payload['password']);
             $trainer = $this->trainerRepositories->create($payload);
 
@@ -67,7 +66,6 @@ class TrainerService implements TrainerServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token', 'send');
-            $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             $trainer = $this->trainerRepositories->update($id, $payload);
             $majors = $request->only('major_id');
             $trainer->majors()->detach();

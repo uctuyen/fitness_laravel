@@ -41,12 +41,6 @@
                         </div>
                         <div class="action">
                             <div  class="uk-search uk-flex uk-flex-middle mr10">
-                                <select name='gender' class="form-control mr10 setupSelect2 ">
-                                    <option value="-1">Chọn giới tính</option>
-                                    <option value="0">Nam</option>
-                                    <option value="1">Nữ</option>
-                                    <option value="2">Khác</option>
-                                </select>
                                 <div  class="input-group">
                                     <input 
                                             type="text"

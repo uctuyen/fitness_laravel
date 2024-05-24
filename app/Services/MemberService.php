@@ -39,7 +39,6 @@ class MemberService implements MemberServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token', 'send', 're_password');
-            $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             $payload['password'] = Hash::make($payload['password']);
             $member = $this->memberRepositories->create($payload);
             DB::commit();
@@ -61,7 +60,6 @@ class MemberService implements MemberServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token', 'send');
-            $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
             $member = $this->memberRepositories->update($id, $payload);
             DB::commit();

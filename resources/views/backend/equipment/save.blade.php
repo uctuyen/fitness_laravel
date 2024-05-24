@@ -47,7 +47,6 @@
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for=""  class="control-label text-Left">Hình ảnh
-                                        <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                             name="image" 
@@ -76,7 +75,6 @@
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Số lượng
-                                        <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                         name="quantity" 
@@ -91,7 +89,6 @@
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Mô tả
-                                        <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                         name="description" 
@@ -107,6 +104,7 @@
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <select name="room_id" class="form-control">
+                                        <option value="0">Chọn Phòng</option>
                                         @foreach($rooms as $room)
                                             <option value="{{ $room->id }}" {{ (old('room_id', $class->room_id ?? '') == $room->id ? 'selected':'') }}>
                                                 {{ $room->name }}
