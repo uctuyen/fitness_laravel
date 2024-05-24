@@ -67,7 +67,7 @@
                                     </label>
                                     <select name="status" class="form-control setupSelect2">
                                         @foreach(config('apps.status.status') as $key => $value)
-                                            <option value="{{ $key }}"> {{ $value }}</option>
+                                            <option value="{{ $key }}" {{ (old('status', $equipment->status ?? '') == $key ? 'selected':'') }}> {{ $value }}</option>
                                         @endforeach    
                                     </select>
                                 </div>
@@ -104,9 +104,9 @@
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <select name="room_id" class="form-control">
-                                        <option value="0">Chọn Phòng</option>
+                                        <option value="">Chọn Phòng</option>
                                         @foreach($rooms as $room)
-                                            <option value="{{ $room->id }}" {{ (old('room_id', $class->room_id ?? '') == $room->id ? 'selected':'') }}>
+                                            <option value="{{ $room->id }}" {{ (old('room_id', $equipment->room_id ?? '') == $room->id ? 'selected':'') }}>
                                                 {{ $room->name }}
                                             </option>
                                         @endforeach
