@@ -74,7 +74,7 @@
                                 <th>chuyên môn</th>
                                 <th>Số lượng học viên tối đa</th>
                                 <th>Giá </th>
-                                <th class="text-center">Thao tác</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,7 +97,7 @@
                                     <td>
                                         {{$class->price}}
                                     </td>
-                                    <td class="text-center" style="width: 100px">
+                                    <td style="width: 100px">
                                         <a href="{{ route('class.edit', $class->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('class.delete', $class->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>

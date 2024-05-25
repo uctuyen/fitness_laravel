@@ -141,3 +141,32 @@ table strong{
 .menuContainer .setupSelect2{
     width: 100% !important;
 }
+
+.status-cancel {
+    display: inline-block;
+    background-color: rgb(35, 229, 129);
+    color: black;
+    padding: 2px 5px; /* Optional: Add some padding */
+}
+
+.status-done {
+    display: inline-block;
+    background-color: rgb(206, 25, 22);
+    color: white;
+    padding: 2px 5px; /* Optional: Add some padding */
+}
+.status-wait {
+    display: inline-block;
+    background-color: rgb(255, 204, 0);
+    color: black;
+    padding: 2px 5px; /* Optional: Add some padding */
+}
+.status-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+th, td {
+    text-align: center;
+}

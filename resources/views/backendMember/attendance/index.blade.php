@@ -91,8 +91,10 @@
                                 <td>{{ formatDate($attendance->calendar->start_date, 'd-m-Y') }}</td>
                                 <td>{{ formatDate($attendance->calendar->start_date, 'H:i:s') }}</td>
                                 <td>{{ formatDate($attendance->calendar->end_date, 'H:i:s') }}</td>
-                                <td>
-                                    {{ $attendance->getStatus() }}
+                                <td class="status-container">
+                                    <div class="{{ $attendance->status == 0 ? 'status-wait' : ($attendance->status == 1 ? 'status-cancel' : 'status-done') }}">
+                                        {{ $attendance->getStatus() }}
+                                    </div>
                                 </td>
                                 <td class="text-center" style="width: 100px">
                                     @if ($attendance->status == 0 && now() < $attendance->calendar->start_date)
@@ -114,28 +116,4 @@
         </div>
     </div>
 </div>
-<script>
-    document.querySelectorAll('.delete-btn').forEach(function(button) {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Bạn có chắc chắn muốn xóa không?')) {
-                var id = this.dataset.id;
-                fetch('/member/attendance/' + id, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-           .then(function(response) {
-                    console.log(response);
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        alert('Xóa không thành công!');
-                    }
-                });
-            }
-        });
-    });
-</script>
 @endsection

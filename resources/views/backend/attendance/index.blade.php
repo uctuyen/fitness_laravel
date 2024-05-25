@@ -72,7 +72,7 @@
                                 <th>Tên huấn luyện viên</th>
                                 <th>Ngày dạy</th>
                                 <th>Ca dạy</th>
-                                <th class="text-center">Thao tác</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,9 +91,10 @@
                                 <td>
                                     {{ \Carbon\Carbon::parse($attendance->calendar->start_date)->format('H:i') . ' - ' . \Carbon\Carbon::parse($attendance->calendar->end_date)->format('H:i') }}                                
                                 </td>
-                                <td class="text-center" style="width: 100px">
+                                <td style="width: 100px">
                                     @if (now() >= \Carbon\Carbon::parse($attendance->calendar->start_date)
-                                    ->subMinutes(10) && now() <= \Carbon\Carbon::parse($attendance->calendar->end_date)
+                                    ->subMinutes(10) && 
+                                    now() <= \Carbon\Carbon::parse($attendance->calendar->end_date)
                                     ->addMinutes(10))
                                         <a href="{{ route('attendance.check-in', $attendance->calendar_id) }}" 
                                             class="btn btn-primary">

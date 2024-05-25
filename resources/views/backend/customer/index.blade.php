@@ -72,7 +72,7 @@
                                 <th>SDT</th>
                                 <th>Email</th>
                                 <th>Địa chỉ</th>
-                                <th class="text-center">Thao tác</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,7 @@
                                 <td>
                                     {{ $item->address }}
                                 </td>
-                                <td class="text-center" style="width: 100px">
+                                <td style="width: 100px">
                                     <a href="{{ route('customer.delete', $item->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

@@ -75,7 +75,7 @@
                                 <th>Số lượng</th>
                                 <th>Mô tả</th>
                                 <th>Tình trạng</th>
-                                <th class="text-center">Thao tác</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,22 +99,22 @@
                                     <td> 
                                         @switch($equipment->status)
                                             @case(1)
-                                                <span class="text-success">{{config('apps.status.status')[$equipment->status]}}</span>
+                                                <span class="status-cancel">{{config('apps.status.status')[$equipment->status]}}</span>
                                                 @break
                                     
                                             @case(2)
-                                                <span class="text-warning">{{config('apps.status.status')[$equipment->status]}}</span>
+                                                <span class="status-wait">{{config('apps.status.status')[$equipment->status]}}</span>
                                                 @break
                                     
                                             @case(3)
-                                                <span class="text-danger">{{config('apps.status.status')[$equipment->status]}}</span>
+                                                <span class="status-done">{{config('apps.status.status')[$equipment->status]}}</span>
                                                 @break
                                     
                                             @default
-                                                <span>{{config('apps.status.status')[$equipment->status]}}</span>
+                                                <span>{{config('status.status')[$equipment->status]}}</span>
                                         @endswitch
                                     </td>
-                                    <td class="text-center" style="width: 100px">
+                                    <td style="width: 100px">
                                         <a href="{{ route('equipment.edit', $equipment->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('equipment.delete', $equipment->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>

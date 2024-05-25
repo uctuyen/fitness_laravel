@@ -76,14 +76,14 @@
                                     <input type="checkbox" name="" id="checkAll" class="input-checkbox">
                                 </th>
                                 <th style="width: 90px">Avatar</th>
-                                <th>Họ</th>
-                                <th>Tên</th>
-                                <th>SDT</th>
-                                <th>Ngày Sinh</th>
-                                <th>Giới tính</th>
-                                <th>Email</th>
-                                <th>Địa chỉ</th>
-                                <th class="text-center">Thao tác</th>
+                                <th >Họ</th>
+                                <th >Tên</th>
+                                <th >SDT</th>
+                                <th >Ngày Sinh</th>
+                                <th >Giới tính</th>
+                                <th >Email</th>
+                                <th >Địa chỉ</th>
+                                <th >Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,28 +92,28 @@
                                 <tr>
                                     <td><input type="checkbox" name="" class="input-checkbox checkBoxItem"></td>
                                     <td><img class="image image-cover" style="width: 100px; height: 100px;" src="{{ $employee->avatar }}" alt=""></td>
-                                    <td>
+                                    <td >
                                         {{$employee->first_name}}
                                     </td>
-                                    <td>
+                                    <td >
                                         {{$employee->last_name}}
                                     </td>
-                                    <td>
+                                    <td >
                                         {{$employee->phone_number}}
                                     </td>
-                                    <td>
+                                    <td >
                                         {{\Carbon\Carbon::parse($employee->day_of_birth)->format('d/m/Y')}}
                                     </td>
-                                    <td>
+                                    <td >
                                        {{ $genderLabels[$employee->gender] }}
                                     </td>
-                                    <td> 
+                                    <td > 
                                         {{$employee->email}}
                                     </td>
-                                    <td>
+                                    <td >
                                         {{$employee->address}}
                                     </td>
-                                    <td class="text-center" style="width: 100px">
+                                    <td  style="width: 100px">
                                         <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('employee.delete', $employee->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
