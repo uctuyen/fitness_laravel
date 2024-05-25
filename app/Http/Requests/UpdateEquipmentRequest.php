@@ -24,6 +24,9 @@ class UpdateEquipmentRequest extends FormRequest
         return [
             'name' => 'required|string ',
             'status' => 'required|gt:0',
+            'room_id' => 'required|exists:rooms,id',
+            'room_id.required' => 'Vui lòng chọn một phòng',
+            'room_id.exists' => 'Hãy chọn phòng',
         ];
     }
 

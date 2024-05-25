@@ -52,8 +52,8 @@
                                     <select name="class_id" class="form-control">
                                         <option value="">Chọn lớp</option>
                                         @foreach($classes as $class)
-                                            <option value="{{ $class->id }}" {{ (old('class_id', $class->class_id ?? '') == $class->id ? 'selected':'') }}>
-                                                {{ $class->name }} <!-- Nối chuỗi tên đầu và tên cuối -->
+                                            <option value="{{ $class->id }}" {{ (old('class_id', $room->class_id ?? '') == $class->id ? 'selected':'') }}>
+                                                {{ $class->name }} <!-- Thêm dòng này -->
                                             </option>
                                         @endforeach
                                     </select>

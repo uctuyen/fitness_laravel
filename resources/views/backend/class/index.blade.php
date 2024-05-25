@@ -72,7 +72,7 @@
                                 <th>Tên lớp học</th>
                                 <th>Huấn luyện viên</th>
                                 <th>chuyên môn</th>
-                                <th>Số lượng học viên</th>
+                                <th>Số lượng học viên tối đa</th>
                                 <th>Giá </th>
                                 <th class="text-center">Thao tác</th>
                             </tr>

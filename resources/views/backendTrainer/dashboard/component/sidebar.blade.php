@@ -14,7 +14,7 @@
                             <strong class="font-bold">{{ Auth::guard('trainer')->user()->first_name }} {{ Auth::guard('trainer')->user()->last_name }}</strong>
                         @endif                         
                     </span> 
-                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                         <span class="text-muted text-xs block"><b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="profile.html">Profile</a></li>
                         <li><a href="contacts.html">Contacts</a></li>

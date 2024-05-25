@@ -35,7 +35,6 @@
                                         <th>Thứ 5</th>
                                         <th>Thứ 6</th>
                                         <th>Thứ 7</th>
-                                        <th>Chủ nhật</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,13 +46,11 @@
                                         <td>{{ formatDate($item->start_date, 'l') == "Wednesday" ? $item->class->trainer->fullname : '' }}</td>
                                         <td>{{ formatDate($item->start_date, 'l') == "Thursday" ? $item->class->trainer->fullname : '' }}</td>
                                         <td>{{ formatDate($item->start_date, 'l') == "Friday" ? $item->class->trainer->fullname : '' }}</td>
-                                        <td>{{ formatDate($item->start_date, 'l') == "Monday" ? $item->class->trainer->fullname : '' }}</td>
                                         <td>{{ formatDate($item->start_date, 'l') == "Saturday" ? $item->class->trainer->fullname : '' }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>

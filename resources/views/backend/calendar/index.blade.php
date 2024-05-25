@@ -112,139 +112,170 @@
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                             }
                                         });
-                                        $('#calendarModal').on('show.bs.modal', function (e) {
-                                            $('#classSelect').val('1');
-                                                $('#trainerSelect').val('2');
-                                        });
-                                        $('#calendar').fullCalendar({
-                                            header: {
-                                                'left': 'prev,next today',
-                                                'center': 'title',
-                                                'right': 'month,agendaWeek,agendaDay'
-                                            },
-                                            editable: true,
-                                            eventDrop: function(event) {
-                                                var id = event.id;
-                                                var start_date = moment(event.start).format('YYYY-MM-DD HH:mm');
-                                                var end_date = moment(event.end).format('YYYY-MM-DD HH:mm');
-                                                $.ajax({
-                                                    url: "{{ route('calendar.update', '') }}" + '/' + id,
-                                                    type: 'PATCH',
-                                                    dataType: 'json',
-                                                    data: {
-                                                        start_date: start_date,
-                                                        end_date: end_date
-                                                    },
-                                                    success: function(response) {
-                                                        swal("Good job!", "cập nhật lịch thành công!", "success");
-                                                    },
-                                                    error: function(error) {
-                                                        if (error.responseJSON && error.responseJSON.errors) {
-                                                            console.log(error);
-                                                        }
-                                                    }
-                                                });
-                                            },
-                                            selectAllow: function(event) {
-                                                return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1,
-                                                    'second').utcOffset(false), 'day');
-                                            },
-                                            events: calendar,
-                                            selectable: true,
-                                            selectHelper: true,
-                                            locale: 'vi',
-                                            select: function(start, end, allDay) {
-                                                selectedStart = start;
-                                                selectedEnd = end;
-                                                $('#calendarModal').modal('toggle');
-                                            },
-                                            eventClick: function(event) {
-                                                var id = event.id;
-                                                swal({
-                                                        title: "Cảnh báo",
-                                                        text: "Sau khi xóa sẽ không thể khôi phục sự kiện này được!",
-                                                        icon: "warning",
-                                                        buttons: true,
-                                                        dangerMode: true,
-                                                    })
-                                                    .then((willDelete) => {
-                                                        if (willDelete) {
-                                                            $.ajax({
-                                                                url: "{{ route('calendar.destroy', '') }}" + '/' + id,
-                                                                type: "DELETE",
-                                                                dataType: 'json',
-                                                                success: function(response) {
-                                                                    $('#calendar').fullCalendar('removeEvents',
-                                                                        response);
-                                                                    swal("Bạn đã xóa sự kiện thành công!", {
-                                                                        icon: "success",
-                                                                    });
-                                                                },
-                                                                error: function(error) {
-                                                                    console.log(error)
-                                                                },
-                                                            });
-                                                        }
-                                                    });
 
-                                            },
-                                        });
 
-                                        $('#Closebtn').click(function() {
-                                            // Perform any additional actions here...
-                                            // For example, you can clear the form fields
-                                            $('#classSelect').val('');
-                                            $('#trainerSelect').val('');
-                                            // Close the modal
-                                            $('#calendarModal').modal('hide');
-                                        });
-
-                                        $('#Savebtn').click(function() {
-                                            var classValue = $('#classSelect option:selected').text().trim();
-                                            var trainerValue = $('#trainerSelect option:selected').text().trim();
-                                            var startTime = $('#startTime').val();
-                                            var endTime = $('#endTime').val();
-
-                                            if (selectedStart) {
-                                                var start_date = moment(selectedStart).format('YYYY-MM-DD') + ' ' + startTime;
-                                            }
-                                            if (selectedEnd) {
-                                                var end_date = moment(selectedEnd).format('YYYY-MM-DD') + ' ' + endTime;
-                                            }
-
+                                        $('#classSelect').change(function() {
+                                            var classId = $(this).val();
                                             $.ajax({
-                                                url: "{{ route('calendar.save') }}",
-                                                type: 'POST',
+                                                url: '/get-trainers-by-class-id/' + classId,
+                                                method: 'GET',
+                                                success: function(data) {
+                                                    var trainersSelect = $('#trainerSelect');
+                                                    trainersSelect.empty();
+                                                    $.each(data, function(key, value) {
+                                                        trainersSelect.append('<option value="' + value.id + '">' +
+                                                            value.name + '</option>');
+                                                    });
+                                                },
+                                                error: function(error) {
+                                                    console.log(error);
+                                                }
+                                            });
+                                        });
+                                   
+
+                                    $('#trainerSelect').change(function() {
+                                        var trainerId = $(this).val();
+                                        updateClassList(trainerId);
+                                    });
+
+                                    $('#calendarModal').on('show.bs.modal', function(e) {
+                                        $('#classSelect').val('1');
+                                        $('#trainerSelect').val('2');
+                                    });
+                                    $('#calendarModal').on('show.bs.modal', function(e) {
+                                        $('#classSelect').val('1');
+                                        $('#trainerSelect').val('2');
+                                    });
+                                    $('#calendar').fullCalendar({
+                                        header: {
+                                            'left': 'prev,next today',
+                                            'center': 'title',
+                                            'right': 'month,agendaWeek,agendaDay'
+                                        },
+                                        editable: true,
+                                        eventDrop: function(event) {
+                                            var id = event.id;
+                                            var start_date = moment(event.start).format('YYYY-MM-DD HH:mm');
+                                            var end_date = moment(event.end).format('YYYY-MM-DD HH:mm');
+                                            $.ajax({
+                                                url: "{{ route('calendar.update', '') }}" + '/' + id,
+                                                type: 'PATCH',
                                                 dataType: 'json',
                                                 data: {
-                                                    title: classValue + ' ' + trainerValue,
-                                                    class_id: $('#classSelect').val(),
-                                                    trainer_id: $('#trainerSelect').val(),
                                                     start_date: start_date,
                                                     end_date: end_date
                                                 },
                                                 success: function(response) {
-                                                    $('#calendar').fullCalendar('renderEvent', {
-                                                        title: response.classValue + ' ' + trainerValue,
-                                                        start: response.start_date,
-                                                        end: response.end_date,
-                                                    }, true); // make the event "stick"
-                                                    $('#calendarModal').modal('hide');
+                                                    swal("Good job!", "cập nhật lịch thành công!", "success");
                                                 },
                                                 error: function(error) {
                                                     if (error.responseJSON && error.responseJSON.errors) {
-                                                        $('#classTitleError').html(error.responseJSON.errors.class_id);
-                                                        $('#trainerTitleError').html(error.responseJSON.errors.trainer_id);
-                                                        $('#startTimeError').html(error.responseJSON.errors.start_time);
-                                                        $('#endTimeError').html(error.responseJSON.errors.end_time);
+                                                        console.log(error);
                                                     }
                                                 }
                                             });
+                                        },
+                                        selectAllow: function(event) {
+                                            return moment(event.start).utcOffset(false).isSame(moment(event.end).subtract(1,
+                                                'second').utcOffset(false), 'day');
+                                        },
+                                        events: calendar,
+                                        selectable: true,
+                                        selectHelper: true,
+                                        locale: 'vi',
+                                        select: function(start, end, allDay) {
+                                            selectedStart = start;
+                                            selectedEnd = end;
+                                            $('#calendarModal').modal('toggle');
+                                        },
+                                        eventClick: function(event) {
+                                            var id = event.id;
+                                            swal({
+                                                    title: "Cảnh báo",
+                                                    text: "Sau khi xóa sẽ không thể khôi phục sự kiện này được!",
+                                                    icon: "warning",
+                                                    buttons: true,
+                                                    dangerMode: true,
+                                                })
+                                                .then((willDelete) => {
+                                                    if (willDelete) {
+                                                        $.ajax({
+                                                            url: "{{ route('calendar.destroy', '') }}" + '/' + id,
+                                                            type: "DELETE",
+                                                            dataType: 'json',
+                                                            success: function(response) {
+                                                                $('#calendar').fullCalendar('removeEvents',
+                                                                    response);
+                                                                swal("Bạn đã xóa sự kiện thành công!", {
+                                                                    icon: "success",
+                                                                });
+                                                            },
+                                                            error: function(error) {
+                                                                console.log(error)
+                                                            },
+                                                        });
+                                                    }
+                                                });
+
+                                        },
+                                    });
+
+                                    $('#Closebtn').click(function() {
+                                        // Perform any additional actions here...
+                                        // For example, you can clear the form fields
+                                        $('#classSelect').val('');
+                                        $('#trainerSelect').val('');
+                                        // Close the modal
+                                        $('#calendarModal').modal('hide');
+                                    });
+
+                                    $('#Savebtn').click(function() {
+                                        var classValue = $('#classSelect option:selected').text().trim();
+                                        var trainerValue = $('#trainerSelect option:selected').text().trim();
+                                        var startTime = $('#startTime').val();
+                                        var endTime = $('#endTime').val();
+
+                                        if (selectedStart) {
+                                            var start_date = moment(selectedStart).format('YYYY-MM-DD') + ' ' + startTime;
+                                        }
+                                        if (selectedEnd) {
+                                            var end_date = moment(selectedEnd).format('YYYY-MM-DD') + ' ' + endTime;
+                                        }
+
+                                        $.ajax({
+                                            url: "{{ route('calendar.save') }}",
+                                            type: 'POST',
+                                            dataType: 'json',
+                                            data: {
+                                                title: classValue + ' ' + trainerValue,
+                                                class_id: $('#classSelect').val(),
+                                                trainer_id: $('#trainerSelect').val(),
+                                                start_date: start_date,
+                                                end_date: end_date,
+                                            },
+                                            success: function(response) {
+                                                $('#calendar').fullCalendar('renderEvent', {
+                                                    title: response.classValue + ' ' + trainerValue,
+                                                    start: response.start_date,
+                                                    end: response.end_date,
+                                                }, true); // make the event "stick"
+                                                $('#calendarModal').modal('hide');
+                                            },
+                                            error: function(error) {
+                                                if (error.responseJSON && error.responseJSON.errors) {
+                                                    $('#classTitleError').html(error.responseJSON.errors.class_id);
+                                                    $('#trainerTitleError').html(error.responseJSON.errors.trainer_id);
+                                                    $('#startTimeError').html(error.responseJSON.errors.start_time);
+                                                    $('#endTimeError').html(error.responseJSON.errors.end_time);
+                                                }
+                                            }
                                         });
-                                        $("#calendarModal").on("hidden.bs.modal", function () {
-                                            $('#saveBtn').unbind();
-                                        });
-                                        $('.fc-event').css('height', '20px');
+                                    });
+                                    $("#calendarModal").on("hidden.bs.modal", function() {
+                                        $('#saveBtn').unbind();
+                                    });
+                                    $('.fc-event').css('height', '20px');
                                     });
                                 </script>
                             </body>

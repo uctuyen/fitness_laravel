@@ -47,7 +47,6 @@
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for=""  class="control-label text-Left">Hình ảnh
-                                        <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                             name="image" 
@@ -68,7 +67,7 @@
                                     </label>
                                     <select name="status" class="form-control setupSelect2">
                                         @foreach(config('apps.status.status') as $key => $value)
-                                            <option value="{{ $key }}"> {{ $value }}</option>
+                                            <option value="{{ $key }}" {{ (old('status', $equipment->status ?? '') == $key ? 'selected':'') }}> {{ $value }}</option>
                                         @endforeach    
                                     </select>
                                 </div>
@@ -76,7 +75,6 @@
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Số lượng
-                                        <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                         name="quantity" 
@@ -91,7 +89,6 @@
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for="" class="control-label text-Left">Mô tả
-                                        <span class="text-danger">(*)</span>
                                     </label>
                                     <input type="text" 
                                         name="description" 
@@ -107,8 +104,9 @@
                                         <span class="text-danger">(*)</span>
                                     </label>
                                     <select name="room_id" class="form-control">
+                                        <option value="">Chọn Phòng</option>
                                         @foreach($rooms as $room)
-                                            <option value="{{ $room->id }}" {{ (old('room_id', $class->room_id ?? '') == $room->id ? 'selected':'') }}>
+                                            <option value="{{ $room->id }}" {{ (old('room_id', $equipment->room_id ?? '') == $room->id ? 'selected':'') }}>
                                                 {{ $room->name }}
                                             </option>
                                         @endforeach

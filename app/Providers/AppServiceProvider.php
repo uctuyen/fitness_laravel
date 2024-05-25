@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         'App\Services\Interfaces\TrainerServiceInterface' => 'App\Services\TrainerService',
         'App\Repositories\Interfaces\TrainerRepositoriesInterface' => 'App\Repositories\TrainerRepositories',
 
+        'App\Services\Interfaces\CustomerServiceInterface' => 'App\Services\CustomerService',
+        'App\Repositories\Interfaces\CustomerRepositoriesInterface' => 'App\Repositories\CustomerRepositories',
+
         'App\Services\Interfaces\AttendanceServiceInterface' => 'App\Services\AttendanceService',
         'App\Repositories\Interfaces\AttendanceRepositoriesInterface' => 'App\Repositories\AttendanceRepositories',
 

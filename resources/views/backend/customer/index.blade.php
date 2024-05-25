@@ -92,12 +92,7 @@
                                     {{ $item->address }}
                                 </td>
                                 <td class="text-center" style="width: 100px">
-                                    <form method="post" action="{{ route('customer.destroy', $item->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" title="Xóa" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                    </form>
+                                    <a href="{{ route('customer.delete', $item->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach

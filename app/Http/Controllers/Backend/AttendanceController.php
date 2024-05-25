@@ -30,6 +30,7 @@ class AttendanceController extends Controller
     {
         $config['seo'] = config('apps.attendance');
         $template = 'backend.Attendance.index';
+        $attendances = $this->attendanceService->getAllPaginate($request);
         $classes = Attendance::groupBy('calendar_id')->paginate(10);
         $trainers = Trainer::all();
 
@@ -38,6 +39,7 @@ class AttendanceController extends Controller
             'config',
             'classes',
             'trainers',
+            'attendances',
         ));
     }
 
@@ -77,5 +79,26 @@ class AttendanceController extends Controller
 
             return redirect()->back()->with('error', 'Điểm danh không thành công!');
         }
+    }
+    public function delete($id)
+    {
+        $config['seo'] = config('apps.attendance');
+        $attendance = $this->attendanceRepositories->findById($id);
+        $template = 'backend.attendance.delete';
+
+        return view('backend.dashboard.layout', compact(
+            'template',
+            'config',
+            'attendance',
+        ));
+    }
+
+    public function destroy($id)
+    {
+        if ($this->attendanceService->destroy($id)) {
+            return redirect()->route('attendance.index')->with('success', 'Xóa điểm danh học thành công!');
+        }
+
+        return redirect()->route('attendance.index')->with('error', 'Xóa điểm danh học không thành công!');
     }
 }

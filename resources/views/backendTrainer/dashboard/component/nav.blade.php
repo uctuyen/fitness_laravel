@@ -1,16 +1,15 @@
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            {{-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
             <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
+               
+            </form> --}}
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                <span class="m-r-sm text-muted welcome-message">Chúc huấn luyện viên {{ Auth::guard('trainer')->user()->first_name }} {{ Auth::guard('trainer')->user()->last_name }}  một ngày tốt lành. </span>
+            </li>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -104,11 +103,6 @@
             <li>
                 <a href="{{route('trainer.logout')}}">
                     <i class="fa fa-sign-out"></i> Đăng xuất
-                </a>
-            </li>
-            <li>
-                <a class="right-sidebar-toggle">
-                    <i class="fa fa-tasks"></i>
                 </a>
             </li>
         </ul>

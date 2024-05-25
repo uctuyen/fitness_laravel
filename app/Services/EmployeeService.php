@@ -60,7 +60,6 @@ class EmployeeService implements EmployeeServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except('_token', 'send');
-            $payload['day_of_birth'] = $this->convertDate($payload['day_of_birth']);
             // Tiếp tục thêm dữ liệu vào cơ sở dữ liệu
             $employee = $this->employeeRepositories->update($id, $payload);
             DB::commit();

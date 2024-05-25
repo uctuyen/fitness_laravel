@@ -22,10 +22,11 @@ class AttendanceService implements AttendanceServiceInterface
     public function getAllPaginate($request)
     {
         $condition['keyword'] = addslashes($request->input('keyword'));
+        $perPage = (int) $request->input('perpage');
         $attendances = $this->attendanceRepositories->paginate($this->paginateSelect(),
             $condition,
             [],
-            ['path' => '/attendance/index']
+            ['path' => '/attendance/index', $perPage]
         );
 
         return $attendances;
@@ -91,9 +92,8 @@ class AttendanceService implements AttendanceServiceInterface
         return [
             'id',
             'member_id',
-            'class_id',
-            'date_attendance',
-            'time',
+            'calendar_id',
+            'status',
         ];
     }
 }
