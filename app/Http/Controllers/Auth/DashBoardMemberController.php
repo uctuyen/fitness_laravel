@@ -51,15 +51,19 @@ class DashBoardMemberController extends Controller
             'calendars',
         ));
     }
+
     public function destroy($id)
     {
         $attendance = Attendance::find($id);
         if ($attendance) {
             $attendance->delete();
+
             return redirect()->route('attendance.index')->with('success', 'Xóa thành công!');
         }
+
         return redirect()->route('attendance.index')->with('error', 'Xóa không thành công!');
     }
+
     private function config()
     {
         return [

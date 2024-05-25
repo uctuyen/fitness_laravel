@@ -51,7 +51,7 @@ class TrainerAttendanceController extends Controller
         $config['method'] = 'check-in';
         $template = 'backendTrainer.attendance.check-in';
 
-        $attendances = $calendar->attendances;
+        $attendances = $calendar->attendances->where('status', '!=', -1);
 
         return view('backendTrainer.dashboard.layout', compact(
             'template',

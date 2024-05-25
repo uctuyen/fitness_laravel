@@ -75,6 +75,13 @@ class AttendanceController extends Controller
         }
     }
 
+    public function cancel(Attendance $attendance)
+    {
+        $attendance->update(['status' => -1]);
+
+        return redirect()->route('attendances.index')->with('success', 'Huỷ đăng ký lịch học thành công!');
+    }
+
     public function getCalendarList(Request $request)
     {
         $calendarIds = Attendance::where('member_id', Auth::guard('member')

@@ -26,15 +26,15 @@ class AttendanceRepositories extends BaseRepositories implements AttendanceRepos
         int $perPage = 20,
     ) {
         $query = $this->model->select('attendances.id', 'calendars.*', 'classes.*', 'trainers.*')
-        ->join('calendars', 'attendances.calendar_id', '=', 'calendars.id')
-        ->join('classes', 'calendars.class_id', '=', 'classes.id')
-        ->join('trainers', 'classes.trainer_id', '=', 'trainers.id')
-        ->where(function ($query) use ($condition) {
-            if (isset($condition['keyword']) && ! empty($condition['keyword'])) {
-                $query->where('trainers.first_name', 'like', '%'.$condition['keyword'].'%')
-                ->orWhere('trainers.last_name', 'like', '%'.$condition['keyword'].'%');
-            }
-        });
+            ->join('calendars', 'attendances.calendar_id', '=', 'calendars.id')
+            ->join('classes', 'calendars.class_id', '=', 'classes.id')
+            ->join('trainers', 'classes.trainer_id', '=', 'trainers.id')
+            ->where(function ($query) use ($condition) {
+                if (isset($condition['keyword']) && ! empty($condition['keyword'])) {
+                    $query->where('trainers.first_name', 'like', '%'.$condition['keyword'].'%')
+                        ->orWhere('trainers.last_name', 'like', '%'.$condition['keyword'].'%');
+                }
+            });
         if (! empty($join)) {
             $query->join(...$join);
         }

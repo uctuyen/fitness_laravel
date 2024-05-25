@@ -76,6 +76,7 @@
                                 <th>Ngày học</th>
                                 <th>Giờ bắt đầu</th>
                                 <th>Giờ kết thúc</th>
+                                <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -90,8 +91,18 @@
                                 <td>{{ formatDate($attendance->calendar->start_date, 'd-m-Y') }}</td>
                                 <td>{{ formatDate($attendance->calendar->start_date, 'H:i:s') }}</td>
                                 <td>{{ formatDate($attendance->calendar->end_date, 'H:i:s') }}</td>
+                                <td>
+                                    {{ $attendance->getStatus() }}
+                                </td>
                                 <td class="text-center" style="width: 100px">
-                                    <a href="#" class="btn btn-danger" data-id="{{ $attendance->id }}">Hủy đăng kí</i></a>                                </td>
+                                    @if ($attendance->status == 0 && now() < $attendance->calendar->start_date)
+                                    <form method="POST" action="{{ route('attendances.cancel', $attendance->id) }}">
+                                        @csrf
+
+                                        <button type="submit" class="btn btn-danger">Huỷ đăng ký</button>
+                                    </form>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -80,6 +80,7 @@ class AttendanceController extends Controller
             return redirect()->back()->with('error', 'Điểm danh không thành công!');
         }
     }
+
     public function delete($id)
     {
         $config['seo'] = config('apps.attendance');

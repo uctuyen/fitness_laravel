@@ -68,7 +68,7 @@ class CalendarController extends Controller
             'calendar'
         ));
     }
-   
+
     public function save(Request $request)
     {
         $request->validate([
@@ -112,6 +112,7 @@ class CalendarController extends Controller
 
         return response()->json($calendar);
     }
+
     public function update(Request $request, $id)
     {
         $calendar = Calendar::find($id);

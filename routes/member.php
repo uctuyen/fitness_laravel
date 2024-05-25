@@ -15,4 +15,5 @@ Route::prefix('member')->group(function () {
 
     Route::resource('attendances', AttendanceController::class);
     Route::post('attendance/get-calendar-list', [AttendanceController::class, 'getCalendarList']);
+    Route::post('attendance/cancel/{attendance}', [AttendanceController::class, 'cancel'])->name('attendances.cancel');
 });

@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Repositories\Interfaces\CustomerRepositoriesInterface as CustomerRepositories;
 use App\Services\Interfaces\CustomerServiceInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Class CustomerService

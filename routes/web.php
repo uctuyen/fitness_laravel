@@ -57,7 +57,7 @@ Route::group(['prefix' => 'customer'], function () {
     Route::get('index', [CustomerController::class, 'index'])->name('customer.index')
         ->middleware('admin');
     Route::get('{id}/delete', [CustomerController::class, 'delete'])->where(['id' => '[0-9]+'])->name('customer.delete')
-    ->middleware('admin');
+        ->middleware('admin');
     Route::delete('{id}/destroy', [CustomerController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('customer.destroy')
         ->middleware('admin');
 });
@@ -104,7 +104,7 @@ Route::group(['prefix' => 'attendance'], function () {
     Route::get('delete/{id}', [AttendanceController::class, 'delete'])->where(['id' => '[0-9]+'])->name('attendance.delete')
         ->middleware('admin');
     Route::delete('{id}/destroy', [AttendanceController::class, 'destroy'])->where(['id' => '[0-9]+'])->name('attendance.destroy')
-    ->middleware('admin');
+        ->middleware('admin');
 });
 /** item *****************************************************/
 /** major */

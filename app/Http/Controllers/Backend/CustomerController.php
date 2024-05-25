@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use Illuminate\Http\Request;
 use App\Repositories\CustomerRepositories;
 use App\Services\CustomerService;
-
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -18,6 +17,7 @@ class CustomerController extends Controller
         $this->customerRepositories = $customerRepositories;
         $this->customerService = $customerService;
     }
+
     public function index(Request $request)
     {
         $customers = Customer::query();

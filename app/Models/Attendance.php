@@ -26,4 +26,17 @@ class Attendance extends Model
     {
         return $this->belongsTo(Calendar::class);
     }
+
+    public function getStatus()
+    {
+        if ($this->status == -1) {
+            return 'Đã huỷ';
+        }
+        if ($this->status == 0) {
+            return 'Đã đăng ký';
+        }
+        if ($this->status == 1) {
+            return 'Đã điểm danh';
+        }
+    }
 }
