@@ -16,21 +16,12 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="white-bg">
     <div class="middle-box text-center loginscreen animated fadeInDown" style="width: 516px;">
         <div>
-            <div>
-
-                <h1 class="logo-name">IN+</h1>
-
-            </div>
-            <h3 style="color:rgb(0, 4, 255)">Welcome Member</h3>
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            </p>
-            <p>Login in. To see it in action.</p>
             <div class="col-md-12">
-                <div class="ibox-content">
+                <div class="ibox-content flex-container">
+                <img class="banner-member" src="{{asset('/frontend/img/login-banner1.jpg')}}" alt="background">
                     <form method="post" class="m-t" role="form" action="{{ route('member.login') }}">
                         @csrf
                         <div class="form-group">
@@ -59,11 +50,9 @@
                         </a>
                     </form>
                     <p class="m-t">
-                        <small> Tuyen Project &copy; 2024</small>
                     </p>
                 </div>
             </div>
-            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
         </div>
     </div>
 

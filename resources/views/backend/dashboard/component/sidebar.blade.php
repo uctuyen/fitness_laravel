@@ -43,7 +43,7 @@
             <li class="active2">
                 <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lí CSHT</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{{route('calendar.index')}}"><i class="fas fa-calendar-alt"></i> Quản Lí lịch Tập</a></li>
+                    <li><a href="{{route('calendar.index')}}"><i class="fas fa-calendar-alt"></i> Quản Lí Lịch Dạy</a></li>
                     <li><a href="{{route('major.index')}}"><i class="fas fa-project-diagram"></i></i> Quản Lí Chuyên Môn</a></li>
                     <li><a href="{{route('class.index')}}"><i class="fas fa-chalkboard-teacher"></i> Quản Lí Lớp</a></li>
                     <li><a href="{{route('room.index')}}"><i class="fas fa-door-open"></i> Quản Lí Phòng</a></li>

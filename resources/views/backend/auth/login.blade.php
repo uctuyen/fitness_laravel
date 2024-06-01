@@ -21,32 +21,25 @@
 
     <div class="loginColumns animated fadeInDown">
         <div class="row">
-
-            <div class="col-md-6">
-                <h2 class="font-bold">Welcome to Fitness Project</h2>
-
-                <p>
-                   <img src="https://t4.ftcdn.net/jpg/04/15/32/43/360_F_415324398_W9kQKIx3xp1tH5p7RXQNChtATIH1Szyp.jpg" 
-                   style="width: 50%; text-align-certer"
-                   alt="">
-                </p>
-
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-
-                <p>
-                    When an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </p>
-
-                <p>
-                    <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
-                </p>
-
+            <div class="col-md-1 d-flex flex-column justify-content-center align-items-center">
+                <div style="display: grid; grid-template-columns: 1fr; grid-gap: 10px;">
+                    <h1 class="logo-name" style="font-size: 2em; color: red;">E</h1>
+                    <h1 class="logo-name" style="font-size: 2em; color: orange;">P</h1>
+                    <h1 class="logo-name" style="font-size: 2em; color: yellow;">L</h1>
+                    <h1 class="logo-name" style="font-size: 2em; color: green;">O</h1>
+                    <h1 class="logo-name" style="font-size: 2em; color: blue;">Y</h1>
+                    <h1 class="logo-name" style="font-size: 2em; color: indigo;">E</h1>
+                    <h1 class="logo-name" style="font-size: 2em; color: violet;">E</h1>
+                </div>  
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5 d-flex justify-content-center align-items-center" style="padding-right: 0;">
+                <img src="/frontend/img/admin-login2.jpg" style="width: 100%" alt="">
+            </div>
+            <div class="col-md-6" style="padding-left: 0;">
                 <div class="ibox-content">
-                    
+                   <img src="https://t4.ftcdn.net/jpg/04/15/32/43/360_F_415324398_W9kQKIx3xp1tH5p7RXQNChtATIH1Szyp.jpg" 
+                   style="width: 100%; text-align-certer"
+                   alt="">
                     <form method="post" class="m-t" role="form" action="{{route('auth.login')}}">
                         @csrf
                         <div class="form-group">
@@ -81,9 +74,6 @@
                         
                         <button type="submit" class="btn btn-primary block full-width m-b">Đăng nhập</button>
 
-                        <a href="#">
-                            <small>Forgot password?</small>
-                        </a>
                     </form>
                     <p class="m-t">
                         <small> Tuyen Project &copy; 2024</small>
@@ -94,10 +84,10 @@
         <hr/>
         <div class="row">
             <div class="col-md-6">
-                Copyright Example Company
+                Copyright Uc Tuyen
             </div>
             <div class="col-md-6 text-right">
-               <small>© 2024-2025</small>
+               <small>© 2023-2024</small>
             </div>
         </div>
     </div>

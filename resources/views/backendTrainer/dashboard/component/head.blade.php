@@ -15,6 +15,7 @@
 <link href="{{ asset('/backend/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('/backend/css/customize.css') }}" rel="stylesheet">
 <script src="{{ asset('backend/js/jquery-3.1.1.min.js') }}"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">{{-- <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 
 {{-- <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 <script src="{{ asset('/backend/js/script.js') }}"></script> --}}

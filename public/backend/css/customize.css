@@ -170,3 +170,10 @@ table strong{
 th, td {
     text-align: center;
 }
+.nav-second-level li a {
+    padding: 7px 6px 7px 10px;
+    padding-left: 52px;
+}
+.banner-member{
+    width: 100%;
+}

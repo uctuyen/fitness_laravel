@@ -11,18 +11,14 @@
     <link href="/backend/css/customize.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
-    <div class="middle-box text-center loginscreen animated fadeInDown" style="width: 516px;">
+    <div class="middle-box text-center loginscreen animated fadeInDown" style="width: 516px; display: flex; flex-direction: column; align-items: center;">
         <div>
             <div>
-                <h1 class="logo-name">IN+</h1>
+                <h1 class="logo-name">Trainer</h1>
             </div>
-            <h3 style="color:red">Welcome Trainer</h3>
-            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            </p>
-            <p>Login in. To see it in action.</p>
             <div class="col-md-12">
                 <div class="ibox-content">
+                    <img src="/frontend/img/trainer-login.jpg" style="width: 50%" alt="">
                     <form method="post" class="m-t" role="form" action="{{ route('trainer.login') }}">
                         @csrf
                         <div class="form-group">
